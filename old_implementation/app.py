@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from datetime import datetime, timedelta
+from datetime import datetime
 from cfo_assistant import CFOAssistant
 from database import SupabaseConnector
 import plotly.graph_objects as go
@@ -85,18 +85,18 @@ if 'query_history' not in st.session_state:
 if 'current_result' not in st.session_state:
     st.session_state.current_result = None
 
-# Sidebar
 with st.sidebar:
     st.markdown("### 🎯 CFO Assistant")
     st.markdown("**AI-Powered Financial Analysis**")
     st.markdown("---")
     
-    # Initialize assistant
-    if st.button("🚀 Initialize CFO Assistant"):
+    # Initialize button
+    if st.button("🚀 Initialize CFO Assistant", use_container_width=True):
         with st.spinner("Connecting to database and initializing agent..."):
             try:
                 st.session_state.cfo_assistant = CFOAssistant(verbose=False)
                 st.success("✅ CFO Assistant initialized!")
+                st.info("🔗 LangChain SQL Agent + Enhanced Analysis")
             except Exception as e:
                 st.error(f"❌ Initialization failed: {str(e)}")
     
@@ -217,34 +217,84 @@ else:
         )
     
     with col2:
-        analyze_button = st.button("🔍 Analyze", type="primary")
-    
-    # Process query
-    if analyze_button and user_query:
-        with st.spinner("🤔 Analyzing your question..."):
-            try:
-                result = st.session_state.cfo_assistant.analyze(user_query)
-                st.session_state.current_result = result
-                st.session_state.query_history.append({
-                    'query': user_query,
-                    'timestamp': datetime.now(),
-                    'status': result['status']
-                })
-            except Exception as e:
-                st.error(f"❌ Analysis failed: {str(e)}")
+        # Analyze button
+        if st.button("🔍 Analyze", type="primary", use_container_width=True):
+            if user_query:
+                try:
+                    with st.spinner("🤖 Analyzing your question..."):
+                        result = st.session_state.cfo_assistant.analyze(user_query)
+                        st.session_state.current_result = result
+                        st.session_state.query_history.append({
+                            'query': user_query,
+                            'timestamp': datetime.now(),
+                            'status': result.get('status', 'unknown')
+                        })
+                        st.rerun()
+                except Exception as e:
+                    import traceback
+                    st.error(f"❌ Analysis failed: {str(e)}")
+                    st.code(traceback.format_exc())
+                    st.session_state.current_result = {
+                        'status': 'error',
+                        'message': str(e),
+                        'query': user_query
+                    }
     
     # Display results
     if st.session_state.current_result:
         result = st.session_state.current_result
         
-        if result['status'] == 'success':
+        # Check if result has status
+        if not isinstance(result, dict) or 'status' not in result:
+            st.error("❌ Invalid result format")
+            st.code(str(result))
+            st.stop()
+        
+        if result.get('status') == 'success':
+            # Show question classification
+            if result.get('intent'):
+                category_name = result['intent'].replace('_', ' ').title()
+                analysis_type = result.get('analysis_type', 'summary').title()
+                
+                col1, col2 = st.columns([1, 1])
+                with col1:
+                    st.caption(f"📊 **Category:** {category_name}")
+                with col2:
+                    st.caption(f"🎯 **Analysis Type:** {analysis_type}")
+            
             # Executive Summary
             st.markdown("### 📋 Executive Summary")
-            st.info(result['summary'])
+            st.info(result.get('summary', 'No summary available'))
             
-            # CFO Narrative
+            # CFO Narrative with enhanced formatting
             st.markdown("### 💼 CFO Analysis")
-            st.markdown(result['narrative'])
+            st.markdown(result.get('narrative', 'Analysis not available'))
+            
+            # Key Metrics Card (if numeric data exists)
+            if result.get('data') is not None and not result['data'].empty:
+                numeric_cols = result['data'].select_dtypes(include=['number']).columns.tolist()
+                numeric_cols = [col for col in numeric_cols if col not in ['fiscal_year', 'fiscal_quarter', 'company_id']]
+                
+                if numeric_cols and len(result['data']) > 0:
+                    st.markdown("### 📊 Key Metrics")
+                    cols = st.columns(min(4, len(numeric_cols)))
+                    for idx, col_name in enumerate(numeric_cols[:4]):
+                        with cols[idx]:
+                            value = result['data'][col_name].iloc[0]
+                            # Format large numbers
+                            if abs(value) > 1_000_000_000:
+                                display_val = f"${value/1_000_000_000:.2f}B"
+                            elif abs(value) > 1_000_000:
+                                display_val = f"${value/1_000_000:.2f}M"
+                            elif abs(value) < 1 and abs(value) > 0:
+                                display_val = f"{value*100:.2f}%"
+                            else:
+                                display_val = f"{value:,.2f}"
+                            
+                            st.metric(
+                                label=col_name.replace('_', ' ').title(),
+                                value=display_val
+                            )
             
             # Data Table
             with st.expander("📑 View Data Table"):
@@ -273,6 +323,11 @@ else:
         
         else:
             st.error(f"❌ Error: {result.get('message', 'Unknown error')}")
+            
+            # Show debug info
+            with st.expander("🐛 Debug Information"):
+                st.write("Result keys:", list(result.keys()))
+                st.write("Full result:", result)
     
     # Query History
     if st.session_state.query_history:

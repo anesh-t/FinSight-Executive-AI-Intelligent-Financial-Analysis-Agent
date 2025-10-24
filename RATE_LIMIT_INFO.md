@@ -10,7 +10,7 @@ You're experiencing OpenAI API rate limits. This happens when:
 
 ## Error Messages You Might See
 
-- `Rate limit reached for gpt-3.5-turbo`
+- `Rate limit reached for gpt-4o`
 - `You exceeded your current quota`
 - `Output parsing error` (can be caused by rate limiting)
 

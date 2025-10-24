@@ -1,0 +1,234 @@
+categories:
+  basic_financials_annual:
+  - query: Apple revenue 2023
+    response: 'Apple Inc. (AAPL) reported revenue of $385.71B for FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: PASS
+  - query: Microsoft net income 2023
+    response: 'Microsoft Corporation (MSFT) reported net income of $82.54B for FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: PASS
+  - query: Google operating income 2023
+    response: 'Alphabet Inc. (GOOG) reported operating income of $84.29B for FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: PASS
+  basic_financials_quarterly:
+  - query: Apple revenue Q2 2023
+    response: 'Apple Inc. (AAPL) reported revenue of $81.80B for Q2 FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: PASS
+  - query: Microsoft net income Q3 2023
+    response: 'Microsoft Corporation (MSFT) reported net income of $22.29B for Q3
+      FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: PASS
+  - query: Google operating income Q2 2023
+    response: 'Alphabet Inc. (GOOG) reported operating income of $21.84B for Q2 FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: PASS
+  - query: Amazon gross profit Q2 2023
+    response: 'Amazon.com Inc. (AMZN) reported gross profit of $65.01B for Q2 FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: PASS
+  combined_annual:
+  - query: Show Apple revenue and closing stock price for 2023
+    response: 'Apple Inc. (AAPL) reported revenue of $385.71B, closing price of $194.71
+      for FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: PASS
+  - query: Show Apple revenue, net margin, and closing stock price for 2023
+    response: 'Apple Inc. (AAPL) reported revenue of $385.71B, net margin of 26.2%,
+      closing price of $194.71 for FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: PASS
+  - query: Show Microsoft revenue, net margin, and closing price 2023
+    response: 'Microsoft Corporation (MSFT) reported revenue of $227.58B, net margin
+      of 36.3%, closing price of $376.04 for FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: PASS
+  - query: Apple net income and opening price 2023
+    response: 'Apple Inc. (AAPL) reported net income of $100.91B, opening price of
+      $137.94 for FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: PASS
+  combined_quarterly:
+  - query: Show Apple revenue and closing stock price Q2 2023
+    response: 'Apple Inc. (AAPL) reported revenue of $81.80B, closing price of $192.32
+      for Q2 FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: PASS
+  - query: Apple net income and opening price Q3 2023
+    response: 'Apple Inc. (AAPL) reported net income of $22.96B, opening price of
+      $150.64 for Q3 FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: PASS
+  macro_indicators:
+  - query: Unemployment rate in 2023
+    response: 'In 2023, the unemployment rate was 3.63%.
+
+
+      Sources: Not available'
+    status: PASS
+  - query: GDP in 2023
+    response: 'In 2023, GDP was $22671.10B.
+
+
+      Sources: Not available'
+    status: PASS
+  - query: CPI in 2023
+    response: 'In 2023, CPI was 304.70, and Core CPI was 308.38.
+
+
+      Sources: Not available'
+    status: FAIL
+  multi_company:
+  - query: Compare Apple and Google revenue Q2 2023
+    response: "Here is the revenue for Q2 2023:\n- **Apple Inc.**: $81.80B revenue\n\
+      - **Alphabet Inc.**: $74.60B revenue\n\n```\nticker          name  fiscal_year\
+      \  fiscal_quarter           revenue_b        net_income_b         op_income_b\
+      \      gross_profit_b           gross_margin       operating_margin\n  AAPL\
+      \    Apple Inc.         2023               2 81.7970000000000000 19.8810000000000000\
+      \ 22.9980000000000000 36.4130000000000000 0.44516302553883394257 0.28115945572576011345\n\
+      \  GOOG Alphabet Inc.         2023               2 74.6040000000000000 18.3680000000000000\
+      \ 21.8380000000000000 42.6880000000000000 0.57219452040105088199 0.29271888906761031580\n\
+      ```\n\nSources: Not available"
+    status: PASS
+  - query: Show Apple and Microsoft net margin 2023
+    response: "Here is the net margin for 2023:\n- **Apple Inc.**: 26.2% net margin\n\
+      - **Microsoft Corporation**: 36.3% net margin\n\n```\nticker               \
+      \   name  fiscal_year            revenue_b         net_income_b          op_income_b\
+      \       gross_profit_b    gross_margin_annual operating_margin_annual      net_margin_annual\n\
+      \  AAPL            Apple Inc.         2023 385.7060000000000000 100.9130000000000000\
+      \ 118.6580000000000000 173.6710000000000000 0.45026782056799738661  0.30763846038174153371\
+      \ 0.26163191653746636039\n  MSFT Microsoft Corporation         2023 227.5830000000000000\
+      \  82.5410000000000000 100.5330000000000000 158.7350000000000000 0.69748179784957575917\
+      \  0.44174213363915582447 0.36268526208020809990\n```\n\nSources: Not available"
+    status: PASS
+  ratios_annual:
+  - query: Apple gross margin 2023
+    response: 'Apple Inc. (AAPL) reported gross margin of 45.0% for FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: PASS
+  - query: Microsoft ROE 2023
+    response: 'Microsoft Corporation (MSFT) reported ROE of 38.4% for FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: PASS
+  - query: Google debt to equity 2023
+    response: 'Alphabet Inc. (GOOG) reported debt-to-equity ratio of 0.42 for FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: FAIL
+  ratios_quarterly:
+  - query: Apple gross margin Q2 2023
+    response: 'Apple Inc. (AAPL) reported gross margin of 44.5% for Q2 FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: PASS
+  - query: Microsoft net margin Q2 2023
+    response: 'Microsoft Corporation (MSFT) reported net margin of 35.7% for Q2 FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: PASS
+  - query: Google ROE Q2 2023
+    response: 'Alphabet Inc. (GOOG) reported ROE of 6.9% for Q2 FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: PASS
+  - query: Amazon debt to equity Q2 2023
+    response: 'Amazon.com Inc. (AMZN) reported debt-to-equity ratio of 1.83 for Q2
+      FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: FAIL
+  stock_annual:
+  - query: Apple opening stock price 2023
+    response: 'Apple Inc. (AAPL) reported opening price of $137.94 for FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: PASS
+  - query: Apple closing stock price 2023
+    response: 'Apple Inc. (AAPL) reported closing price of $194.71 for FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: PASS
+  - query: Microsoft high and low price 2023
+    response: 'Microsoft Corporation (MSFT) reported high price of $384.30, low price
+      of $219.35 for FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: PASS
+  stock_quarterly:
+  - query: Apple opening stock price Q2 2023
+    response: 'Apple Inc. (AAPL) reported opening price of $126.89 for Q2 FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: PASS
+  - query: Apple closing stock price Q2 2023
+    response: 'Apple Inc. (AAPL) reported closing price of $192.32 for Q2 FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: PASS
+  - query: Apple high stock price Q2 2023
+    response: 'Apple Inc. (AAPL) reported high price of $194.76 for Q2 FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: PASS
+  - query: Apple low stock price Q2 2023
+    response: 'Apple Inc. (AAPL) reported low price of $124.76 for Q2 FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: PASS
+  - query: Microsoft opening and closing price Q2 2023
+    response: 'Microsoft Corporation (MSFT) reported opening price of $286.52, closing
+      price of $340.54 for Q2 FY2023.
+
+
+      Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED'
+    status: PASS
+summary:
+  failed: 3
+  passed: 30
+  total: 33
+test_run: '2025-10-21T20:14:21.108521'

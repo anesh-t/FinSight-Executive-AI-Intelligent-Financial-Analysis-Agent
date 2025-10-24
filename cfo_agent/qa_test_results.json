@@ -1,0 +1,699 @@
+{
+  "timestamp": "2025-10-20T16:29:43.964089",
+  "overall": {
+    "total_tests": 40,
+    "passed": 0,
+    "failed": 40,
+    "pass_rate": 0.0,
+    "avg_execution_time": 1.6812579500000002
+  },
+  "categories": {
+    "\ud83d\udcc8 Basic Financial Queries (Quarterly)": {
+      "total": 3,
+      "passed": 0,
+      "failed": 3,
+      "pass_rate": 0.0
+    },
+    "\ud83d\udcca Basic Financial Queries (Annual)": {
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "pass_rate": 0.0
+    },
+    "\ud83d\udcb9 Financial Ratios (Quarterly)": {
+      "total": 4,
+      "passed": 0,
+      "failed": 4,
+      "pass_rate": 0.0
+    },
+    "\ud83d\udcb9 Financial Ratios (Annual)": {
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "pass_rate": 0.0
+    },
+    "\ud83d\udcc8 Stock Metrics": {
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "pass_rate": 0.0
+    },
+    "\ud83c\udf0d Macro Indicators": {
+      "total": 3,
+      "passed": 0,
+      "failed": 3,
+      "pass_rate": 0.0
+    },
+    "\ud83d\udd2c Macro Sensitivity": {
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "pass_rate": 0.0
+    },
+    "\ud83d\udcca Growth Metrics": {
+      "total": 3,
+      "passed": 0,
+      "failed": 3,
+      "pass_rate": 0.0
+    },
+    "\ud83c\udfc6 Peer Comparisons": {
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "pass_rate": 0.0
+    },
+    "\ud83c\udfaf Combined Views - Layer 1 (Core)": {
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "pass_rate": 0.0
+    },
+    "\ud83c\udf10 Combined Views - Layer 2 (With Macro)": {
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "pass_rate": 0.0
+    },
+    "\ud83d\udd2c Combined Views - Layer 3 (Full Analysis)": {
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "pass_rate": 0.0
+    },
+    "\ud83c\udfe2 Multi-Company Queries": {
+      "total": 3,
+      "passed": 0,
+      "failed": 3,
+      "pass_rate": 0.0
+    },
+    "\ud83d\udcca Multiple Metrics": {
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "pass_rate": 0.0
+    },
+    "\ud83c\udf10 Multi-Company + Macro": {
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "pass_rate": 0.0
+    },
+    "\u23f1\ufe0f TTM Queries": {
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "pass_rate": 0.0
+    },
+    "\ud83d\udd0d Latest Quarter": {
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "pass_rate": 0.0
+    }
+  },
+  "quality_metrics": {
+    "data_accuracy_rate": 10.0,
+    "formatting_quality_rate": 0.0
+  },
+  "results": [
+    {
+      "query": "show Apple revenue Q2 2023",
+      "category": "\ud83d\udcc8 Basic Financial Queries (Quarterly)",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected period: Q2 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "2.68s",
+      "response_preview": "Apple Inc. (AAPL) reported revenue of $81.80B for Q2 FY2023.\n\nSources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED"
+    },
+    {
+      "query": "show Microsoft net income Q3 2023",
+      "category": "\ud83d\udcc8 Basic Financial Queries (Quarterly)",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected period: Q3 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "2.08s",
+      "response_preview": "Microsoft Corporation (MSFT) reported net income of $22.29B for Q3 FY2023.\n\nSources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED"
+    },
+    {
+      "query": "show Google gross profit Q2 2023",
+      "category": "\ud83d\udcc8 Basic Financial Queries (Quarterly)",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected company: Google",
+        "Missing expected period: Q2 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "1.99s",
+      "response_preview": "Alphabet Inc. (GOOG) reported gross profit of $42.69B for Q2 FY2023.\n\nSources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED"
+    },
+    {
+      "query": "show Amazon revenue 2023",
+      "category": "\ud83d\udcca Basic Financial Queries (Annual)",
+      "passed": false,
+      "data_accurate": true,
+      "formatting_good": false,
+      "issues": [
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "1.80s",
+      "response_preview": "Amazon.com Inc. (AMZN) reported revenue of $574.78B for FY2023.\n\nSources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED"
+    },
+    {
+      "query": "show Meta operating income 2023",
+      "category": "\ud83d\udcca Basic Financial Queries (Annual)",
+      "passed": false,
+      "data_accurate": true,
+      "formatting_good": false,
+      "issues": [
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "2.55s",
+      "response_preview": "Meta Platforms Inc. (META) reported operating income of $46.75B for FY2023.\n\nSources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED"
+    },
+    {
+      "query": "show Apple gross margin Q2 2023",
+      "category": "\ud83d\udcb9 Financial Ratios (Quarterly)",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected period: Q2 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "1.02s",
+      "response_preview": "Apple Inc. (AAPL) reported gross margin of 44.5% for Q2 FY2023.\n\nSources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED"
+    },
+    {
+      "query": "show Microsoft operating margin Q3 2023",
+      "category": "\ud83d\udcb9 Financial Ratios (Quarterly)",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected period: Q3 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "1.13s",
+      "response_preview": "Microsoft Corporation (MSFT) reported operating margin of 47.6% for Q3 FY2023.\n\nSources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED"
+    },
+    {
+      "query": "show Google net margin Q2 2023",
+      "category": "\ud83d\udcb9 Financial Ratios (Quarterly)",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected company: Google",
+        "Missing expected period: Q2 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "1.38s",
+      "response_preview": "Alphabet Inc. (GOOG) reported net margin of 24.6% for Q2 FY2023.\n\nSources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED"
+    },
+    {
+      "query": "show Apple ROE Q2 2023",
+      "category": "\ud83d\udcb9 Financial Ratios (Quarterly)",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected period: Q2 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "1.14s",
+      "response_preview": "Apple Inc. (AAPL) reported ROE of 33.0% for Q2 FY2023.\n\nSources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED"
+    },
+    {
+      "query": "show Amazon debt to equity 2023",
+      "category": "\ud83d\udcb9 Financial Ratios (Annual)",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected metric: debt to equity",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "1.23s",
+      "response_preview": "Amazon.com Inc. (AMZN) reported debt-to-equity ratio of 1.61 for FY2023.\n\nSources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED"
+    },
+    {
+      "query": "show Meta ROA 2023",
+      "category": "\ud83d\udcb9 Financial Ratios (Annual)",
+      "passed": false,
+      "data_accurate": true,
+      "formatting_good": false,
+      "issues": [
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "2.47s",
+      "response_preview": "Meta Platforms Inc. (META) reported ROA of 18.7% for FY2023.\n\nSources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED"
+    },
+    {
+      "query": "show Apple stock price Q2 2023",
+      "category": "\ud83d\udcc8 Stock Metrics",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected period: Q2 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "1.56s",
+      "response_preview": "Apple Inc. (AAPL) reported average stock price of $159.76, trading range of $124.76-$194.76, quarterly return of +8.9%, year-over-year return of +34.6%, volatility of 43.8% for Q2 FY2023.\n\nSources: AL"
+    },
+    {
+      "query": "show Microsoft stock return Q3 2023",
+      "category": "\ud83d\udcc8 Stock Metrics",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected period: Q3 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "2.64s",
+      "response_preview": "Microsoft Corporation (MSFT) reported average stock price of $338.12, trading range of $309.45-$366.78, quarterly return of -7.3%, year-over-year return of +35.6%, volatility of 17.0% for Q3 FY2023.\n\n"
+    },
+    {
+      "query": "show GDP Q2 2023",
+      "category": "\ud83c\udf0d Macro Indicators",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected period: Q2 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "1.76s",
+      "response_preview": "Macro indicators for Q2 FY2023: Real GDP of $22539.42B.\n\nSources: Not available"
+    },
+    {
+      "query": "show CPI 2023",
+      "category": "\ud83c\udf0d Macro Indicators",
+      "passed": false,
+      "data_accurate": true,
+      "formatting_good": false,
+      "issues": [
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "2.20s",
+      "response_preview": "Macro indicators for FY2023: CPI (annual average) of 304.70, Core CPI (annual average) of 308.38.\n\nSources: Not available"
+    },
+    {
+      "query": "show unemployment rate Q2 2023",
+      "category": "\ud83c\udf0d Macro Indicators",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected period: Q2 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "1.79s",
+      "response_preview": "Macro indicators for Q2 FY2023: unemployment rate of 3.53%.\n\nSources: Not available"
+    },
+    {
+      "query": "show Apple CPI beta Q2 2023",
+      "category": "\ud83d\udd2c Macro Sensitivity",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected metric: CPI beta",
+        "Missing expected period: Q2 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "1.44s",
+      "response_preview": "Apple Inc. (AAPL) macro sensitivity for Q2 FY2023: net margin beta to CPI of 0.000052, operating margin beta to CPI of 0.000237, gross margin beta to CPI of 0.000801.\n\nSources: ALPHAVANTAGE_FIN (as_re"
+    },
+    {
+      "query": "show Microsoft GDP beta 2023",
+      "category": "\ud83d\udd2c Macro Sensitivity",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected metric: GDP beta",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "1.30s",
+      "response_preview": "Microsoft Corporation (MSFT) reported revenue of $227.58B, net income of $82.54B, operating income of $100.53B, gross profit of $158.74B, R&D expenses of $27.52B, SG&A expenses of $7.29B, COGS of $68."
+    },
+    {
+      "query": "show Apple revenue growth Q2 2023",
+      "category": "\ud83d\udcca Growth Metrics",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected metric: growth",
+        "Missing expected period: Q2 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "1.44s",
+      "response_preview": "Apple Inc. (AAPL) reported revenue of $81.80B for Q2 FY2023.\n\nSources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED"
+    },
+    {
+      "query": "show Microsoft YoY growth Q3 2023",
+      "category": "\ud83d\udcca Growth Metrics",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected metric: YoY",
+        "Missing expected period: Q3 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "1.64s",
+      "response_preview": "Data found for Microsoft Corporation (MSFT) in Q3 FY2023.\n\nSources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED"
+    },
+    {
+      "query": "show Google 3-year CAGR 2023",
+      "category": "\ud83d\udcca Growth Metrics",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected company: Google",
+        "Missing expected metric: CAGR",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "2.35s",
+      "response_preview": "Data found for Alphabet Inc. (GOOG) in FY2023.\n\nSources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED"
+    },
+    {
+      "query": "who led in revenue Q2 2023",
+      "category": "\ud83c\udfc6 Peer Comparisons",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected type: ranking",
+        "Missing expected period: Q2 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "1.17s",
+      "response_preview": "Found 5 periods of data for META (META). For Q2 FY2025: revenue of $47.52B.\n\n```\n company_id ticker  fiscal_year  fiscal_quarter            revenue_b             net_margin                    roe  ran"
+    },
+    {
+      "query": "rank companies by net margin Q2 2023",
+      "category": "\ud83c\udfc6 Peer Comparisons",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected type: ranking",
+        "Missing expected period: Q2 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "1.08s",
+      "response_preview": "Found 5 periods of data for META (META). For Q2 FY2025: net margin of 38.6%.\n\n```\n company_id ticker  fiscal_year  fiscal_quarter            revenue_b             net_margin                    roe  ra"
+    },
+    {
+      "query": "show Apple complete picture Q2 2023",
+      "category": "\ud83c\udfaf Combined Views - Layer 1 (Core)",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected type: complete",
+        "Missing expected period: Q2 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "1.95s",
+      "response_preview": "Apple Inc. (AAPL) reported revenue of $81.80B, net income of $19.88B, operating income of $23.00B, gross profit of $36.41B, R&D expenses of $7.44B, SG&A expenses of $5.97B, COGS of $45.38B, gross marg"
+    },
+    {
+      "query": "show Microsoft snapshot Q3 2023",
+      "category": "\ud83c\udfaf Combined Views - Layer 1 (Core)",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected type: snapshot",
+        "Missing expected period: Q3 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "2.27s",
+      "response_preview": "Microsoft Corporation (MSFT) reported revenue of $56.52B, net income of $22.29B, operating income of $26.90B, gross profit of $40.22B, R&D expenses of $6.66B, SG&A expenses of $1.47B, COGS of $16.30B,"
+    },
+    {
+      "query": "show Apple with macro context Q2 2023",
+      "category": "\ud83c\udf10 Combined Views - Layer 2 (With Macro)",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected type: macro context",
+        "Missing expected period: Q2 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "1.21s",
+      "response_preview": "Apple Inc. (AAPL) reported revenue of $81.80B, net income of $19.88B, operating income of $23.00B, gross profit of $36.41B, R&D expenses of $7.44B, SG&A expenses of $5.97B, COGS of $45.38B, gross marg"
+    },
+    {
+      "query": "show Microsoft with economic indicators Q3 2023",
+      "category": "\ud83c\udf10 Combined Views - Layer 2 (With Macro)",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected type: macro",
+        "Missing expected period: Q3 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "2.43s",
+      "response_preview": "Microsoft Corporation (MSFT) reported revenue of $56.52B, net income of $22.29B, operating income of $26.90B, gross profit of $40.22B, R&D expenses of $6.66B, SG&A expenses of $1.47B, COGS of $16.30B,"
+    },
+    {
+      "query": "show Apple full analysis Q2 2023",
+      "category": "\ud83d\udd2c Combined Views - Layer 3 (Full Analysis)",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected type: full analysis",
+        "Missing expected period: Q2 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "1.08s",
+      "response_preview": "Apple Inc. (AAPL) reported revenue of $81.80B, net income of $19.88B, operating income of $23.00B, gross profit of $36.41B, R&D expenses of $7.44B, SG&A expenses of $5.97B, COGS of $45.38B, gross marg"
+    },
+    {
+      "query": "everything about Google Q2 2023",
+      "category": "\ud83d\udd2c Combined Views - Layer 3 (Full Analysis)",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected company: Google",
+        "Missing expected type: everything",
+        "Missing expected period: Q2 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "1.61s",
+      "response_preview": "Alphabet Inc. (GOOG) reported revenue of $74.60B, net income of $18.37B, operating income of $21.84B, gross profit of $42.69B, R&D expenses of $10.59B, SG&A expenses of $3.48B, COGS of $31.92B, gross "
+    },
+    {
+      "query": "show Apple and Google revenue Q2 2023",
+      "category": "\ud83c\udfe2 Multi-Company Queries",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected companies: ['Apple', 'Google']",
+        "Missing expected period: Q2 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "0.92s",
+      "response_preview": "Found 2 periods of data for Apple Inc. (AAPL). For Q2 FY2023: revenue of $81.80B.\n\n```\nticker          name  fiscal_year  fiscal_quarter           revenue_b        net_income_b         op_income_b    "
+    },
+    {
+      "query": "compare Apple and Microsoft net income Q3 2023",
+      "category": "\ud83c\udfe2 Multi-Company Queries",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected companies: ['Apple', 'Microsoft']",
+        "Missing expected period: Q3 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "1.01s",
+      "response_preview": "Found 2 periods of data for Apple Inc. (AAPL). For Q3 FY2023: net income of $22.96B.\n\n```\nticker                  name  fiscal_year  fiscal_quarter           revenue_b        net_income_b         op_i"
+    },
+    {
+      "query": "show Apple, Microsoft, Google revenue 2023",
+      "category": "\ud83c\udfe2 Multi-Company Queries",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected companies: ['Apple', 'Microsoft', 'Google']",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "2.27s",
+      "response_preview": "Found 2 periods of data for Apple Inc. (AAPL). For FY2023: revenue of $385.71B.\n\n```\nticker          name  fiscal_year            revenue_b         net_income_b          op_income_b       gross_profit"
+    },
+    {
+      "query": "show Apple revenue, net income Q2 2023",
+      "category": "\ud83d\udcca Multiple Metrics",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected metrics: ['revenue', 'net income']",
+        "Missing expected period: Q2 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "2.05s",
+      "response_preview": "Apple Inc. (AAPL) reported revenue of $81.80B, net income of $19.88B for Q2 FY2023.\n\nSources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED"
+    },
+    {
+      "query": "show Microsoft revenue, net income, gross margin Q3 2023",
+      "category": "\ud83d\udcca Multiple Metrics",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected metrics: ['revenue', 'net income', 'gross margin']",
+        "Missing expected period: Q3 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "2.16s",
+      "response_preview": "Microsoft Corporation (MSFT) reported revenue of $56.52B, net income of $22.29B, gross margin of 71.2% for Q3 FY2023.\n\nSources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED"
+    },
+    {
+      "query": "compare Apple with Google and how CPI affected both Q2 2023",
+      "category": "\ud83c\udf10 Multi-Company + Macro",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected companies: ['Apple', 'Google']",
+        "Missing expected macro: CPI",
+        "Missing expected period: Q2 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "1.53s",
+      "response_preview": "Found 2 periods of data for Apple Inc. (AAPL). For Q2 FY2023: revenue of $81.80B, net income of $19.88B, gross margin of 44.5%, operating margin of 28.1%, net margin of 24.3%.\n\n```\nticker          nam"
+    },
+    {
+      "query": "show Apple and Microsoft with macro context Q3 2023",
+      "category": "\ud83c\udf10 Multi-Company + Macro",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected companies: ['Apple', 'Microsoft']",
+        "Missing expected type: macro",
+        "Missing expected period: Q3 2023",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "1.00s",
+      "response_preview": "Found 2 periods of data for Apple Inc. (AAPL). For Q3 FY2023: revenue of $89.50B, net income of $22.96B, gross margin of 45.2%, operating margin of 30.1%, net margin of 25.6%.\n\n```\nticker             "
+    },
+    {
+      "query": "show Apple TTM revenue",
+      "category": "\u23f1\ufe0f TTM Queries",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected period: TTM",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "1.64s",
+      "response_preview": "Apple Inc. (AAPL) reported revenue of $94.04B for Q2 FY2025.\n\nSources: Not available"
+    },
+    {
+      "query": "show Microsoft trailing twelve months net income",
+      "category": "\u23f1\ufe0f TTM Queries",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected period: TTM",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "0.92s",
+      "response_preview": "Microsoft Corporation (MSFT) reported net income of $27.23B for Q2 FY2025.\n\nSources: Not available"
+    },
+    {
+      "query": "show Apple latest quarter",
+      "category": "\ud83d\udd0d Latest Quarter",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected period: latest",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "1.72s",
+      "response_preview": "Apple Inc. (AAPL) reported revenue of $94.04B, net income of $23.43B, operating income of $28.20B, gross profit of $43.72B, R&D expenses of $8.87B, SG&A expenses of $6.65B, COGS of $50.32B, gross marg"
+    },
+    {
+      "query": "show Microsoft latest quarter revenue",
+      "category": "\ud83d\udd0d Latest Quarter",
+      "passed": false,
+      "data_accurate": false,
+      "formatting_good": false,
+      "issues": [
+        "Missing expected period: latest",
+        "Missing markdown formatting",
+        "Missing source citations"
+      ],
+      "execution_time": "1.65s",
+      "response_preview": "Microsoft Corporation (MSFT) reported revenue of $76.44B for Q2 FY2025.\n\nSources: Not available"
+    }
+  ]
+}

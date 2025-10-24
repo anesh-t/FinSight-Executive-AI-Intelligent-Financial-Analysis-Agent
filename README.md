@@ -1,140 +1,177 @@
-# 📊 CFO Assistant Agent
+# 📊 CFO Assistant Project
 
-> **AI-Powered Financial Analysis System** | LangChain + GPT-3.5-Turbo + Supabase
+> **AI-Powered Financial Analysis System** | LangGraph + LangChain + GPT-4o + Supabase
 
-A sophisticated LangChain-based CFO Assistant Agent that queries structured financial data from Supabase PostgreSQL and delivers executive-level insights with beautiful visualizations.
+## 🚀 **New Implementation: CFO Agent**
 
-## 🎯 Overview
+The CFO Assistant has been **upgraded to a new Structured-Only CFO Agent** with:
 
-The CFO Assistant acts as a junior financial consultant analyzing **Apple, Microsoft, Amazon, Google, and Meta's** financial data from **2019-2025**. It combines:
+- ✅ **LangGraph State Machine** - 6-node workflow for robust execution
+- ✅ **Template-First SQL** - 14 pre-defined templates for common queries
+- ✅ **Guarded Generative SQL** - LLM fallback with strict validation
+- ✅ **Full Provenance** - Citations from Alpha Vantage, FRED, Yahoo Finance
+- ✅ **Human-in-the-Loop** - Optional approval gates
+- ✅ **Session Memory** - Context retention across queries
+- ✅ **CFO-Grade Formatting** - Tables + insights + sources
 
-- **Natural Language Queries** → SQL generation via LangChain
-- **Structured Database** → Supabase PostgreSQL with optimized views
-- **Executive Visualizations** → Plotly charts with company-specific colors
-- **CFO-Style Narratives** → GPT-3.5-Turbo powered insights
+### 🎯 Overview
+
+The CFO Agent analyzes **Apple, Microsoft, Amazon, Google, and Meta's** financial data from **2019-2025** using:
+
+- **Natural Language** → Decomposed tasks → Template-first SQL
+- **18 Whitelisted Surfaces** → Validated queries → Read-only execution
+- **Citations & Provenance** → CFO insights → Formatted responses
 
 ## 🚀 Quick Start
 
-### 1. Install Dependencies
+### 1. Navigate to CFO Agent
+
+```bash
+cd cfo_agent
+```
+
+### 2. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Configure Environment
-
-Edit `.env` file and add your Supabase database password:
-
-```env
-SUPABASE_DB_URL=postgresql://postgres:YOUR_PASSWORD@db.ikhrfgywojsrvxgdojxd.supabase.co:5432/postgres
-```
-
-### 3. Test Connection
+### 3. Configure Environment
 
 ```bash
-python test_connection.py
+cp .env.example .env
+# Edit .env with your OPENAI_API_KEY and SUPABASE_DB_URL
 ```
 
-### 4. Launch Dashboard
+### 4. Start the API Server
 
 ```bash
-streamlit run app.py
+python app.py
 ```
 
-The dashboard will open at `http://localhost:8501`
+Server starts at `http://localhost:8000`
+
+### 5. Test the API
+
+```bash
+curl -X POST http://localhost:8000/ask \
+  -H "Content-Type: application/json" \
+  -d '{"question": "Show AAPL latest quarter revenue and ROE"}'
+```
 
 ## 💡 Example Queries
 
-- "Compare Apple's revenue growth and stock return since 2020"
-- "Show GDP and CPI trends alongside Meta's operating margin"
-- "Which quarters were most impacted by COVID-19 for Amazon?"
-- "Visualize debt-to-equity ratios across all companies for 2023"
-- "Plot Apple's ROE vs. Fed Funds rate over time"
+### Quarter Snapshots
+- "Show AAPL latest quarter revenue, gross margin, and ROE with GP source"
+- "What were Microsoft revenue and net income in FY 2023?"
 
-## 📦 Database Schema
+### Growth Analysis
+- "Latest quarter revenue QoQ and YoY for AAPL"
+- "Amazon 5-year revenue CAGR ending FY 2024"
 
-### Fact Tables
-- **fact_financials** – Revenue, income, assets, liabilities, cash flows
-- **fact_ratios** – ROE, ROA, profit margins, leverage ratios
-- **fact_stock_prices** – Stock prices, returns, volatility, dividends
-- **fact_macro_indicators** – GDP, CPI, Fed Funds rate, S&P 500
+### Peer Comparisons
+- "Who led on net margin last quarter? show ranks/percentiles"
+- "Rank peers by operating margin in FY 2023"
 
-### Dimension Tables
-- **dim_company** – Company master data
-- **dim_financial_metric** – Financial metric definitions
-- **dim_ratio** – Ratio metric definitions
-- **dim_stock_metric** – Stock metric definitions
-- **dim_macro_indicator** – Macro indicator definitions
-- **dim_event** – Event timeline (COVID-19, product launches, etc.)
+### Macro Analysis
+- "For AAPL, show net margin with CPI & Fed Funds this quarter"
+- "Over the last 12 quarters, AAPL beta of net margin vs CPI?"
 
-### Analytical Views
-- **vw_company_summary** – Comprehensive company financials + ratios + stock
-- **vw_macro_overlay** – Company data with macro indicators
-- **vw_event_timeline** – Financial data with event context
-- **vw_macro_long** – Long-format macro data
-- **vw_data_dictionary** – Metadata for all metrics
+### Health Checks
+- "Is AMZN balance sheet in balance last quarter? gap?"
+- "Flag any 3σ outliers in net margin for META since 2021"
 
-## 🎨 Visualization Features
+### Multi-Task
+- "hey hi, tell me Apple revenue in 2022, compare its ROE with Google and tell which is better"
 
-All charts use company-specific colors:
+## 📚 Documentation
 
-- 🍎 **Apple** – Blue (#007AFF)
-- 🪟 **Microsoft** – Teal (#00A4EF)
-- 📦 **Amazon** – Orange (#FF9900)
-- 🔍 **Google** – Yellow (#FBBC04)
-- 👥 **Meta** – Purple (#8B5CF6)
+### CFO Agent (New Implementation)
+- **[CFO Agent README](cfo_agent/README.md)** - Complete user guide
+- **[Build Specification](cfo_agent/CFO_AGENT_BUILD_SPEC.md)** - Technical details
+- **[Implementation Summary](CFO_AGENT_IMPLEMENTATION_SUMMARY.md)** - What was built
+
+### Database Migrations
+All database migrations are complete. See:
+- **[Complete Migration Status](COMPLETE_MIGRATION_STATUS.md)** - Full migration summary
+- **[Final Validation Report](FINAL_VALIDATION_REPORT.md)** - Validation results
+- **[Schema Validation Report](SCHEMA_VALIDATION_REPORT.md)** - Schema completeness
+
+### Database Schema
+
+The database has **39 core objects** (100% complete):
+
+**Key Surfaces:**
+- `vw_cfo_answers` - Main answer surface (50+ metrics per company-quarter)
+- `mv_financials_annual`, `mv_ratios_annual` - Annual aggregates
+- `mv_financials_ttm`, `mv_ratios_ttm` - TTM rolling metrics
+- `vw_growth_quarter`, `vw_growth_annual`, `vw_growth_ttm` - Growth calculations
+- `vw_peer_stats_quarter`, `vw_peer_stats_annual` - Peer rankings
+- `vw_macro_sensitivity_rolling` - Macro sensitivities
+- `vw_financial_health_quarter`, `vw_outliers_quarter` - Health checks
+
+See [SCHEMA_VALIDATION_REPORT.md](SCHEMA_VALIDATION_REPORT.md) for complete schema.
 
 ## 📁 Project Structure
 
 ```
 windsurf-project-2/
-├── app.py                  # Streamlit dashboard
-├── cfo_assistant.py        # Main agent with LangChain
-├── database.py             # Supabase connector
-├── visualizations.py       # Plotly chart generator
-├── example_usage.py        # Usage examples
-├── test_connection.py      # Connection testing
-├── requirements.txt        # Python dependencies
-├── .env                    # Environment variables
-└── README.md              # This file
+├── cfo_agent/              # New CFO Agent (29 files)
+│   ├── app.py              # FastAPI service
+│   ├── graph.py            # LangGraph state machine
+│   ├── decomposer.py       # Query decomposition
+│   ├── router.py           # Intent routing
+│   ├── planner.py          # Task planning
+│   ├── sql_builder.py      # Template-first SQL
+│   ├── db/                 # Database layer
+│   ├── catalog/            # Templates & examples
+│   ├── prompts/            # System prompts
+│   └── tests/              # Testing suite
+├── database.py             # Supabase connector (for migrations)
+├── db_migration_*.py       # Database migration scripts
+├── validate_*.py           # Validation scripts
+├── old_implementation/     # Backup of old files
+└── requirements.txt        # Python dependencies
 ```
 
 ## 🔧 Configuration
 
-The system uses environment variables in `.env`:
+Create `.env` in `cfo_agent/` directory:
 
 ```env
 # OpenAI
 OPENAI_API_KEY=your_key_here
 
 # Supabase
-SUPABASE_URL=https://ikhrfgywojsrvxgdojxd.supabase.co
-SUPABASE_KEY=your_key_here
-SUPABASE_DB_URL=postgresql://postgres:password@host:5432/postgres
+SUPABASE_DB_URL=postgresql://postgres:password@db.ikhrfgywojsrvxgdojxd.supabase.co:5432/postgres
 
-# Agent Settings
-LLM_MODEL=gpt-3.5-turbo
+# LLM Configuration
+LLM_MODEL=gpt-4o
 LLM_TEMPERATURE=0.0
-MAX_ITERATIONS=15
-VERBOSE=true
+
+# HITL (Human-in-the-Loop)
+HITL_ENABLED=false
 ```
 
 ## 🛠️ Troubleshooting
 
 ### Database Connection Issues
 
+Check your `SUPABASE_DB_URL` in `.env` file.
+
+### API Not Starting
+
 ```bash
-# Test connection
-python test_connection.py
+cd cfo_agent
+pip install -r requirements.txt
+python app.py
 ```
 
-Make sure you've replaced `[YOUR_PASSWORD]` in the `SUPABASE_DB_URL` with your actual Supabase database password.
+### Old Implementation
 
-### OpenAI API Errors
-
-- Verify API key is valid
-- Check rate limits
-- Ensure sufficient credits
+Old files have been moved to `old_implementation/` directory. You can:
+- Restore them if needed
+- Delete the directory after testing: `rm -rf old_implementation/`
 
 ## 📝 License
 
@@ -142,4 +179,4 @@ MIT License
 
 ---
 
-**Built with** ❤️ **using LangChain, GPT-3.5-Turbo, Supabase, Plotly, and Streamlit**
+**Built with** ❤️ **using LangGraph, LangChain, GPT-4o, FastAPI, and Supabase**

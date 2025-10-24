@@ -1,0 +1,843 @@
+
+====================================================================================================
+COMPREHENSIVE QUERY VERIFICATION SUITE
+====================================================================================================
+Test Time: 2025-10-21 20:14:21
+====================================================================================================
+
+====================================================================================================
+CATEGORY: BASIC FINANCIALS QUARTERLY
+====================================================================================================
+
+Query: 'Apple revenue Q2 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: quarter_snapshot
+[DEBUG GRAPH] Entities resolved: {'AAPL': 'AAPL'}
+[DEBUG GRAPH] Is stock query: False
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'fiscal_quarter', 'revenue_b', 'net_income_b', 'op_income_b', 'gross_profit_b', 'rd_b', 'sga_b', 'cogs_b', 'operating_cash_flow', 'investing_cash_flow', 'financing_cash_flow', 'capex', 'dividends', 'buybacks', 'eps', 'total_assets', 'total_liabilities', 'equity', 'gross_margin', 'operating_margin', 'net_margin', 'roe', 'roa', 'debt_to_equity', 'debt_to_assets', 'rnd_to_revenue', 'sgna_to_revenue']
+[DEBUG FORMATTER] Question: Apple revenue Q2 2023
+[DEBUG FORMATTER] Intent: quarter_snapshot
+[DEBUG FORMATTER] Requested metrics: {'revenue'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Final parts list: ['revenue of $81.80B']
+[DEBUG FORMATTER] Parts count: 1
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Apple Inc. (AAPL) reported revenue of $81.80B for Q2 FY2023.                                     │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Query: 'Microsoft net income Q3 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: quarter_snapshot
+[DEBUG GRAPH] Entities resolved: {'MSFT': 'MSFT'}
+[DEBUG GRAPH] Is stock query: False
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'fiscal_quarter', 'revenue_b', 'net_income_b', 'op_income_b', 'gross_profit_b', 'rd_b', 'sga_b', 'cogs_b', 'operating_cash_flow', 'investing_cash_flow', 'financing_cash_flow', 'capex', 'dividends', 'buybacks', 'eps', 'total_assets', 'total_liabilities', 'equity', 'gross_margin', 'operating_margin', 'net_margin', 'roe', 'roa', 'debt_to_equity', 'debt_to_assets', 'rnd_to_revenue', 'sgna_to_revenue']
+[DEBUG FORMATTER] Question: Microsoft net income Q3 2023
+[DEBUG FORMATTER] Intent: quarter_snapshot
+[DEBUG FORMATTER] Requested metrics: {'net_income'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Final parts list: ['net income of $22.29B']
+[DEBUG FORMATTER] Parts count: 1
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Microsoft Corporation (MSFT) reported net income of $22.29B for Q3 FY2023.                       │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Query: 'Google operating income Q2 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: quarter_snapshot
+[DEBUG GRAPH] Entities resolved: {'GOOG': 'GOOG'}
+[DEBUG GRAPH] Is stock query: False
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'fiscal_quarter', 'revenue_b', 'net_income_b', 'op_income_b', 'gross_profit_b', 'rd_b', 'sga_b', 'cogs_b', 'operating_cash_flow', 'investing_cash_flow', 'financing_cash_flow', 'capex', 'dividends', 'buybacks', 'eps', 'total_assets', 'total_liabilities', 'equity', 'gross_margin', 'operating_margin', 'net_margin', 'roe', 'roa', 'debt_to_equity', 'debt_to_assets', 'rnd_to_revenue', 'sgna_to_revenue']
+[DEBUG FORMATTER] Question: Google operating income Q2 2023
+[DEBUG FORMATTER] Intent: quarter_snapshot
+[DEBUG FORMATTER] Requested metrics: {'operating_income'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Final parts list: ['operating income of $21.84B']
+[DEBUG FORMATTER] Parts count: 1
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Alphabet Inc. (GOOG) reported operating income of $21.84B for Q2 FY2023.                         │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Query: 'Amazon gross profit Q2 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: quarter_snapshot
+[DEBUG GRAPH] Entities resolved: {'AMZN': 'AMZN'}
+[DEBUG GRAPH] Is stock query: False
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'fiscal_quarter', 'revenue_b', 'net_income_b', 'op_income_b', 'gross_profit_b', 'rd_b', 'sga_b', 'cogs_b', 'operating_cash_flow', 'investing_cash_flow', 'financing_cash_flow', 'capex', 'dividends', 'buybacks', 'eps', 'total_assets', 'total_liabilities', 'equity', 'gross_margin', 'operating_margin', 'net_margin', 'roe', 'roa', 'debt_to_equity', 'debt_to_assets', 'rnd_to_revenue', 'sgna_to_revenue']
+[DEBUG FORMATTER] Question: Amazon gross profit Q2 2023
+[DEBUG FORMATTER] Intent: quarter_snapshot
+[DEBUG FORMATTER] Requested metrics: {'gross_profit'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Final parts list: ['gross profit of $65.01B']
+[DEBUG FORMATTER] Parts count: 1
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Amazon.com Inc. (AMZN) reported gross profit of $65.01B for Q2 FY2023.                           │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+====================================================================================================
+CATEGORY: BASIC FINANCIALS ANNUAL
+====================================================================================================
+
+Query: 'Apple revenue 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: annual_metrics
+[DEBUG GRAPH] Entities resolved: {'AAPL': 'AAPL'}
+[DEBUG GRAPH] Is stock query: False
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'revenue_b', 'net_income_b', 'op_income_b', 'gross_profit_annual_b', 'rd_annual_b', 'sga_annual_b', 'cogs_annual_b', 'total_assets_eoy', 'total_liabilities_eoy', 'equity_eoy', 'operating_cash_flow', 'investing_cash_flow', 'financing_cash_flow', 'capex_annual_b', 'eps', 'dividends', 'buybacks', 'gross_margin_annual', 'operating_margin_annual', 'net_margin_annual', 'roe_annual_avg_equity', 'roa_annual', 'debt_to_assets_annual', 'debt_to_equity_annual', 'rnd_to_revenue_annual', 'sgna_to_revenue_annual']
+[DEBUG FORMATTER] Question: Apple revenue 2023
+[DEBUG FORMATTER] Intent: annual_metrics
+[DEBUG FORMATTER] Requested metrics: {'revenue'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Final parts list: ['revenue of $385.71B']
+[DEBUG FORMATTER] Parts count: 1
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Apple Inc. (AAPL) reported revenue of $385.71B for FY2023.                                       │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Query: 'Microsoft net income 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: annual_metrics
+[DEBUG GRAPH] Entities resolved: {'MSFT': 'MSFT'}
+[DEBUG GRAPH] Is stock query: False
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'revenue_b', 'net_income_b', 'op_income_b', 'gross_profit_annual_b', 'rd_annual_b', 'sga_annual_b', 'cogs_annual_b', 'total_assets_eoy', 'total_liabilities_eoy', 'equity_eoy', 'operating_cash_flow', 'investing_cash_flow', 'financing_cash_flow', 'capex_annual_b', 'eps', 'dividends', 'buybacks', 'gross_margin_annual', 'operating_margin_annual', 'net_margin_annual', 'roe_annual_avg_equity', 'roa_annual', 'debt_to_assets_annual', 'debt_to_equity_annual', 'rnd_to_revenue_annual', 'sgna_to_revenue_annual']
+[DEBUG FORMATTER] Question: Microsoft net income 2023
+[DEBUG FORMATTER] Intent: annual_metrics
+[DEBUG FORMATTER] Requested metrics: {'net_income'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Final parts list: ['net income of $82.54B']
+[DEBUG FORMATTER] Parts count: 1
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Microsoft Corporation (MSFT) reported net income of $82.54B for FY2023.                          │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Query: 'Google operating income 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: annual_metrics
+[DEBUG GRAPH] Entities resolved: {'GOOG': 'GOOG'}
+[DEBUG GRAPH] Is stock query: False
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'revenue_b', 'net_income_b', 'op_income_b', 'gross_profit_annual_b', 'rd_annual_b', 'sga_annual_b', 'cogs_annual_b', 'total_assets_eoy', 'total_liabilities_eoy', 'equity_eoy', 'operating_cash_flow', 'investing_cash_flow', 'financing_cash_flow', 'capex_annual_b', 'eps', 'dividends', 'buybacks', 'gross_margin_annual', 'operating_margin_annual', 'net_margin_annual', 'roe_annual_avg_equity', 'roa_annual', 'debt_to_assets_annual', 'debt_to_equity_annual', 'rnd_to_revenue_annual', 'sgna_to_revenue_annual']
+[DEBUG FORMATTER] Question: Google operating income 2023
+[DEBUG FORMATTER] Intent: annual_metrics
+[DEBUG FORMATTER] Requested metrics: {'operating_income'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Final parts list: ['operating income of $84.29B']
+[DEBUG FORMATTER] Parts count: 1
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Alphabet Inc. (GOOG) reported operating income of $84.29B for FY2023.                            │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+====================================================================================================
+CATEGORY: RATIOS QUARTERLY
+====================================================================================================
+
+Query: 'Apple gross margin Q2 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: quarter_snapshot
+[DEBUG GRAPH] Entities resolved: {'AAPL': 'AAPL'}
+[DEBUG GRAPH] Is stock query: False
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'fiscal_quarter', 'revenue_b', 'net_income_b', 'op_income_b', 'gross_profit_b', 'rd_b', 'sga_b', 'cogs_b', 'operating_cash_flow', 'investing_cash_flow', 'financing_cash_flow', 'capex', 'dividends', 'buybacks', 'eps', 'total_assets', 'total_liabilities', 'equity', 'gross_margin', 'operating_margin', 'net_margin', 'roe', 'roa', 'debt_to_equity', 'debt_to_assets', 'rnd_to_revenue', 'sgna_to_revenue']
+[DEBUG FORMATTER] Question: Apple gross margin Q2 2023
+[DEBUG FORMATTER] Intent: quarter_snapshot
+[DEBUG FORMATTER] Requested metrics: {'gross_margin'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Final parts list: ['gross margin of 44.5%']
+[DEBUG FORMATTER] Parts count: 1
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Apple Inc. (AAPL) reported gross margin of 44.5% for Q2 FY2023.                                  │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Query: 'Microsoft net margin Q2 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: quarter_snapshot
+[DEBUG GRAPH] Entities resolved: {'MSFT': 'MSFT'}
+[DEBUG GRAPH] Is stock query: False
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'fiscal_quarter', 'revenue_b', 'net_income_b', 'op_income_b', 'gross_profit_b', 'rd_b', 'sga_b', 'cogs_b', 'operating_cash_flow', 'investing_cash_flow', 'financing_cash_flow', 'capex', 'dividends', 'buybacks', 'eps', 'total_assets', 'total_liabilities', 'equity', 'gross_margin', 'operating_margin', 'net_margin', 'roe', 'roa', 'debt_to_equity', 'debt_to_assets', 'rnd_to_revenue', 'sgna_to_revenue']
+[DEBUG FORMATTER] Question: Microsoft net margin Q2 2023
+[DEBUG FORMATTER] Intent: quarter_snapshot
+[DEBUG FORMATTER] Requested metrics: {'net_margin'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Final parts list: ['net margin of 35.7%']
+[DEBUG FORMATTER] Parts count: 1
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Microsoft Corporation (MSFT) reported net margin of 35.7% for Q2 FY2023.                         │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Query: 'Google ROE Q2 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: quarter_snapshot
+[DEBUG GRAPH] Entities resolved: {'GOOG': 'GOOG'}
+[DEBUG GRAPH] Is stock query: False
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'fiscal_quarter', 'revenue_b', 'net_income_b', 'op_income_b', 'gross_profit_b', 'rd_b', 'sga_b', 'cogs_b', 'operating_cash_flow', 'investing_cash_flow', 'financing_cash_flow', 'capex', 'dividends', 'buybacks', 'eps', 'total_assets', 'total_liabilities', 'equity', 'gross_margin', 'operating_margin', 'net_margin', 'roe', 'roa', 'debt_to_equity', 'debt_to_assets', 'rnd_to_revenue', 'sgna_to_revenue']
+[DEBUG FORMATTER] Question: Google ROE Q2 2023
+[DEBUG FORMATTER] Intent: quarter_snapshot
+[DEBUG FORMATTER] Requested metrics: {'roe'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Final parts list: ['ROE of 6.9%']
+[DEBUG FORMATTER] Parts count: 1
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Alphabet Inc. (GOOG) reported ROE of 6.9% for Q2 FY2023.                                         │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Query: 'Amazon debt to equity Q2 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: quarter_snapshot
+[DEBUG GRAPH] Entities resolved: {'AMZN': 'AMZN'}
+[DEBUG GRAPH] Is stock query: False
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'fiscal_quarter', 'revenue_b', 'net_income_b', 'op_income_b', 'gross_profit_b', 'rd_b', 'sga_b', 'cogs_b', 'operating_cash_flow', 'investing_cash_flow', 'financing_cash_flow', 'capex', 'dividends', 'buybacks', 'eps', 'total_assets', 'total_liabilities', 'equity', 'gross_margin', 'operating_margin', 'net_margin', 'roe', 'roa', 'debt_to_equity', 'debt_to_assets', 'rnd_to_revenue', 'sgna_to_revenue']
+[DEBUG FORMATTER] Question: Amazon debt to equity Q2 2023
+[DEBUG FORMATTER] Intent: quarter_snapshot
+[DEBUG FORMATTER] Requested metrics: {'debt_to_equity'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Final parts list: ['debt-to-equity ratio of 1.83']
+[DEBUG FORMATTER] Parts count: 1
+
+Status: ❌ FAIL
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Amazon.com Inc. (AMZN) reported debt-to-equity ratio of 1.83 for Q2 FY2023.                      │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+====================================================================================================
+CATEGORY: RATIOS ANNUAL
+====================================================================================================
+
+Query: 'Apple gross margin 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: annual_metrics
+[DEBUG GRAPH] Entities resolved: {'AAPL': 'AAPL'}
+[DEBUG GRAPH] Is stock query: False
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'revenue_b', 'net_income_b', 'op_income_b', 'gross_profit_annual_b', 'rd_annual_b', 'sga_annual_b', 'cogs_annual_b', 'total_assets_eoy', 'total_liabilities_eoy', 'equity_eoy', 'operating_cash_flow', 'investing_cash_flow', 'financing_cash_flow', 'capex_annual_b', 'eps', 'dividends', 'buybacks', 'gross_margin_annual', 'operating_margin_annual', 'net_margin_annual', 'roe_annual_avg_equity', 'roa_annual', 'debt_to_assets_annual', 'debt_to_equity_annual', 'rnd_to_revenue_annual', 'sgna_to_revenue_annual']
+[DEBUG FORMATTER] Question: Apple gross margin 2023
+[DEBUG FORMATTER] Intent: annual_metrics
+[DEBUG FORMATTER] Requested metrics: {'gross_margin'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Final parts list: ['gross margin of 45.0%']
+[DEBUG FORMATTER] Parts count: 1
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Apple Inc. (AAPL) reported gross margin of 45.0% for FY2023.                                     │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Query: 'Microsoft ROE 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: annual_metrics
+[DEBUG GRAPH] Entities resolved: {'MSFT': 'MSFT'}
+[DEBUG GRAPH] Is stock query: False
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'revenue_b', 'net_income_b', 'op_income_b', 'gross_profit_annual_b', 'rd_annual_b', 'sga_annual_b', 'cogs_annual_b', 'total_assets_eoy', 'total_liabilities_eoy', 'equity_eoy', 'operating_cash_flow', 'investing_cash_flow', 'financing_cash_flow', 'capex_annual_b', 'eps', 'dividends', 'buybacks', 'gross_margin_annual', 'operating_margin_annual', 'net_margin_annual', 'roe_annual_avg_equity', 'roa_annual', 'debt_to_assets_annual', 'debt_to_equity_annual', 'rnd_to_revenue_annual', 'sgna_to_revenue_annual']
+[DEBUG FORMATTER] Question: Microsoft ROE 2023
+[DEBUG FORMATTER] Intent: annual_metrics
+[DEBUG FORMATTER] Requested metrics: {'roe'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Final parts list: ['ROE of 38.4%']
+[DEBUG FORMATTER] Parts count: 1
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Microsoft Corporation (MSFT) reported ROE of 38.4% for FY2023.                                   │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Query: 'Google debt to equity 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: annual_metrics
+[DEBUG GRAPH] Entities resolved: {'GOOG': 'GOOG'}
+[DEBUG GRAPH] Is stock query: False
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'revenue_b', 'net_income_b', 'op_income_b', 'gross_profit_annual_b', 'rd_annual_b', 'sga_annual_b', 'cogs_annual_b', 'total_assets_eoy', 'total_liabilities_eoy', 'equity_eoy', 'operating_cash_flow', 'investing_cash_flow', 'financing_cash_flow', 'capex_annual_b', 'eps', 'dividends', 'buybacks', 'gross_margin_annual', 'operating_margin_annual', 'net_margin_annual', 'roe_annual_avg_equity', 'roa_annual', 'debt_to_assets_annual', 'debt_to_equity_annual', 'rnd_to_revenue_annual', 'sgna_to_revenue_annual']
+[DEBUG FORMATTER] Question: Google debt to equity 2023
+[DEBUG FORMATTER] Intent: annual_metrics
+[DEBUG FORMATTER] Requested metrics: {'debt_to_equity'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Final parts list: ['debt-to-equity ratio of 0.42']
+[DEBUG FORMATTER] Parts count: 1
+
+Status: ❌ FAIL
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Alphabet Inc. (GOOG) reported debt-to-equity ratio of 0.42 for FY2023.                           │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+====================================================================================================
+CATEGORY: STOCK QUARTERLY
+====================================================================================================
+
+Query: 'Apple opening stock price Q2 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: stock_price_quarterly
+[DEBUG GRAPH] Entities resolved: {'AAPL': 'AAPL'}
+[DEBUG GRAPH] Is stock query: True
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'fiscal_quarter', 'avg_price', 'open_price', 'close_price', 'high_price', 'low_price', 'return_qoq', 'return_yoy', 'price_change_abs', 'price_change_pct', 'volatility_pct', 'volume_total', 'volume_avg', 'dividend_yield', 'dividend_per_share']
+[DEBUG FORMATTER] Question: Apple opening stock price Q2 2023
+[DEBUG FORMATTER] Intent: stock_price_quarterly
+[DEBUG FORMATTER] Requested metrics: {'opening_price'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Checking opening_price...
+[DEBUG FORMATTER] Added quarterly opening price: $126.89
+[DEBUG FORMATTER] Final parts list: ['opening price of $126.89']
+[DEBUG FORMATTER] Parts count: 1
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Apple Inc. (AAPL) reported opening price of $126.89 for Q2 FY2023.                               │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Query: 'Apple closing stock price Q2 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: stock_price_quarterly
+[DEBUG GRAPH] Entities resolved: {'AAPL': 'AAPL'}
+[DEBUG GRAPH] Is stock query: True
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'fiscal_quarter', 'avg_price', 'open_price', 'close_price', 'high_price', 'low_price', 'return_qoq', 'return_yoy', 'price_change_abs', 'price_change_pct', 'volatility_pct', 'volume_total', 'volume_avg', 'dividend_yield', 'dividend_per_share']
+[DEBUG FORMATTER] Question: Apple closing stock price Q2 2023
+[DEBUG FORMATTER] Intent: stock_price_quarterly
+[DEBUG FORMATTER] Requested metrics: {'closing_price'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Final parts list: ['closing price of $192.32']
+[DEBUG FORMATTER] Parts count: 1
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Apple Inc. (AAPL) reported closing price of $192.32 for Q2 FY2023.                               │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Query: 'Apple high stock price Q2 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: stock_price_quarterly
+[DEBUG GRAPH] Entities resolved: {'AAPL': 'AAPL'}
+[DEBUG GRAPH] Is stock query: True
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'fiscal_quarter', 'avg_price', 'open_price', 'close_price', 'high_price', 'low_price', 'return_qoq', 'return_yoy', 'price_change_abs', 'price_change_pct', 'volatility_pct', 'volume_total', 'volume_avg', 'dividend_yield', 'dividend_per_share']
+[DEBUG FORMATTER] Question: Apple high stock price Q2 2023
+[DEBUG FORMATTER] Intent: stock_price_quarterly
+[DEBUG FORMATTER] Requested metrics: {'high_price'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Final parts list: ['high price of $194.76']
+[DEBUG FORMATTER] Parts count: 1
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Apple Inc. (AAPL) reported high price of $194.76 for Q2 FY2023.                                  │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Query: 'Apple low stock price Q2 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: stock_price_quarterly
+[DEBUG GRAPH] Entities resolved: {'AAPL': 'AAPL'}
+[DEBUG GRAPH] Is stock query: True
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'fiscal_quarter', 'avg_price', 'open_price', 'close_price', 'high_price', 'low_price', 'return_qoq', 'return_yoy', 'price_change_abs', 'price_change_pct', 'volatility_pct', 'volume_total', 'volume_avg', 'dividend_yield', 'dividend_per_share']
+[DEBUG FORMATTER] Question: Apple low stock price Q2 2023
+[DEBUG FORMATTER] Intent: stock_price_quarterly
+[DEBUG FORMATTER] Requested metrics: {'low_price'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Final parts list: ['low price of $124.76']
+[DEBUG FORMATTER] Parts count: 1
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Apple Inc. (AAPL) reported low price of $124.76 for Q2 FY2023.                                   │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Query: 'Microsoft opening and closing price Q2 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: stock_price_quarterly
+[DEBUG GRAPH] Entities resolved: {'MSFT': 'MSFT'}
+[DEBUG GRAPH] Is stock query: True
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'fiscal_quarter', 'avg_price', 'open_price', 'close_price', 'high_price', 'low_price', 'return_qoq', 'return_yoy', 'price_change_abs', 'price_change_pct', 'volatility_pct', 'volume_total', 'volume_avg', 'dividend_yield', 'dividend_per_share']
+[DEBUG FORMATTER] Question: Microsoft opening and closing price Q2 2023
+[DEBUG FORMATTER] Intent: stock_price_quarterly
+[DEBUG FORMATTER] Requested metrics: {'opening_price', 'closing_price'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Checking opening_price...
+[DEBUG FORMATTER] Added quarterly opening price: $286.52
+[DEBUG FORMATTER] Final parts list: ['opening price of $286.52', 'closing price of $340.54']
+[DEBUG FORMATTER] Parts count: 2
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Microsoft Corporation (MSFT) reported opening price of $286.52, closing price of $340.54 for Q2 FY2023. │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+====================================================================================================
+CATEGORY: STOCK ANNUAL
+====================================================================================================
+
+Query: 'Apple opening stock price 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: stock_price_annual
+[DEBUG GRAPH] Entities resolved: {'AAPL': 'AAPL'}
+[DEBUG GRAPH] Is stock query: True
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'avg_price_annual', 'avg_open_price_annual', 'avg_close_price_annual', 'high_price_annual', 'low_price_annual', 'close_price_eoy', 'return_annual', 'volatility_pct_annual', 'volume_total_annual', 'volume_avg_annual', 'dividend_per_share_annual', 'dividend_yield_annual']
+[DEBUG FORMATTER] Question: Apple opening stock price 2023
+[DEBUG FORMATTER] Intent: stock_price_annual
+[DEBUG FORMATTER] Requested metrics: {'opening_price'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Checking opening_price...
+[DEBUG FORMATTER] Added annual opening price: $137.94
+[DEBUG FORMATTER] Final parts list: ['opening price of $137.94']
+[DEBUG FORMATTER] Parts count: 1
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Apple Inc. (AAPL) reported opening price of $137.94 for FY2023.                                  │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Query: 'Apple closing stock price 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: stock_price_annual
+[DEBUG GRAPH] Entities resolved: {'AAPL': 'AAPL'}
+[DEBUG GRAPH] Is stock query: True
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'avg_price_annual', 'avg_open_price_annual', 'avg_close_price_annual', 'high_price_annual', 'low_price_annual', 'close_price_eoy', 'return_annual', 'volatility_pct_annual', 'volume_total_annual', 'volume_avg_annual', 'dividend_per_share_annual', 'dividend_yield_annual']
+[DEBUG FORMATTER] Question: Apple closing stock price 2023
+[DEBUG FORMATTER] Intent: stock_price_annual
+[DEBUG FORMATTER] Requested metrics: {'closing_price'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Final parts list: ['closing price of $194.71']
+[DEBUG FORMATTER] Parts count: 1
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Apple Inc. (AAPL) reported closing price of $194.71 for FY2023.                                  │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Query: 'Microsoft high and low price 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: stock_price_annual
+[DEBUG GRAPH] Entities resolved: {'MSFT': 'MSFT'}
+[DEBUG GRAPH] Is stock query: True
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'avg_price_annual', 'avg_open_price_annual', 'avg_close_price_annual', 'high_price_annual', 'low_price_annual', 'close_price_eoy', 'return_annual', 'volatility_pct_annual', 'volume_total_annual', 'volume_avg_annual', 'dividend_per_share_annual', 'dividend_yield_annual']
+[DEBUG FORMATTER] Question: Microsoft high and low price 2023
+[DEBUG FORMATTER] Intent: stock_price_annual
+[DEBUG FORMATTER] Requested metrics: {'low_price', 'high_price'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Final parts list: ['high price of $384.30', 'low price of $219.35']
+[DEBUG FORMATTER] Parts count: 2
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Microsoft Corporation (MSFT) reported high price of $384.30, low price of $219.35 for FY2023.    │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+====================================================================================================
+CATEGORY: MACRO INDICATORS
+====================================================================================================
+
+Query: 'Unemployment rate in 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: macro_indicator_annual
+[DEBUG GRAPH] Entities resolved: {}
+[DEBUG GRAPH] Is stock query: False
+[DEBUG GRAPH] Num entities: 0
+[DEBUG FORMATTER] Columns in row: ['fiscal_year', 'gdp_annual', 'pce_annual', 'cpi_annual', 'core_cpi_annual', 'pce_price_index_annual', 'unemployment_rate_annual', 'fed_funds_rate_annual', 'term_spread_10y_2y_annual', 'sp500_index_annual', 'vix_index_annual', 'gdp_q4', 'cpi_q4', 'unemployment_rate_q4', 'fed_funds_rate_q4', 'sp500_index_q4']
+[DEBUG FORMATTER] Question: Unemployment rate in 2023
+[DEBUG FORMATTER] Intent: macro_indicator_annual
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ In 2023, the unemployment rate was 3.63%.                                                        │
+│                                                                                                  │
+│ Sources: Not available                                                                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Query: 'GDP in 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: macro_indicator_annual
+[DEBUG GRAPH] Entities resolved: {}
+[DEBUG GRAPH] Is stock query: False
+[DEBUG GRAPH] Num entities: 0
+[DEBUG FORMATTER] Columns in row: ['fiscal_year', 'gdp_annual', 'pce_annual', 'cpi_annual', 'core_cpi_annual', 'pce_price_index_annual', 'unemployment_rate_annual', 'fed_funds_rate_annual', 'term_spread_10y_2y_annual', 'sp500_index_annual', 'vix_index_annual', 'gdp_q4', 'cpi_q4', 'unemployment_rate_q4', 'fed_funds_rate_q4', 'sp500_index_q4']
+[DEBUG FORMATTER] Question: GDP in 2023
+[DEBUG FORMATTER] Intent: macro_indicator_annual
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ In 2023, GDP was $22671.10B.                                                                     │
+│                                                                                                  │
+│ Sources: Not available                                                                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Query: 'CPI in 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: macro_indicator_annual
+[DEBUG GRAPH] Entities resolved: {}
+[DEBUG GRAPH] Is stock query: False
+[DEBUG GRAPH] Num entities: 0
+[DEBUG FORMATTER] Columns in row: ['fiscal_year', 'gdp_annual', 'pce_annual', 'cpi_annual', 'core_cpi_annual', 'pce_price_index_annual', 'unemployment_rate_annual', 'fed_funds_rate_annual', 'term_spread_10y_2y_annual', 'sp500_index_annual', 'vix_index_annual', 'gdp_q4', 'cpi_q4', 'unemployment_rate_q4', 'fed_funds_rate_q4', 'sp500_index_q4']
+[DEBUG FORMATTER] Question: CPI in 2023
+[DEBUG FORMATTER] Intent: macro_indicator_annual
+
+Status: ❌ FAIL
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ In 2023, CPI was 304.70, and Core CPI was 308.38.                                                │
+│                                                                                                  │
+│ Sources: Not available                                                                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+====================================================================================================
+CATEGORY: COMBINED ANNUAL
+====================================================================================================
+
+Query: 'Show Apple revenue and closing stock price for 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: complete_annual
+[DEBUG GRAPH] Entities resolved: {'AAPL': 'AAPL'}
+[DEBUG GRAPH] Is stock query: False
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'revenue_b', 'net_income_b', 'op_income_b', 'gross_profit_b', 'rd_b', 'sga_b', 'gross_margin_annual', 'operating_margin_annual', 'net_margin_annual', 'roe_annual', 'roa_annual', 'debt_to_equity_annual', 'debt_to_assets_annual', 'rd_intensity_annual', 'sga_intensity_annual', 'avg_price_annual', 'avg_open_price_annual', 'avg_close_price_annual', 'close_price_eoy', 'high_price_annual', 'low_price_annual', 'return_annual', 'volatility_pct_annual', 'dividend_yield_annual']
+[DEBUG FORMATTER] Question: Show Apple revenue and closing stock price for 2023
+[DEBUG FORMATTER] Intent: complete_annual
+[DEBUG FORMATTER] Requested metrics: {'revenue', 'closing_price'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Final parts list: ['revenue of $385.71B', 'closing price of $194.71']
+[DEBUG FORMATTER] Parts count: 2
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Apple Inc. (AAPL) reported revenue of $385.71B, closing price of $194.71 for FY2023.             │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Query: 'Show Apple revenue, net margin, and closing stock price for 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: complete_annual
+[DEBUG GRAPH] Entities resolved: {'AAPL': 'AAPL'}
+[DEBUG GRAPH] Is stock query: False
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'revenue_b', 'net_income_b', 'op_income_b', 'gross_profit_b', 'rd_b', 'sga_b', 'gross_margin_annual', 'operating_margin_annual', 'net_margin_annual', 'roe_annual', 'roa_annual', 'debt_to_equity_annual', 'debt_to_assets_annual', 'rd_intensity_annual', 'sga_intensity_annual', 'avg_price_annual', 'avg_open_price_annual', 'avg_close_price_annual', 'close_price_eoy', 'high_price_annual', 'low_price_annual', 'return_annual', 'volatility_pct_annual', 'dividend_yield_annual']
+[DEBUG FORMATTER] Question: Show Apple revenue, net margin, and closing stock price for 2023
+[DEBUG FORMATTER] Intent: complete_annual
+[DEBUG FORMATTER] Requested metrics: {'net_margin', 'revenue', 'closing_price'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Final parts list: ['revenue of $385.71B', 'net margin of 26.2%', 'closing price of $194.71']
+[DEBUG FORMATTER] Parts count: 3
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Apple Inc. (AAPL) reported revenue of $385.71B, net margin of 26.2%, closing price of $194.71 for FY2023. │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Query: 'Show Microsoft revenue, net margin, and closing price 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: complete_annual
+[DEBUG GRAPH] Entities resolved: {'MSFT': 'MSFT'}
+[DEBUG GRAPH] Is stock query: False
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'revenue_b', 'net_income_b', 'op_income_b', 'gross_profit_b', 'rd_b', 'sga_b', 'gross_margin_annual', 'operating_margin_annual', 'net_margin_annual', 'roe_annual', 'roa_annual', 'debt_to_equity_annual', 'debt_to_assets_annual', 'rd_intensity_annual', 'sga_intensity_annual', 'avg_price_annual', 'avg_open_price_annual', 'avg_close_price_annual', 'close_price_eoy', 'high_price_annual', 'low_price_annual', 'return_annual', 'volatility_pct_annual', 'dividend_yield_annual']
+[DEBUG FORMATTER] Question: Show Microsoft revenue, net margin, and closing price 2023
+[DEBUG FORMATTER] Intent: complete_annual
+[DEBUG FORMATTER] Requested metrics: {'net_margin', 'revenue', 'closing_price'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Final parts list: ['revenue of $227.58B', 'net margin of 36.3%', 'closing price of $376.04']
+[DEBUG FORMATTER] Parts count: 3
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Microsoft Corporation (MSFT) reported revenue of $227.58B, net margin of 36.3%, closing price of $376.04 for FY2023. │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Query: 'Apple net income and opening price 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: complete_annual
+[DEBUG GRAPH] Entities resolved: {'AAPL': 'AAPL'}
+[DEBUG GRAPH] Is stock query: False
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'revenue_b', 'net_income_b', 'op_income_b', 'gross_profit_b', 'rd_b', 'sga_b', 'gross_margin_annual', 'operating_margin_annual', 'net_margin_annual', 'roe_annual', 'roa_annual', 'debt_to_equity_annual', 'debt_to_assets_annual', 'rd_intensity_annual', 'sga_intensity_annual', 'avg_price_annual', 'avg_open_price_annual', 'avg_close_price_annual', 'close_price_eoy', 'high_price_annual', 'low_price_annual', 'return_annual', 'volatility_pct_annual', 'dividend_yield_annual']
+[DEBUG FORMATTER] Question: Apple net income and opening price 2023
+[DEBUG FORMATTER] Intent: complete_annual
+[DEBUG FORMATTER] Requested metrics: {'opening_price', 'net_income'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Checking opening_price...
+[DEBUG FORMATTER] Added annual opening price: $137.94
+[DEBUG FORMATTER] Final parts list: ['net income of $100.91B', 'opening price of $137.94']
+[DEBUG FORMATTER] Parts count: 2
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Apple Inc. (AAPL) reported net income of $100.91B, opening price of $137.94 for FY2023.          │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+====================================================================================================
+CATEGORY: COMBINED QUARTERLY
+====================================================================================================
+
+Query: 'Show Apple revenue and closing stock price Q2 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: complete_quarterly
+[DEBUG GRAPH] Entities resolved: {'AAPL': 'AAPL'}
+[DEBUG GRAPH] Is stock query: False
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'fiscal_quarter', 'revenue_b', 'net_income_b', 'op_income_b', 'gross_profit_b', 'rd_b', 'sga_b', 'eps', 'gross_margin', 'operating_margin', 'net_margin', 'roe', 'roa', 'debt_to_equity', 'debt_to_assets', 'rd_intensity', 'sga_intensity', 'avg_price', 'open_price', 'close_price', 'high_price', 'low_price', 'return_qoq', 'return_yoy', 'volatility_pct', 'dividend_yield']
+[DEBUG FORMATTER] Question: Show Apple revenue and closing stock price Q2 2023
+[DEBUG FORMATTER] Intent: complete_quarterly
+[DEBUG FORMATTER] Requested metrics: {'revenue', 'closing_price'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Final parts list: ['revenue of $81.80B', 'closing price of $192.32']
+[DEBUG FORMATTER] Parts count: 2
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Apple Inc. (AAPL) reported revenue of $81.80B, closing price of $192.32 for Q2 FY2023.           │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Query: 'Apple net income and opening price Q3 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: complete_quarterly
+[DEBUG GRAPH] Entities resolved: {'AAPL': 'AAPL'}
+[DEBUG GRAPH] Is stock query: False
+[DEBUG GRAPH] Num entities: 1
+[DEBUG FORMATTER] Columns in row: ['ticker', 'name', 'fiscal_year', 'fiscal_quarter', 'revenue_b', 'net_income_b', 'op_income_b', 'gross_profit_b', 'rd_b', 'sga_b', 'eps', 'gross_margin', 'operating_margin', 'net_margin', 'roe', 'roa', 'debt_to_equity', 'debt_to_assets', 'rd_intensity', 'sga_intensity', 'avg_price', 'open_price', 'close_price', 'high_price', 'low_price', 'return_qoq', 'return_yoy', 'volatility_pct', 'dividend_yield']
+[DEBUG FORMATTER] Question: Apple net income and opening price Q3 2023
+[DEBUG FORMATTER] Intent: complete_quarterly
+[DEBUG FORMATTER] Requested metrics: {'opening_price', 'net_income'}
+[DEBUG FORMATTER] Show all: False
+[DEBUG FORMATTER] Checking opening_price...
+[DEBUG FORMATTER] Added quarterly opening price: $150.64
+[DEBUG FORMATTER] Final parts list: ['net income of $22.96B', 'opening price of $150.64']
+[DEBUG FORMATTER] Parts count: 2
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Apple Inc. (AAPL) reported net income of $22.96B, opening price of $150.64 for Q3 FY2023.        │
+│                                                                                                  │
+│ Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+====================================================================================================
+CATEGORY: MULTI COMPANY
+====================================================================================================
+
+Query: 'Compare Apple and Google revenue Q2 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: multi_company_quarter
+[DEBUG GRAPH] Entities resolved: {'GOOG': 'GOOG', 'AAPL': 'AAPL'}
+[DEBUG GRAPH] Is stock query: False
+[DEBUG GRAPH] Num entities: 2
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Here is the revenue for Q2 2023:                                                                 │
+│ - **Apple Inc.**: $81.80B revenue                                                                │
+│ - **Alphabet Inc.**: $74.60B revenue                                                             │
+│                                                                                                  │
+│ ```                                                                                              │
+│ ticker          name  fiscal_year  fiscal_quarter           revenue_b        net_income_b         op_income_b      gross_profit_b           gross_margin       operating_margin │
+│   AAPL    Apple Inc.         2023               2 81.7970000000000000 19.8810000000000000 22.9980000000000000 36.4130000000000000 0.44516302553883394257 0.28115945572576011345 │
+│   GOOG Alphabet Inc.         2023               2 74.6040000000000000 18.3680000000000000 21.8380000000000000 42.6880000000000000 0.57219452040105088199 0.29271888906761031580 │
+│ ```                                                                                              │
+│                                                                                                  │
+│ Sources: Not available                                                                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Query: 'Show Apple and Microsoft net margin 2023'
+----------------------------------------------------------------------------------------------------
+[DEBUG GRAPH] Intent: multi_company_annual
+[DEBUG GRAPH] Entities resolved: {'AAPL': 'AAPL', 'MSFT': 'MSFT'}
+[DEBUG GRAPH] Is stock query: False
+[DEBUG GRAPH] Num entities: 2
+
+Status: ✅ PASS
+
+Formatted Response:
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Here is the net margin for 2023:                                                                 │
+│ - **Apple Inc.**: 26.2% net margin                                                               │
+│ - **Microsoft Corporation**: 36.3% net margin                                                    │
+│                                                                                                  │
+│ ```                                                                                              │
+│ ticker                  name  fiscal_year            revenue_b         net_income_b          op_income_b       gross_profit_b    gross_margin_annual operating_margin_annual      net_margin_annual │
+│   AAPL            Apple Inc.         2023 385.7060000000000000 100.9130000000000000 118.6580000000000000 173.6710000000000000 0.45026782056799738661  0.30763846038174153371 0.26163191653746636039 │
+│   MSFT Microsoft Corporation         2023 227.5830000000000000  82.5410000000000000 100.5330000000000000 158.7350000000000000 0.69748179784957575917  0.44174213363915582447 0.36268526208020809990 │
+│ ```                                                                                              │
+│                                                                                                  │
+│ Sources: Not available                                                                           │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+====================================================================================================
+FINAL SUMMARY
+====================================================================================================
+
+Total Queries Tested: 33
+✅ Passed: 30 (90.9%)
+❌ Failed: 3 (9.1%)
+
+Category                                 Queries    Pass Rate
+----------------------------------------------------------------------------------------------------
+Basic Financials Quarterly               4          4/4 (100%)
+Basic Financials Annual                  3          3/3 (100%)
+Ratios Quarterly                         4          3/4 (75%)
+Ratios Annual                            3          2/3 (67%)
+Stock Quarterly                          5          5/5 (100%)
+Stock Annual                             3          3/3 (100%)
+Macro Indicators                         3          2/3 (67%)
+Combined Annual                          4          4/4 (100%)
+Combined Quarterly                       2          2/2 (100%)
+Multi Company                            2          2/2 (100%)
+
+====================================================================================================
+
+⚠️  3 queries need attention.
+====================================================================================================
+
+📁 Detailed results saved to: verification_results.yaml

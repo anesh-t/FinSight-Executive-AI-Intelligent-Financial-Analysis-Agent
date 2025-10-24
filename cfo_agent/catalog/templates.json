@@ -1,0 +1,236 @@
+{
+  "templates": {
+    "quarter_snapshot": {
+      "intent": "quarter_snapshot",
+      "surface": "fact_financials, vw_ratios_quarter",
+      "description": "Get quarterly metrics including revenue, income, expenses (R&D, SG&A, COGS), and ALL ratios (margins, ROE, ROA, debt ratios, intensity ratios). Use for all quarterly queries like 'Q2 2023 revenue', 'Q2 2023 ROE', 'Q2 2023 debt to equity', 'Q3 2023 R&D intensity', 'latest quarter margins'.",
+      "sql": "SELECT c.ticker, c.name, f.fiscal_year, f.fiscal_quarter, f.revenue/1e9 as revenue_b, f.net_income/1e9 as net_income_b, f.operating_income/1e9 as op_income_b, f.gross_profit/1e9 as gross_profit_b, f.r_and_d_expenses/1e9 as rd_b, f.sg_and_a_expenses/1e9 as sga_b, f.cogs/1e9 as cogs_b, f.cash_flow_ops/1e9 as operating_cash_flow, f.cash_flow_investing/1e9 as investing_cash_flow, f.cash_flow_financing/1e9 as financing_cash_flow, f.capex/1e9 as capex, f.dividends/1e9 as dividends, f.buybacks/1e9 as buybacks, f.eps, f.total_assets, f.total_liabilities, f.equity, r.gross_margin, r.operating_margin, r.net_margin, r.roe, r.roa, r.debt_to_equity, r.debt_to_assets, r.rnd_to_revenue, r.sgna_to_revenue FROM fact_financials f JOIN dim_company c USING (company_id) LEFT JOIN vw_ratios_quarter r ON r.company_id = f.company_id AND r.fiscal_year = f.fiscal_year AND r.fiscal_quarter = f.fiscal_quarter WHERE c.ticker = :ticker AND (CAST(:fy AS INTEGER) IS NULL OR f.fiscal_year = :fy) AND (CAST(:fq AS INTEGER) IS NULL OR f.fiscal_quarter = :fq) ORDER BY f.fiscal_year DESC, f.fiscal_quarter DESC LIMIT :limit",
+      "params": ["ticker", "fy", "fq", "limit"],
+      "default_params": {"limit": 1, "fy": null, "fq": null}
+    },
+    "annual_metrics": {
+      "intent": "annual_metrics",
+      "surface": "mv_financials_annual, mv_ratios_annual, fact_financials",
+      "description": "Get annual financial metrics including revenue, income, expenses (R&D, SG&A, COGS), cash flows, EPS, and ratios for a specific year. Use for queries like 'Apple revenue 2023', 'R&D expenses for 2023', 'SG&A 2023', 'annual metrics', 'EPS 2023'.",
+      "sql": "SELECT c.ticker, c.name, mv.fiscal_year, mv.revenue_annual/1e9 as revenue_b, mv.net_income_annual/1e9 as net_income_b, mv.operating_income_annual/1e9 as op_income_b, mv.gross_profit_annual/1e9 as gross_profit_annual_b, mv.r_and_d_expenses_annual/1e9 as rd_annual_b, mv.sg_and_a_expenses_annual/1e9 as sga_annual_b, mv.cogs_annual/1e9 as cogs_annual_b, mv.total_assets_eoy, mv.total_liabilities_eoy, mv.equity_eoy, mv.cash_flow_ops_annual/1e9 as operating_cash_flow, mv.cash_flow_investing_annual/1e9 as investing_cash_flow, mv.cash_flow_financing_annual/1e9 as financing_cash_flow, mv.capex_annual/1e9 as capex_annual_b, SUM(f.eps) as eps, SUM(f.dividends)/1e9 as dividends, SUM(f.buybacks)/1e9 as buybacks, r.gross_margin_annual, r.operating_margin_annual, r.net_margin_annual, r.roe_annual_avg_equity, r.roa_annual, r.debt_to_assets_annual, r.debt_to_equity_annual, r.rnd_to_revenue_annual, r.sgna_to_revenue_annual FROM mv_financials_annual mv JOIN mv_ratios_annual r USING (company_id, fiscal_year) JOIN dim_company c USING (company_id) LEFT JOIN fact_financials f ON f.company_id = mv.company_id AND f.fiscal_year = mv.fiscal_year WHERE c.ticker = :ticker AND (CAST(:fy AS INTEGER) IS NULL OR mv.fiscal_year = :fy) GROUP BY c.ticker, c.name, mv.fiscal_year, mv.revenue_annual, mv.net_income_annual, mv.operating_income_annual, mv.gross_profit_annual, mv.r_and_d_expenses_annual, mv.sg_and_a_expenses_annual, mv.cogs_annual, mv.total_assets_eoy, mv.total_liabilities_eoy, mv.equity_eoy, mv.cash_flow_ops_annual, mv.cash_flow_investing_annual, mv.cash_flow_financing_annual, mv.capex_annual, r.gross_margin_annual, r.operating_margin_annual, r.net_margin_annual, r.roe_annual_avg_equity, r.roa_annual, r.debt_to_assets_annual, r.debt_to_equity_annual, r.rnd_to_revenue_annual, r.sgna_to_revenue_annual ORDER BY mv.fiscal_year DESC LIMIT :limit",
+      "params": ["ticker", "fy", "limit"],
+      "default_params": {"limit": 1, "fy": null}
+    },
+    "growth_qoq_yoy": {
+      "intent": "growth_qoq_yoy",
+      "surface": "vw_growth_quarter",
+      "description": "Get quarter-over-quarter and year-over-year growth rates",
+      "sql": "SELECT c.ticker, c.name, g.fiscal_year, g.fiscal_quarter, g.revenue_qoq, g.revenue_yoy, g.net_income_qoq, g.net_income_yoy FROM vw_growth_quarter g JOIN dim_company c USING (company_id) WHERE c.ticker = :ticker AND (CAST(:fy AS INTEGER) IS NULL OR g.fiscal_year = :fy) AND (CAST(:fq AS INTEGER) IS NULL OR g.fiscal_quarter = :fq) ORDER BY g.fiscal_year DESC, g.fiscal_quarter DESC LIMIT :limit",
+      "params": ["ticker", "fy", "fq", "limit"],
+      "default_params": {"limit": 4, "fy": null, "fq": null}
+    },
+    "growth_annual_cagr": {
+      "intent": "growth_annual_cagr",
+      "surface": "vw_growth_annual",
+      "description": "Get annual growth rates and CAGR (3-year, 5-year)",
+      "sql": "SELECT c.ticker, c.name, g.fiscal_year, g.revenue_yoy, g.revenue_cagr_3y, g.revenue_cagr_5y, g.net_income_yoy FROM vw_growth_annual g JOIN dim_company c USING (company_id) WHERE c.ticker = :ticker AND (CAST(:fy AS INTEGER) IS NULL OR g.fiscal_year = :fy) ORDER BY g.fiscal_year DESC LIMIT :limit",
+      "params": ["ticker", "fy", "limit"],
+      "default_params": {"limit": 1, "fy": null}
+    },
+    "peer_leaderboard_quarter": {
+      "intent": "peer_leaderboard_quarter",
+      "surface": "vw_peer_stats_quarter",
+      "description": "Get peer rankings and percentiles for quarterly metrics",
+      "sql": "SELECT p.company_id, c.ticker, p.fiscal_year, p.fiscal_quarter, p.revenue/1e9 as revenue_b, p.net_margin, p.roe, p.rank_revenue, p.rank_net_margin, p.rank_roe, p.pct_revenue, p.pct_net_margin, p.pct_roe FROM vw_peer_stats_quarter p JOIN dim_company c USING (company_id) ORDER BY p.fiscal_year DESC, p.fiscal_quarter DESC, p.rank_net_margin LIMIT :limit",
+      "params": ["limit"],
+      "default_params": {"limit": 5}
+    },
+    "peer_leaderboard_annual": {
+      "intent": "peer_leaderboard_annual",
+      "surface": "vw_peer_stats_annual",
+      "description": "Get peer rankings and percentiles for annual metrics",
+      "sql": "SELECT p.company_id, c.ticker, p.fiscal_year, p.revenue_annual/1e9 as revenue_b, p.net_margin_annual, p.operating_margin_annual, p.roe_annual_avg_equity, p.rank_revenue_annual, p.pct_revenue_annual, p.z_revenue_annual FROM vw_peer_stats_annual p JOIN dim_company c USING (company_id) WHERE (CAST(:fy AS INTEGER) IS NULL OR p.fiscal_year = :fy) ORDER BY p.fiscal_year DESC, p.operating_margin_annual DESC LIMIT :limit",
+      "params": ["fy", "limit"],
+      "default_params": {"limit": 5, "fy": null}
+    },
+    "macro_values_quarter": {
+      "intent": "macro_values_quarter",
+      "surface": "vw_company_quarter_macro",
+      "description": "Get company metrics with macro indicator values for a quarter",
+      "sql": "SELECT c.ticker, c.name, m.fiscal_year, m.fiscal_quarter, m.revenue/1e9 as revenue_b, m.net_margin, m.cpi, m.fed_funds_rate, m.sp500_index, m.unemployment_rate FROM vw_company_quarter_macro m JOIN dim_company c USING (company_id) WHERE c.ticker = :ticker AND (CAST(:fy AS INTEGER) IS NULL OR m.fiscal_year = :fy) AND (CAST(:fq AS INTEGER) IS NULL OR m.fiscal_quarter = :fq) ORDER BY m.fiscal_year DESC, m.fiscal_quarter DESC LIMIT :limit",
+      "params": ["ticker", "fy", "fq", "limit"],
+      "default_params": {"limit": 1, "fy": null, "fq": null}
+    },
+    "macro_betas_rolling": {
+      "intent": "macro_betas_rolling",
+      "surface": "vw_macro_sensitivity_rolling",
+      "description": "Get rolling macro sensitivities (betas) over 12 quarters",
+      "sql": "SELECT c.ticker, c.name, s.fiscal_year, s.fiscal_quarter, s.beta_nm_cpi_12q, s.beta_nm_ffr_12q, s.beta_nm_spx_12q FROM vw_macro_sensitivity_rolling s JOIN dim_company c USING (company_id) WHERE c.ticker = :ticker AND (CAST(:fy AS INTEGER) IS NULL OR s.fiscal_year = :fy) AND (CAST(:fq AS INTEGER) IS NULL OR s.fiscal_quarter = :fq) ORDER BY s.fiscal_year DESC, s.fiscal_quarter DESC LIMIT :limit",
+      "params": ["ticker", "fy", "fq", "limit"],
+      "default_params": {"limit": 1, "fy": null, "fq": null}
+    },
+    "health_flags": {
+      "intent": "health_flags",
+      "surface": "vw_financial_health_quarter",
+      "description": "Get balance sheet health flags and validation",
+      "sql": "SELECT c.ticker, c.name, h.fiscal_year, h.fiscal_quarter, h.balance_status, h.balance_gap_pct, h.flag_negative_equity, h.flag_net_loss FROM vw_financial_health_quarter h JOIN dim_company c USING (company_id) WHERE c.ticker = :ticker AND (CAST(:fy AS INTEGER) IS NULL OR h.fiscal_year = :fy) AND (CAST(:fq AS INTEGER) IS NULL OR h.fiscal_quarter = :fq) ORDER BY h.fiscal_year DESC, h.fiscal_quarter DESC LIMIT :limit",
+      "params": ["ticker", "fy", "fq", "limit"],
+      "default_params": {"limit": 1, "fy": null, "fq": null}
+    },
+    "outliers": {
+      "intent": "outliers",
+      "surface": "vw_outliers_quarter",
+      "description": "Detect 3-sigma outliers in revenue and margins",
+      "sql": "SELECT o.company_id, c.ticker, o.fiscal_year, o.fiscal_quarter, o.z_revenue, o.z_net_margin, o.outlier_revenue_3sigma, o.outlier_net_margin_3sigma FROM vw_outliers_quarter o JOIN dim_company c USING (company_id) WHERE c.ticker = :ticker AND (o.outlier_revenue_3sigma = 1 OR o.outlier_net_margin_3sigma = 1) ORDER BY o.fiscal_year DESC, o.fiscal_quarter DESC LIMIT :limit",
+      "params": ["ticker", "limit"],
+      "default_params": {"limit": 10}
+    },
+    "annual_revenue_single_year": {
+      "intent": "annual_revenue_single_year",
+      "surface": "mv_financials_annual",
+      "description": "Get annual revenue for a single company and year",
+      "sql": "SELECT f.company_id, c.ticker, c.name, f.fiscal_year, f.revenue_annual/1e9 as revenue_b FROM mv_financials_annual f JOIN dim_company c USING (company_id) WHERE c.ticker = :ticker AND f.fiscal_year = :fy LIMIT 1",
+      "params": ["ticker", "fy"],
+      "default_params": {}
+    },
+    "compare_ratio_annual_two": {
+      "intent": "compare_ratio_annual_two",
+      "surface": "mv_ratios_annual",
+      "description": "Compare a ratio (e.g., ROE) between two companies for a year",
+      "sql": "SELECT r.company_id, c.ticker, c.name, r.fiscal_year, r.roe_annual_avg_equity, r.roa_annual, r.gross_margin_annual, r.operating_margin_annual, r.net_margin_annual FROM mv_ratios_annual r JOIN dim_company c USING (company_id) WHERE c.ticker IN (:t1, :t2) AND r.fiscal_year = :fy ORDER BY c.ticker LIMIT 2",
+      "params": ["t1", "t2", "fy"],
+      "default_params": {}
+    },
+    "narrative_brief_latest": {
+      "intent": "narrative_brief_latest",
+      "surface": "vw_cfo_answers",
+      "description": "Get latest quarter comprehensive snapshot for narrative",
+      "sql": "SELECT company_id, ticker, name, fyq_label, revenue/1e9 as revenue_b, net_income/1e9 as net_income_b, gross_margin, net_margin, roe, revenue_qoq, revenue_yoy, net_income_ttm/1e9 as net_income_ttm_b, rank_revenue, rank_net_margin, pct_net_margin, gross_profit_source FROM vw_cfo_answers WHERE ticker = :ticker ORDER BY fiscal_year DESC, fiscal_quarter DESC LIMIT 1",
+      "params": ["ticker"],
+      "default_params": {}
+    },
+    "stock_price_quarterly": {
+      "intent": "stock_price_quarterly",
+      "surface": "vw_stock_prices_quarter",
+      "description": "Get quarterly stock price data including avg price, returns (QoQ, YoY), volatility, volume, dividends. Use for queries like 'Apple stock price Q2 2023', 'Microsoft quarterly return Q3 2024', 'Google volatility Q1 2023'.",
+      "sql": "SELECT c.ticker, c.name, sq.fiscal_year, sq.fiscal_quarter, sq.avg_price, sq.open_price, sq.close_price, sq.high_price, sq.low_price, sq.return_qoq, sq.return_yoy, sq.price_change_abs, sq.price_change_pct, sq.volatility_pct, sq.volume_total, sq.volume_avg, sq.dividend_yield, sq.dividend_per_share FROM vw_stock_prices_quarter sq JOIN dim_company c USING (company_id) WHERE c.ticker = :ticker AND (CAST(:fy AS INTEGER) IS NULL OR sq.fiscal_year = :fy) AND (CAST(:fq AS INTEGER) IS NULL OR sq.fiscal_quarter = :fq) ORDER BY sq.fiscal_year DESC, sq.fiscal_quarter DESC LIMIT :limit",
+      "params": ["ticker", "fy", "fq", "limit"],
+      "default_params": {"limit": 1, "fy": null, "fq": null}
+    },
+    "stock_price_annual": {
+      "intent": "stock_price_annual",
+      "surface": "mv_stock_prices_annual",
+      "description": "Get annual stock price data including average annual price, year-high/low, annual return, annual volatility, total volume. Use for queries like 'Apple stock price 2023', 'Microsoft annual return 2024', 'Amazon stock performance 2023'.",
+      "sql": "SELECT c.ticker, c.name, sa.fiscal_year, sa.avg_price_annual, sa.avg_open_price_annual, sa.avg_close_price_annual, sa.high_price_annual, sa.low_price_annual, sa.close_price_eoy, sa.return_annual, sa.volatility_pct_annual, sa.volume_total_annual, sa.volume_avg_annual, sa.dividend_per_share_annual, sa.dividend_yield_annual FROM mv_stock_prices_annual sa JOIN dim_company c USING (company_id) WHERE c.ticker = :ticker AND (CAST(:fy AS INTEGER) IS NULL OR sa.fiscal_year = :fy) ORDER BY sa.fiscal_year DESC LIMIT :limit",
+      "params": ["ticker", "fy", "limit"],
+      "default_params": {"limit": 1, "fy": null}
+    },
+    "macro_indicator_quarterly": {
+      "intent": "macro_indicator_quarterly",
+      "surface": "vw_macro_quarter",
+      "description": "Get quarterly macro indicator data including GDP, inflation (CPI, Core CPI, PCE Index), unemployment rate, Fed funds rate, yield spread, S&P 500, VIX. Use for queries like 'GDP Q2 2023', 'inflation Q3 2023', 'unemployment rate Q1 2024', 'Fed rate Q4 2023'.",
+      "sql": "SELECT mq.fiscal_year, mq.fiscal_quarter, mq.gdp, mq.pce, mq.cpi, mq.core_cpi, mq.pce_price_index, mq.unemployment_rate, mq.fed_funds_rate, mq.term_spread_10y_2y, mq.sp500_index, mq.vix_index FROM vw_macro_quarter mq WHERE (CAST(:fy AS INTEGER) IS NULL OR mq.fiscal_year = :fy) AND (CAST(:fq AS INTEGER) IS NULL OR mq.fiscal_quarter = :fq) ORDER BY mq.fiscal_year DESC, mq.fiscal_quarter DESC LIMIT :limit",
+      "params": ["fy", "fq", "limit"],
+      "default_params": {"limit": 1, "fy": null, "fq": null}
+    },
+    "macro_indicator_annual": {
+      "intent": "macro_indicator_annual",
+      "surface": "mv_macro_annual",
+      "description": "Get annual macro indicator data including GDP, inflation (CPI, Core CPI, PCE Index), unemployment rate, Fed funds rate, yield spread, S&P 500, VIX. Use for queries like 'GDP 2023', 'inflation 2023', 'unemployment rate 2024', 'macro indicators 2023'.",
+      "sql": "SELECT ma.fiscal_year, ma.gdp_annual, ma.pce_annual, ma.cpi_annual, ma.core_cpi_annual, ma.pce_price_index_annual, ma.unemployment_rate_annual, ma.fed_funds_rate_annual, ma.term_spread_10y_2y_annual, ma.sp500_index_annual, ma.vix_index_annual, ma.gdp_q4, ma.cpi_q4, ma.unemployment_rate_q4, ma.fed_funds_rate_q4, ma.sp500_index_q4 FROM mv_macro_annual ma WHERE (CAST(:fy AS INTEGER) IS NULL OR ma.fiscal_year = :fy) ORDER BY ma.fiscal_year DESC LIMIT :limit",
+      "params": ["fy", "limit"],
+      "default_params": {"limit": 1, "fy": null}
+    },
+    "macro_sensitivity_quarterly": {
+      "intent": "macro_sensitivity_quarterly",
+      "surface": "vw_macro_sensitivity_rolling",
+      "description": "Get quarterly macro sensitivity (betas) showing how company margins respond to macro indicators (CPI, Fed rate, S&P 500, unemployment). Use for queries like 'Apple macro sensitivity Q2 2023', 'Microsoft beta to inflation Q3 2023', 'Google margin sensitivity to CPI Q1 2024'.",
+      "sql": "SELECT c.ticker, c.name, ms.fiscal_year, ms.fiscal_quarter, ms.gross_margin, ms.operating_margin, ms.net_margin, ms.cpi, ms.fed_funds_rate, ms.sp500_index, ms.unemployment_rate, ms.beta_gm_cpi_12q, ms.beta_om_cpi_12q, ms.beta_nm_cpi_12q, ms.beta_gm_ffr_12q, ms.beta_om_ffr_12q, ms.beta_nm_ffr_12q, ms.beta_nm_spx_12q, ms.beta_nm_unrate_12q FROM vw_macro_sensitivity_rolling ms JOIN dim_company c USING (company_id) WHERE c.ticker = :ticker AND (CAST(:fy AS INTEGER) IS NULL OR ms.fiscal_year = :fy) AND (CAST(:fq AS INTEGER) IS NULL OR ms.fiscal_quarter = :fq) ORDER BY ms.fiscal_year DESC, ms.fiscal_quarter DESC LIMIT :limit",
+      "params": ["ticker", "fy", "fq", "limit"],
+      "default_params": {"limit": 1, "fy": null, "fq": null}
+    },
+    "macro_sensitivity_annual": {
+      "intent": "macro_sensitivity_annual",
+      "surface": "mv_macro_sensitivity_annual",
+      "description": "Get annual macro sensitivity (betas) showing how company margins respond to macro indicators (CPI, Fed rate, S&P 500, unemployment). Use for queries like 'Apple macro sensitivity 2023', 'Microsoft beta to inflation 2023', 'Amazon margin sensitivity to Fed rate 2024'.",
+      "sql": "SELECT c.ticker, c.name, msa.fiscal_year, msa.gross_margin_annual, msa.operating_margin_annual, msa.net_margin_annual, msa.cpi_annual, msa.fed_funds_rate_annual, msa.sp500_index_annual, msa.unemployment_rate_annual, msa.beta_gm_cpi_annual, msa.beta_om_cpi_annual, msa.beta_nm_cpi_annual, msa.beta_gm_ffr_annual, msa.beta_om_ffr_annual, msa.beta_nm_ffr_annual, msa.beta_nm_spx_annual, msa.beta_nm_unrate_annual FROM mv_macro_sensitivity_annual msa JOIN dim_company c USING (company_id) WHERE c.ticker = :ticker AND (CAST(:fy AS INTEGER) IS NULL OR msa.fiscal_year = :fy) ORDER BY msa.fiscal_year DESC LIMIT :limit",
+      "params": ["ticker", "fy", "limit"],
+      "default_params": {"limit": 1, "fy": null}
+    },
+    "complete_quarterly": {
+      "intent": "complete_quarterly",
+      "surface": "vw_company_complete_quarter",
+      "description": "Get complete quarterly snapshot with financials, ratios, and stock prices. Use for queries like 'show Apple complete picture Q2 2023', 'everything about Microsoft Q3 2023', 'comprehensive view Google Q2 2023'.",
+      "sql": "SELECT ticker, name, fiscal_year, fiscal_quarter, revenue/1e9 as revenue_b, net_income/1e9 as net_income_b, operating_income/1e9 as op_income_b, gross_profit/1e9 as gross_profit_b, r_and_d_expenses/1e9 as rd_b, sg_and_a_expenses/1e9 as sga_b, eps, gross_margin, operating_margin, net_margin, roe, roa, debt_to_equity, debt_to_assets, rd_intensity, sga_intensity, avg_price, open_price, close_price, high_price, low_price, return_qoq, return_yoy, volatility_pct, dividend_yield FROM vw_company_complete_quarter WHERE ticker = :ticker AND (CAST(:fy AS INTEGER) IS NULL OR fiscal_year = :fy) AND (CAST(:fq AS INTEGER) IS NULL OR fiscal_quarter = :fq) ORDER BY fiscal_year DESC, fiscal_quarter DESC LIMIT :limit",
+      "params": ["ticker", "fy", "fq", "limit"],
+      "default_params": {"limit": 1, "fy": null, "fq": null}
+    },
+    "complete_macro_context_quarterly": {
+      "intent": "complete_macro_context_quarterly",
+      "surface": "vw_company_macro_context_quarter",
+      "description": "Get complete quarterly data with macro context. Use for queries like 'Apple with macro Q2 2023', 'Microsoft with economic context Q3 2023', 'Google with inflation Q2 2023'.",
+      "sql": "SELECT ticker, name, fiscal_year, fiscal_quarter, revenue/1e9 as revenue_b, net_income/1e9 as net_income_b, gross_margin, operating_margin, net_margin, avg_price, return_qoq, gdp/1e3 as gdp_t, cpi, unemployment_rate, fed_funds_rate, sp500_index FROM vw_company_macro_context_quarter WHERE ticker = :ticker AND (CAST(:fy AS INTEGER) IS NULL OR fiscal_year = :fy) AND (CAST(:fq AS INTEGER) IS NULL OR fiscal_quarter = :fq) ORDER BY fiscal_year DESC, fiscal_quarter DESC LIMIT :limit",
+      "params": ["ticker", "fy", "fq", "limit"],
+      "default_params": {"limit": 1, "fy": null, "fq": null}
+    },
+    "complete_full_quarterly": {
+      "intent": "complete_full_quarterly",
+      "surface": "vw_company_full_quarter",
+      "description": "Get full quarterly picture with financials, ratios, stock, macro, and sensitivity betas. Use for queries like 'Apple full analysis Q2 2023', 'everything including betas Microsoft Q3 2023', 'complete picture with sensitivity Google Q2 2023'.",
+      "sql": "SELECT ticker, name, fiscal_year, fiscal_quarter, revenue/1e9 as revenue_b, net_income/1e9 as net_income_b, gross_margin, net_margin, avg_price, return_qoq, gdp/1e3 as gdp_t, cpi, fed_funds_rate, beta_nm_cpi_12q, beta_nm_ffr_12q, beta_nm_spx_12q FROM vw_company_full_quarter WHERE ticker = :ticker AND (CAST(:fy AS INTEGER) IS NULL OR fiscal_year = :fy) AND (CAST(:fq AS INTEGER) IS NULL OR fiscal_quarter = :fq) ORDER BY fiscal_year DESC, fiscal_quarter DESC LIMIT :limit",
+      "params": ["ticker", "fy", "fq", "limit"],
+      "default_params": {"limit": 1, "fy": null, "fq": null}
+    },
+    "complete_annual": {
+      "intent": "complete_annual",
+      "surface": "mv_company_complete_annual",
+      "description": "Get complete annual snapshot with financials, ratios, and stock prices. Use for queries like 'show Apple complete picture 2023', 'everything about Microsoft 2023', 'comprehensive annual view Google 2023'.",
+      "sql": "SELECT ticker, name, fiscal_year, revenue_annual/1e9 as revenue_b, net_income_annual/1e9 as net_income_b, operating_income_annual/1e9 as op_income_b, gross_profit_annual/1e9 as gross_profit_b, r_and_d_expenses_annual/1e9 as rd_b, sg_and_a_expenses_annual/1e9 as sga_b, gross_margin_annual, operating_margin_annual, net_margin_annual, roe_annual, roa_annual, debt_to_equity_annual, debt_to_assets_annual, rd_intensity_annual, sga_intensity_annual, avg_price_annual, avg_open_price_annual, avg_close_price_annual, close_price_eoy, high_price_annual, low_price_annual, return_annual, volatility_pct_annual, dividend_yield_annual FROM mv_company_complete_annual WHERE ticker = :ticker AND (CAST(:fy AS INTEGER) IS NULL OR fiscal_year = :fy) ORDER BY fiscal_year DESC LIMIT :limit",
+      "params": ["ticker", "fy", "limit"],
+      "default_params": {"limit": 1, "fy": null}
+    },
+    "complete_macro_context_annual": {
+      "intent": "complete_macro_context_annual",
+      "surface": "mv_company_macro_context_annual",
+      "description": "Get complete annual data with macro context. Use for queries like 'Apple with macro 2023', 'Microsoft with economic context 2023', 'Google annual with inflation 2023'.",
+      "sql": "SELECT ticker, name, fiscal_year, revenue_annual/1e9 as revenue_b, net_income_annual/1e9 as net_income_b, gross_margin_annual, operating_margin_annual, net_margin_annual, avg_price_annual, return_annual, gdp_annual/1e3 as gdp_t, cpi_annual, unemployment_rate_annual, fed_funds_rate_annual, sp500_index_annual FROM mv_company_macro_context_annual WHERE ticker = :ticker AND (CAST(:fy AS INTEGER) IS NULL OR fiscal_year = :fy) ORDER BY fiscal_year DESC LIMIT :limit",
+      "params": ["ticker", "fy", "limit"],
+      "default_params": {"limit": 1, "fy": null}
+    },
+    "complete_full_annual": {
+      "intent": "complete_full_annual",
+      "surface": "mv_company_full_annual",
+      "description": "Get full annual picture with financials, ratios, stock, macro, and sensitivity betas. Use for queries like 'Apple full analysis 2023', 'everything including betas Microsoft 2023', 'complete picture with sensitivity Amazon 2023'.",
+      "sql": "SELECT ticker, name, fiscal_year, revenue_annual/1e9 as revenue_b, net_income_annual/1e9 as net_income_b, gross_margin_annual, net_margin_annual, avg_price_annual, return_annual, gdp_annual/1e3 as gdp_t, cpi_annual, fed_funds_rate_annual, beta_nm_cpi_annual, beta_nm_ffr_annual, beta_nm_spx_annual FROM mv_company_full_annual WHERE ticker = :ticker AND (CAST(:fy AS INTEGER) IS NULL OR fiscal_year = :fy) ORDER BY fiscal_year DESC LIMIT :limit",
+      "params": ["ticker", "fy", "limit"],
+      "default_params": {"limit": 1, "fy": null}
+    },
+    "multi_company_quarter": {
+      "intent": "multi_company_quarter",
+      "surface": "fact_financials, vw_ratios_quarter, dim_company",
+      "description": "Compare multiple companies for quarterly metrics. Use for queries like 'show Apple and Google revenue Q2 2023', 'compare Apple vs Microsoft net income Q3 2023', 'show revenue for Apple, Microsoft, Google Q2 2023'.",
+      "sql": "SELECT c.ticker, c.name, f.fiscal_year, f.fiscal_quarter, f.revenue/1e9 as revenue_b, f.net_income/1e9 as net_income_b, f.operating_income/1e9 as op_income_b, f.gross_profit/1e9 as gross_profit_b, r.gross_margin, r.operating_margin, r.net_margin, r.roe, r.roa FROM fact_financials f JOIN dim_company c USING (company_id) LEFT JOIN vw_ratios_quarter r ON r.company_id = f.company_id AND r.fiscal_year = f.fiscal_year AND r.fiscal_quarter = f.fiscal_quarter WHERE c.ticker IN (:t1, :t2) AND (CAST(:fy AS INTEGER) IS NULL OR f.fiscal_year = :fy) AND (CAST(:fq AS INTEGER) IS NULL OR f.fiscal_quarter = :fq) ORDER BY c.ticker, f.fiscal_year DESC, f.fiscal_quarter DESC LIMIT :limit",
+      "params": ["t1", "t2", "fy", "fq", "limit"],
+      "default_params": {"limit": 10, "fy": null, "fq": null}
+    },
+    "multi_company_annual": {
+      "intent": "multi_company_annual",
+      "surface": "mv_financials_annual, mv_ratios_annual, dim_company",
+      "description": "Compare multiple companies for annual metrics. Use for queries like 'show Apple and Google revenue 2023', 'compare Apple vs Microsoft 2023', 'show revenue for Apple, Microsoft, Google 2023'.",
+      "sql": "SELECT c.ticker, c.name, mv.fiscal_year, mv.revenue_annual/1e9 as revenue_b, mv.net_income_annual/1e9 as net_income_b, mv.operating_income_annual/1e9 as op_income_b, mv.gross_profit_annual/1e9 as gross_profit_b, r.gross_margin_annual, r.operating_margin_annual, r.net_margin_annual, r.roe_annual_avg_equity as roe_annual, r.roa_annual FROM mv_financials_annual mv JOIN dim_company c USING (company_id) LEFT JOIN mv_ratios_annual r USING (company_id, fiscal_year) WHERE c.ticker IN (:t1, :t2) AND (CAST(:fy AS INTEGER) IS NULL OR mv.fiscal_year = :fy) ORDER BY c.ticker, mv.fiscal_year DESC LIMIT :limit",
+      "params": ["t1", "t2", "fy", "limit"],
+      "default_params": {"limit": 10, "fy": null}
+    },
+    "multi_company_macro_quarter": {
+      "intent": "multi_company_macro_quarter",
+      "surface": "vw_company_macro_context_quarter",
+      "description": "Compare multiple companies with macro context for quarterly data. Use for queries like 'compare Apple and Google with CPI Q2 2023', 'show Apple vs Microsoft with inflation Q3 2023'.",
+      "sql": "SELECT ticker, name, fiscal_year, fiscal_quarter, revenue/1e9 as revenue_b, net_income/1e9 as net_income_b, gross_margin, operating_margin, net_margin, gdp/1e3 as gdp_t, cpi, unemployment_rate, fed_funds_rate FROM vw_company_macro_context_quarter WHERE ticker IN (:t1, :t2) AND (CAST(:fy AS INTEGER) IS NULL OR fiscal_year = :fy) AND (CAST(:fq AS INTEGER) IS NULL OR fiscal_quarter = :fq) ORDER BY ticker, fiscal_year DESC, fiscal_quarter DESC LIMIT :limit",
+      "params": ["t1", "t2", "fy", "fq", "limit"],
+      "default_params": {"limit": 10, "fy": null, "fq": null}
+    },
+    "multi_company_macro_annual": {
+      "intent": "multi_company_macro_annual",
+      "surface": "mv_company_macro_context_annual",
+      "description": "Compare multiple companies with macro context for annual data. Use for queries like 'compare Apple and Google with GDP 2023', 'show Apple vs Microsoft with inflation 2023'.",
+      "sql": "SELECT ticker, name, fiscal_year, revenue_annual/1e9 as revenue_b, net_income_annual/1e9 as net_income_b, gross_margin_annual, operating_margin_annual, net_margin_annual, gdp_annual/1e3 as gdp_t, cpi_annual, unemployment_rate_annual, fed_funds_rate_annual FROM mv_company_macro_context_annual WHERE ticker IN (:t1, :t2) AND (CAST(:fy AS INTEGER) IS NULL OR fiscal_year = :fy) ORDER BY ticker, fiscal_year DESC LIMIT :limit",
+      "params": ["t1", "t2", "fy", "limit"],
+      "default_params": {"limit": 10, "fy": null}
+    }
+  }
+}

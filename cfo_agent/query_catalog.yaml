@@ -1,0 +1,63 @@
+categories:
+  # Basic Financials - Quarterly
+  basic_financials_quarterly:
+    - "Apple revenue Q2 2023"
+    - "Microsoft net income Q3 2023"
+    - "Google operating income Q2 2023"
+    - "Amazon gross profit Q2 2023"
+    
+  # Basic Financials - Annual
+  basic_financials_annual:
+    - "Apple revenue 2023"
+    - "Microsoft net income 2023"
+    - "Google operating income 2023"
+    
+  # Ratios - Quarterly
+  ratios_quarterly:
+    - "Apple gross margin Q2 2023"
+    - "Microsoft net margin Q2 2023"
+    - "Google ROE Q2 2023"
+    - "Amazon debt to equity Q2 2023"
+    
+  # Ratios - Annual
+  ratios_annual:
+    - "Apple gross margin 2023"
+    - "Microsoft ROE 2023"
+    - "Google debt to equity 2023"
+    
+  # Stock Prices - Quarterly (ALL INDICATORS)
+  stock_quarterly:
+    - "Apple opening stock price Q2 2023"
+    - "Apple closing stock price Q2 2023"
+    - "Apple high stock price Q2 2023"
+    - "Apple low stock price Q2 2023"
+    - "Microsoft opening and closing price Q2 2023"
+    
+  # Stock Prices - Annual
+  stock_annual:
+    - "Apple opening stock price 2023"
+    - "Apple closing stock price 2023"
+    - "Microsoft high and low price 2023"
+    
+  # Macro Indicators
+  macro_indicators:
+    - "Unemployment rate in 2023"
+    - "GDP in 2023"
+    - "CPI in 2023"
+    
+  # Combined Queries - Financials + Stock
+  combined_annual:
+    - "Show Apple revenue and closing stock price for 2023"
+    - "Show Apple revenue, net margin, and closing stock price for 2023"
+    - "Show Microsoft revenue, net margin, and closing price 2023"
+    - "Apple net income and opening price 2023"
+    
+  # Combined Queries - Quarterly
+  combined_quarterly:
+    - "Show Apple revenue and closing stock price Q2 2023"
+    - "Apple net income and opening price Q3 2023"
+    
+  # Multi-Company
+  multi_company:
+    - "Compare Apple and Google revenue Q2 2023"
+    - "Show Apple and Microsoft net margin 2023"

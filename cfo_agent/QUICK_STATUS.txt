@@ -1,0 +1,57 @@
+================================================================================
+CFO AGENT - RATIO METRICS FINAL STATUS
+================================================================================
+
+ALL 9 RATIOS FROM dim_ratio TABLE:
+
+#  | Ratio               | Annual  | Quarterly | Data Source (Q)
+---|---------------------|---------|-----------|------------------------
+1  | ROE                 | ✅ 100% | ✅ 100%  | fact_ratios
+2  | ROA                 | ✅ 100% | ✅ 100%  | fact_ratios  
+3  | Gross Margin        | ✅ 100% | ✅ 100%  | fact_ratios
+4  | Operating Margin    | ✅ 100% | ✅ 100%  | fact_ratios
+5  | Net Margin          | ✅ 100% | ✅ 100%  | fact_ratios
+6  | Debt-to-Equity      | ⚠️  90% | ⚠️  50%  | fact_ratios (routing issue)
+7  | Debt-to-Assets      | ⚠️  90% | ⚠️  50%  | fact_ratios (routing issue)
+8  | R&D Intensity       | ✅ 100% | ⚠️  50%  | fact_ratios (routing issue)
+9  | SG&A Intensity      | ✅ 100% | ⚠️  50%  | fact_ratios (routing issue)
+
+OVERALL:  7/9 Perfect Annual | 5/9 Perfect Quarterly | 12/18 Total Working
+
+================================================================================
+DATA SOURCES:
+================================================================================
+
+ANNUAL QUERIES → mv_ratios_annual
+  Template: annual_metrics
+  Columns: roe_annual_avg_equity, roa_annual, gross_margin_annual,
+           operating_margin_annual, net_margin_annual, debt_to_equity_annual,
+           debt_to_assets_annual, rnd_to_revenue_annual, sgna_to_revenue_annual
+
+QUARTERLY QUERIES → fact_ratios
+  Template: quarterly_ratios OR quarter_snapshot  
+  Columns: roe, roa, gross_margin, operating_margin, net_margin,
+           debt_to_equity, debt_to_assets, rnd_to_revenue, sgna_to_revenue
+
+ALTERNATIVE (TTM) → mv_ratios_ttm
+  Template: ttm_snapshot
+  Columns: roe_ttm, roa_ttm, gross_margin_ttm, operating_margin_ttm,
+           net_margin_ttm (only 5 ratios, no debt/intensity)
+
+================================================================================
+WORKING QUERIES:
+================================================================================
+
+✅ "show Apple ROE for 2023" → ROE of 156.0%
+✅ "show Apple gross margin for 2023" → gross margin of 45.0%
+✅ "show Apple R&D intensity for 2023" → R&D intensity of 7.8%
+✅ "show Apple ROE for Q2 2023" → ROE of 33.0%
+✅ "show Apple gross margin for Q2 2023" → gross margin of 44.5%
+
+⚠️ "show Apple debt to equity for 2023" → Shows ratio but adds extra info
+⚠️ "show Apple debt to equity for Q2 2023" → Shows equity only, not ratio
+
+================================================================================
+STATUS: Production Ready for Core Ratios (Margins, Returns, Intensity Annual)
+        Quarterly Debt/Intensity need routing fix (data exists, just routing)
+================================================================================

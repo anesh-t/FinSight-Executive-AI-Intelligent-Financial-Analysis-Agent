@@ -1,0 +1,94 @@
+# Golden Prompts for CFO Agent Testing
+# Each prompt should route correctly and return valid results
+
+prompts:
+  - name: "Quarter Snapshot"
+    question: "Show AAPL latest quarter revenue, gross margin, and ROE with GP source."
+    expected_intent: "quarter_snapshot"
+    expected_surface: "vw_cfo_answers"
+    expected_entities: ["AAPL"]
+    expected_period: {"latest": true}
+    
+  - name: "Annual Metrics"
+    question: "What were Microsoft revenue and net income in FY 2023?"
+    expected_intent: "annual_metrics"
+    expected_surface: "mv_financials_annual"
+    expected_entities: ["MSFT"]
+    expected_period: {"fy": 2023}
+    
+  - name: "TTM Snapshot"
+    question: "Give me Apple TTM revenue, TTM net income, and ROE_TTM."
+    expected_intent: "ttm_snapshot"
+    expected_surface: "mv_financials_ttm"
+    expected_entities: ["AAPL"]
+    expected_period: {"latest": true}
+    
+  - name: "Growth QoQ/YoY"
+    question: "Latest quarter revenue QoQ and YoY for NVDA."
+    expected_intent: "growth_qoq_yoy"
+    expected_surface: "vw_growth_quarter"
+    expected_entities: ["NVDA"]
+    expected_period: {"latest": true}
+    
+  - name: "Growth CAGR"
+    question: "Amazon 5-year revenue CAGR ending FY 2024."
+    expected_intent: "growth_annual_cagr"
+    expected_surface: "vw_growth_annual"
+    expected_entities: ["AMZN"]
+    expected_period: {"fy": 2024}
+    
+  - name: "Peer Leaderboard Quarter"
+    question: "Who led on net margin last quarter? show ranks/percentiles."
+    expected_intent: "peer_leaderboard_quarter"
+    expected_surface: "vw_peer_stats_quarter"
+    expected_entities: []
+    expected_period: {"latest": true}
+    
+  - name: "Peer Leaderboard Annual"
+    question: "Rank peers by operating margin in FY 2023."
+    expected_intent: "peer_leaderboard_annual"
+    expected_surface: "vw_peer_stats_annual"
+    expected_entities: []
+    expected_period: {"fy": 2023}
+    
+  - name: "Macro Values"
+    question: "For AAPL, show net margin with CPI & Fed Funds this quarter."
+    expected_intent: "macro_values_quarter"
+    expected_surface: "vw_company_quarter_macro"
+    expected_entities: ["AAPL"]
+    expected_period: {"latest": true}
+    
+  - name: "Macro Betas"
+    question: "Over the last 12 quarters, AAPL beta of net margin vs CPI?"
+    expected_intent: "macro_betas_rolling"
+    expected_surface: "vw_macro_sensitivity_rolling"
+    expected_entities: ["AAPL"]
+    expected_period: {"latest": true}
+    
+  - name: "Health Flags"
+    question: "Is AMZN balance sheet in balance last quarter? gap?"
+    expected_intent: "health_flags"
+    expected_surface: "vw_financial_health_quarter"
+    expected_entities: ["AMZN"]
+    expected_period: {"latest": true}
+    
+  - name: "Outliers"
+    question: "Flag any 3σ outliers in net margin for META since 2021."
+    expected_intent: "outliers"
+    expected_surface: "vw_outliers_quarter"
+    expected_entities: ["META"]
+    expected_period: {"fy": 2021}
+    
+  - name: "Multi-Task"
+    question: "hey hi, tell me Apple revenue in 2022, compare its ROE with Google and tell which is better."
+    expected_tasks: 2
+    expected_intents: ["annual_revenue_single_year", "compare_ratio_annual_two"]
+    expected_entities: ["AAPL", "GOOG"]
+    expected_period: {"fy": 2022}
+
+acceptance_criteria:
+  - "Correct intent/surface chosen"
+  - "Non-empty result tables"
+  - "SQL validated (allowlist/columns/params/limit)"
+  - "Response contains table + 2-3 insights + sources"
+  - "p95 latency < 2.5s on warmed cache"

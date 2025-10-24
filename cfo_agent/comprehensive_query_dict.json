@@ -1,0 +1,143 @@
+{
+  "query_capabilities": {
+    "basic_financials": {
+      "description": "Query financial metrics like revenue, net income, operating income, etc.",
+      "periods": ["quarterly", "annual"],
+      "attributes": [
+        "revenue", "net income", "operating income", "gross profit", 
+        "R&D expense", "SG&A expense", "COGS", "total assets", "total liabilities",
+        "equity", "operating cash flow", "investing cash flow", "financing cash flow",
+        "capex", "EPS", "dividends", "buybacks"
+      ],
+      "examples": {
+        "single_company_single_metric": [
+          "What was Apple's revenue in 2023?",
+          "Show Microsoft net income for Q2 2023",
+          "Google operating income 2024"
+        ],
+        "single_company_multiple_metrics": [
+          "Show Apple revenue and net income for 2023",
+          "What was Microsoft's revenue, net income, and operating income in Q3 2023?",
+          "Amazon total assets and equity 2023"
+        ],
+        "multi_company_single_metric": [
+          "Compare revenue for Apple and Microsoft in 2023",
+          "Show net income for Apple, Microsoft, and Google 2023",
+          "What was the operating income for Amazon and Apple in Q4 2023?"
+        ],
+        "multi_company_multiple_metrics": [
+          "Compare revenue and net income for Apple and Microsoft 2023",
+          "Show operating income and gross profit for Apple, Microsoft, Google 2023"
+        ]
+      }
+    },
+    "financial_ratios": {
+      "description": "Query financial ratios and margins",
+      "periods": ["quarterly", "annual"],
+      "attributes": [
+        "gross margin", "operating margin", "net margin",
+        "ROE", "ROA", "debt to assets", "debt to equity",
+        "R&D to revenue", "SG&A to revenue"
+      ],
+      "examples": {
+        "single_ratio": [
+          "What is Apple's gross margin for 2023?",
+          "Show Microsoft's ROE in Q2 2023",
+          "Google operating margin 2024"
+        ],
+        "multiple_ratios": [
+          "Show Apple's gross margin, operating margin, and net margin for 2023",
+          "What were Microsoft's ROE and ROA in 2023?"
+        ],
+        "multi_company": [
+          "Compare gross margin for Apple and Microsoft 2023",
+          "Show net margin for Apple, Microsoft, Google 2023"
+        ]
+      }
+    },
+    "stock_prices": {
+      "description": "Query stock price data including opening, closing, high, low, average prices",
+      "periods": ["quarterly", "annual"],
+      "attributes": [
+        "opening price", "closing price", "high price", "low price", "average price",
+        "stock return", "volatility", "volume", "dividend per share", "dividend yield"
+      ],
+      "examples": {
+        "single_price_type": [
+          "What was Apple's opening price in 2023?",
+          "Show Microsoft closing price for Q2 2023",
+          "Google high price 2024"
+        ],
+        "multiple_price_types": [
+          "Show Apple opening and closing price for 2023",
+          "What were Microsoft's high and low prices in 2023?",
+          "Amazon opening, closing, high, low price 2023"
+        ],
+        "multi_company": [
+          "Show closing price for Apple and Microsoft 2023",
+          "Compare opening price for Apple, Microsoft, Google 2023",
+          "What was the high price for Amazon and Apple in 2023?"
+        ],
+        "average_vs_actual": [
+          "Show Apple closing price for 2023",
+          "Show Apple average closing price for 2023"
+        ]
+      }
+    },
+    "macro_indicators": {
+      "description": "Query macroeconomic indicators",
+      "periods": ["quarterly", "annual"],
+      "attributes": [
+        "GDP", "CPI", "unemployment rate", "Fed funds rate",
+        "10-year yield", "yield spread", "S&P 500 index", "VIX"
+      ],
+      "examples": {
+        "single_indicator": [
+          "What was GDP in 2023?",
+          "Show CPI for Q2 2023",
+          "Unemployment rate in 2024"
+        ],
+        "multiple_indicators": [
+          "Show GDP and CPI for 2023",
+          "What were the unemployment rate and Fed funds rate in Q3 2023?"
+        ],
+        "time_series": [
+          "Show GDP from 2020 to 2023",
+          "CPI trends over the last 5 years"
+        ]
+      }
+    },
+    "combined_queries": {
+      "description": "Queries combining financials, ratios, and stock prices for same company",
+      "examples": [
+        "Show Apple revenue, net margin, and closing stock price for 2023",
+        "What were Microsoft's operating income, ROE, and stock return in 2023?",
+        "Google revenue, gross margin, and average stock price 2023"
+      ]
+    },
+    "sensitivity_analysis": {
+      "description": "Analyze company sensitivity to macro indicators",
+      "examples": [
+        "How sensitive is Apple to GDP?",
+        "Show Apple's beta to CPI",
+        "What is Microsoft's correlation with unemployment rate?"
+      ]
+    },
+    "peer_comparison": {
+      "description": "Compare companies within peer groups",
+      "examples": [
+        "Who led in revenue among tech companies in 2023?",
+        "Rank Apple's peers by net income in 2023",
+        "Compare Apple to its peers in gross margin 2023"
+      ]
+    },
+    "growth_metrics": {
+      "description": "Query growth rates and trends",
+      "examples": [
+        "What was Apple's revenue YoY growth in 2023?",
+        "Show Microsoft's QoQ growth in Q3 2023",
+        "Apple revenue CAGR over 3 years"
+      ]
+    }
+  }
+}

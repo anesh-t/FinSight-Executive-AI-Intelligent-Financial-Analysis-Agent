@@ -1,0 +1,190 @@
+{
+  "examples": [
+    {
+      "question": "Show AAPL latest quarter revenue, gross margin, and ROE with GP source.",
+      "expected_output": {
+        "greeting": "",
+        "tasks": [
+          {
+            "intent": "quarter_snapshot",
+            "entities": ["AAPL"],
+            "period": {"latest": true, "fy": null, "fq": null},
+            "measures": ["revenue", "gross_margin", "roe", "gross_profit_source"]
+          }
+        ],
+        "checks": ["use_whitelist", "bind_params", "limit_results"]
+      }
+    },
+    {
+      "question": "What were Microsoft revenue and net income in FY 2023?",
+      "expected_output": {
+        "greeting": "",
+        "tasks": [
+          {
+            "intent": "annual_metrics",
+            "entities": ["MSFT"],
+            "period": {"latest": false, "fy": 2023, "fq": null},
+            "measures": ["revenue", "net_income"]
+          }
+        ],
+        "checks": ["use_whitelist", "bind_params", "limit_results"]
+      }
+    },
+    {
+      "question": "Give me Apple TTM revenue, TTM net income, and ROE_TTM.",
+      "expected_output": {
+        "greeting": "",
+        "tasks": [
+          {
+            "intent": "ttm_snapshot",
+            "entities": ["AAPL"],
+            "period": {"latest": true, "fy": null, "fq": null},
+            "measures": ["revenue_ttm", "net_income_ttm", "roe_ttm"]
+          }
+        ],
+        "checks": ["use_whitelist", "bind_params", "limit_results"]
+      }
+    },
+    {
+      "question": "Latest quarter revenue QoQ and YoY for NVDA.",
+      "expected_output": {
+        "greeting": "",
+        "tasks": [
+          {
+            "intent": "growth_qoq_yoy",
+            "entities": ["NVDA"],
+            "period": {"latest": true, "fy": null, "fq": null},
+            "measures": ["revenue_qoq", "revenue_yoy"]
+          }
+        ],
+        "checks": ["use_whitelist", "bind_params", "limit_results"]
+      }
+    },
+    {
+      "question": "Amazon 5-year revenue CAGR ending FY 2024.",
+      "expected_output": {
+        "greeting": "",
+        "tasks": [
+          {
+            "intent": "growth_annual_cagr",
+            "entities": ["AMZN"],
+            "period": {"latest": false, "fy": 2024, "fq": null},
+            "measures": ["revenue_cagr_5y"]
+          }
+        ],
+        "checks": ["use_whitelist", "bind_params", "limit_results"]
+      }
+    },
+    {
+      "question": "Who led on net margin last quarter? show ranks/percentiles.",
+      "expected_output": {
+        "greeting": "",
+        "tasks": [
+          {
+            "intent": "peer_leaderboard_quarter",
+            "entities": [],
+            "period": {"latest": true, "fy": null, "fq": null},
+            "measures": ["net_margin", "rank_net_margin", "pct_net_margin"]
+          }
+        ],
+        "checks": ["use_whitelist", "bind_params", "limit_results"]
+      }
+    },
+    {
+      "question": "Rank peers by operating margin in FY 2023.",
+      "expected_output": {
+        "greeting": "",
+        "tasks": [
+          {
+            "intent": "peer_leaderboard_annual",
+            "entities": [],
+            "period": {"latest": false, "fy": 2023, "fq": null},
+            "measures": ["operating_margin", "rank_operating_margin"]
+          }
+        ],
+        "checks": ["use_whitelist", "bind_params", "limit_results"]
+      }
+    },
+    {
+      "question": "For AAPL, show net margin with CPI & Fed Funds this quarter.",
+      "expected_output": {
+        "greeting": "",
+        "tasks": [
+          {
+            "intent": "macro_values_quarter",
+            "entities": ["AAPL"],
+            "period": {"latest": true, "fy": null, "fq": null},
+            "measures": ["net_margin", "cpi", "fed_funds_rate"]
+          }
+        ],
+        "checks": ["use_whitelist", "bind_params", "limit_results"]
+      }
+    },
+    {
+      "question": "Over the last 12 quarters, AAPL beta of net margin vs CPI?",
+      "expected_output": {
+        "greeting": "",
+        "tasks": [
+          {
+            "intent": "macro_betas_rolling",
+            "entities": ["AAPL"],
+            "period": {"latest": true, "fy": null, "fq": null},
+            "measures": ["beta_nm_cpi_12q"]
+          }
+        ],
+        "checks": ["use_whitelist", "bind_params", "limit_results"]
+      }
+    },
+    {
+      "question": "Is AMZN balance sheet in balance last quarter? gap?",
+      "expected_output": {
+        "greeting": "",
+        "tasks": [
+          {
+            "intent": "health_flags",
+            "entities": ["AMZN"],
+            "period": {"latest": true, "fy": null, "fq": null},
+            "measures": ["balance_status", "balance_gap_abs", "balance_gap_pct"]
+          }
+        ],
+        "checks": ["use_whitelist", "bind_params", "limit_results"]
+      }
+    },
+    {
+      "question": "Flag any 3σ outliers in net margin for META since 2021.",
+      "expected_output": {
+        "greeting": "",
+        "tasks": [
+          {
+            "intent": "outliers",
+            "entities": ["META"],
+            "period": {"latest": false, "fy": 2021, "fq": null},
+            "measures": ["z_net_margin", "outlier_net_margin_3sigma"]
+          }
+        ],
+        "checks": ["use_whitelist", "bind_params", "limit_results"]
+      }
+    },
+    {
+      "question": "hey hi, tell me Apple revenue in 2022, compare its ROE with Google and tell which is better.",
+      "expected_output": {
+        "greeting": "Hi!",
+        "tasks": [
+          {
+            "intent": "annual_revenue_single_year",
+            "entities": ["AAPL"],
+            "period": {"latest": false, "fy": 2022, "fq": null},
+            "measures": ["revenue"]
+          },
+          {
+            "intent": "compare_ratio_annual_two",
+            "entities": ["AAPL", "GOOG"],
+            "period": {"latest": false, "fy": 2022, "fq": null},
+            "measures": ["roe_annual_avg_equity"]
+          }
+        ],
+        "checks": ["use_whitelist", "bind_params", "limit_results"]
+      }
+    }
+  ]
+}

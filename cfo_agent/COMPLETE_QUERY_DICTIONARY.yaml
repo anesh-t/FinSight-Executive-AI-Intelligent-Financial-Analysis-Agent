@@ -1,0 +1,175 @@
+# COMPLETE QUERY DICTIONARY - ALL SUPPORTED QUERIES
+# CFO Intelligence Platform - Comprehensive Catalog
+
+basic_financials_quarterly:
+  description: "Basic financial metrics for quarterly periods"
+  queries:
+    - "Apple revenue Q2 2023"
+    - "Microsoft net income Q3 2023"
+    - "Google operating income Q2 2023"
+    - "Amazon gross profit Q2 2023"
+    - "Meta R&D expenses Q2 2023"
+    - "Apple SG&A expenses Q2 2023"
+    - "Microsoft COGS Q2 2023"
+    - "Google EPS Q2 2023"
+    - "Amazon cash flow Q2 2023"
+    - "Apple CapEx Q2 2023"
+
+basic_financials_annual:
+  description: "Basic financial metrics for annual periods"
+  queries:
+    - "Apple revenue 2023"
+    - "Microsoft net income 2023"
+    - "Google operating income 2023"
+    - "Amazon gross profit 2023"
+    - "Meta total revenue 2023"
+    - "Apple R&D expenses 2023"
+    - "Microsoft EPS 2023"
+
+ratios_quarterly:
+  description: "Financial ratios for quarterly periods"
+  queries:
+    - "Apple gross margin Q2 2023"
+    - "Microsoft operating margin Q2 2023"
+    - "Google net margin Q2 2023"
+    - "Amazon ROE Q2 2023"
+    - "Meta ROA Q2 2023"
+    - "Apple debt to equity Q2 2023"
+    - "Microsoft debt to assets Q2 2023"
+    - "Google R&D intensity Q2 2023"
+
+ratios_annual:
+  description: "Financial ratios for annual periods"
+  queries:
+    - "Apple gross margin 2023"
+    - "Microsoft operating margin 2023"
+    - "Google net margin 2023"
+    - "Amazon ROE 2023"
+    - "Meta ROA 2023"
+    - "Apple debt to equity 2023"
+
+stock_quarterly_single:
+  description: "Individual stock price indicators - quarterly"
+  queries:
+    - "Apple opening stock price Q2 2023"
+    - "Apple closing stock price Q2 2023"
+    - "Apple high stock price Q2 2023"
+    - "Apple low stock price Q2 2023"
+    - "Microsoft opening price Q2 2023"
+    - "Google closing price Q2 2023"
+    - "Amazon high price Q2 2023"
+    - "Meta low price Q2 2023"
+
+stock_quarterly_multiple:
+  description: "Multiple stock price indicators - quarterly"
+  queries:
+    - "Apple opening and closing price Q2 2023"
+    - "Microsoft high and low price Q2 2023"
+    - "Google opening, closing, and high price Q2 2023"
+
+stock_annual_single:
+  description: "Individual stock price indicators - annual"
+  queries:
+    - "Apple opening stock price 2023"
+    - "Apple closing stock price 2023"
+    - "Apple high stock price 2023"
+    - "Apple low stock price 2023"
+    - "Microsoft opening price 2023"
+    - "Google closing price 2023"
+
+stock_annual_multiple:
+  description: "Multiple stock price indicators - annual"
+  queries:
+    - "Apple opening and closing price 2023"
+    - "Microsoft high and low price 2023"
+    - "Google opening, closing, high, and low price 2023"
+
+stock_returns_volatility:
+  description: "Stock returns and volatility metrics"
+  queries:
+    - "Apple stock return Q2 2023"
+    - "Microsoft volatility Q2 2023"
+    - "Google dividend yield 2023"
+
+macro_indicators:
+  description: "Macroeconomic indicators"
+  queries:
+    - "Unemployment rate in 2023"
+    - "GDP in 2023"
+    - "CPI in 2023"
+    - "Federal funds rate in 2023"
+    - "Inflation rate 2023"
+
+combined_annual_2metrics:
+  description: "Combined queries with 2 metrics - annual"
+  queries:
+    - "Show Apple revenue and net income for 2023"
+    - "Show Apple revenue and closing stock price for 2023"
+    - "Show Microsoft net margin and ROE 2023"
+    - "Apple gross margin and high price 2023"
+    - "Google net income and opening price 2023"
+
+combined_annual_3metrics:
+  description: "Combined queries with 3+ metrics - annual"
+  queries:
+    - "Show Apple revenue, net margin, and closing stock price for 2023"
+    - "Show Microsoft revenue, net margin, and closing price 2023"
+    - "Show Google revenue, operating margin, and ROE 2023"
+    - "Apple revenue, net income, and gross margin 2023"
+
+combined_quarterly_2metrics:
+  description: "Combined queries with 2 metrics - quarterly"
+  queries:
+    - "Show Apple revenue and closing stock price Q2 2023"
+    - "Show Microsoft net income and opening price Q3 2023"
+    - "Apple net income and closing price Q2 2023"
+    - "Google gross margin and high price Q2 2023"
+
+combined_quarterly_3metrics:
+  description: "Combined queries with 3+ metrics - quarterly"
+  queries:
+    - "Show Apple revenue, net margin, and closing price Q2 2023"
+    - "Show Microsoft revenue, ROE, and opening price Q2 2023"
+
+multi_company_single_metric:
+  description: "Multi-company comparisons - single metric"
+  queries:
+    - "Compare Apple and Google revenue Q2 2023"
+    - "Compare Microsoft and Amazon net income Q2 2023"
+    - "Show Apple and Microsoft net margin 2023"
+    - "Compare Google and Meta ROE 2023"
+
+multi_company_multiple_metrics:
+  description: "Multi-company comparisons - multiple metrics"
+  queries:
+    - "Compare Apple and Google revenue and net income Q2 2023"
+    - "Show Apple and Microsoft revenue, margin, and ROE 2023"
+
+growth_metrics:
+  description: "Growth rates and trends"
+  queries:
+    - "Apple revenue growth Q2 2023"
+    - "Microsoft YoY growth Q2 2023"
+    - "Google 3-year CAGR 2023"
+
+ttm_latest:
+  description: "TTM and latest period queries"
+  queries:
+    - "Apple TTM revenue"
+    - "Microsoft latest quarter"
+    - "Google latest quarter revenue"
+
+complete_analysis:
+  description: "Complete analysis queries"
+  queries:
+    - "Show Apple complete picture Q2 2023"
+    - "Show Microsoft full analysis 2023"
+    - "Everything about Google Q2 2023"
+
+natural_language_variations:
+  description: "Natural language query variations"
+  queries:
+    - "What was Apple's revenue in Q2 2023"
+    - "How much did Microsoft earn in 2023"
+    - "What is Google's stock price for Q2 2023"
+    - "Show me Amazon's profit margin 2023"

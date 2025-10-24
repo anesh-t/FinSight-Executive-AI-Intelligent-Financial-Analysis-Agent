@@ -51,6 +51,24 @@ class SupabaseConnector:
             print(f"Query execution error: {e}")
             return pd.DataFrame()
     
+    def execute_ddl(self, query: str) -> bool:
+        """
+        Execute DDL statement (CREATE, ALTER, DROP, etc.) with proper commit.
+        
+        Args:
+            query: DDL SQL statement
+            
+        Returns:
+            True if successful, False otherwise
+        """
+        try:
+            with self.engine.begin() as conn:
+                conn.execute(text(query))
+            return True
+        except Exception as e:
+            print(f"DDL execution error: {e}")
+            return False
+    
     def query_view(self, view_name: str, filter_query: str = None, limit: int = 1000) -> pd.DataFrame:
         """
         Query a specific view with optional filtering.

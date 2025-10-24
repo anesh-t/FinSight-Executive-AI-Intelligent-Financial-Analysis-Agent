@@ -1,0 +1,525 @@
+================================================================================
+CFO AGENT COMPREHENSIVE TEST REPORT
+================================================================================
+Test Run: 2025-10-20T22:27:39.529197
+Total Queries: 39
+Passed: 38 (97.4%)
+Failed: 1 (2.6%)
+================================================================================
+
+
+================================================================================
+CATEGORY: 1. BASIC FINANCIALS - Single Company
+================================================================================
+
+
+Query 1: What was Apple's revenue in 2023?
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Apple Inc. (AAPL) reported revenue of $385.71B for FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+Query 2: Show Microsoft net income for 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Microsoft Corporation (MSFT) reported net income of $82.54B for FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+Query 3: Google operating income 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Alphabet Inc. (GOOG) reported operating income of $84.29B for FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+Query 4: Amazon gross profit in 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Amazon.com Inc. (AMZN) reported gross profit of $270.05B for FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+================================================================================
+CATEGORY: 2. BASIC FINANCIALS - Multiple Metrics
+================================================================================
+
+
+Query 1: Show Apple revenue and net income for 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Apple Inc. (AAPL) reported revenue of $385.71B, net income of $100.91B for FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+Query 2: What was Microsoft's revenue, net income, and operating income in 2023?
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Microsoft Corporation (MSFT) reported revenue of $227.58B, net income of $82.54B, operating income of $100.53B for FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+================================================================================
+CATEGORY: 3. BASIC FINANCIALS - Multi-Company
+================================================================================
+
+
+Query 1: Compare revenue for Apple and Microsoft in 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Here is the revenue for 2023:
+- **Apple Inc.**: $385.71B revenue
+- **Microsoft Corporation**: $227.58B revenue
+
+```
+ticker                  name  fiscal_year            revenue_b         net_income_b          op_income_b       gross_profit_b    gross_margin_annual operating_margin_annual      net_margin_annual
+  AAPL            Apple Inc.         2023 385.7060000000000000 100.9130000000000000 118.6580000000000000 173.6710000000000000 0.45026782056799738661  0.30763846038174153371 0.26163191653746636039
+  MSFT Microsoft Corporation         2023 227.5830000000000000  82.5410000000000000 100.5330000000000000 158.7350000000000000 0.69748179784957575917  0.44174213363915582447 0.36268526208020809990
+```
+
+Sources: Not available
+--------------------------------------------------------------------------------
+
+
+Query 2: Show net income for Apple, Microsoft, and Google 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Here is the net income for 2023:
+- **Apple Inc.**: $100.91B net income
+- **Alphabet Inc.**: $73.80B net income
+
+```
+ticker          name  fiscal_year            revenue_b         net_income_b          op_income_b       gross_profit_b    gross_margin_annual operating_margin_annual      net_margin_annual
+  AAPL    Apple Inc.         2023 385.7060000000000000 100.9130000000000000 118.6580000000000000 173.6710000000000000 0.45026782056799738661  0.30763846038174153371 0.26163191653746636039
+  GOOG Alphabet Inc.         2023 307.3940000000000000  73.7950000000000000  84.2930000000000000 174.0620000000000000 0.56625047984020507882  0.27421810445226647234 0.24006649446638516041
+```
+
+Sources: Not available
+--------------------------------------------------------------------------------
+
+
+================================================================================
+CATEGORY: 4. FINANCIAL RATIOS - Single Company
+================================================================================
+
+
+Query 1: What is Apple's gross margin for 2023?
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Apple Inc. (AAPL) reported gross margin of 45.0% for FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+Query 2: Show Microsoft's ROE in 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Microsoft Corporation (MSFT) reported ROE of 38.4% for FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+Query 3: Google operating margin 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Alphabet Inc. (GOOG) reported operating margin of 27.4% for FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+Query 4: Amazon net margin 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Amazon.com Inc. (AMZN) reported net margin of 5.3% for FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+================================================================================
+CATEGORY: 5. FINANCIAL RATIOS - Multiple Ratios
+================================================================================
+
+
+Query 1: Show Apple's gross margin, operating margin, and net margin for 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Apple Inc. (AAPL) reported gross margin of 45.0%, operating margin of 30.8%, net margin of 26.2% for FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+Query 2: What were Microsoft's ROE and ROA in 2023?
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Microsoft Corporation (MSFT) reported ROE of 38.4%, ROA of 19.3% for FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+================================================================================
+CATEGORY: 6. FINANCIAL RATIOS - Multi-Company
+================================================================================
+
+
+Query 1: Compare gross margin for Apple and Microsoft 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Here is the gross margin for 2023:
+- **Apple Inc.**: 45.0% gross margin
+- **Microsoft Corporation**: 69.7% gross margin
+
+```
+ticker                  name  fiscal_year            revenue_b         net_income_b          op_income_b       gross_profit_b    gross_margin_annual operating_margin_annual      net_margin_annual
+  AAPL            Apple Inc.         2023 385.7060000000000000 100.9130000000000000 118.6580000000000000 173.6710000000000000 0.45026782056799738661  0.30763846038174153371 0.26163191653746636039
+  MSFT Microsoft Corporation         2023 227.5830000000000000  82.5410000000000000 100.5330000000000000 158.7350000000000000 0.69748179784957575917  0.44174213363915582447 0.36268526208020809990
+```
+
+Sources: Not available
+--------------------------------------------------------------------------------
+
+
+Query 2: Show net margin for Apple, Microsoft, Google 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Here is the net margin for 2023:
+- **Apple Inc.**: 26.2% net margin
+- **Alphabet Inc.**: 24.0% net margin
+
+```
+ticker          name  fiscal_year            revenue_b         net_income_b          op_income_b       gross_profit_b    gross_margin_annual operating_margin_annual      net_margin_annual
+  AAPL    Apple Inc.         2023 385.7060000000000000 100.9130000000000000 118.6580000000000000 173.6710000000000000 0.45026782056799738661  0.30763846038174153371 0.26163191653746636039
+  GOOG Alphabet Inc.         2023 307.3940000000000000  73.7950000000000000  84.2930000000000000 174.0620000000000000 0.56625047984020507882  0.27421810445226647234 0.24006649446638516041
+```
+
+Sources: Not available
+--------------------------------------------------------------------------------
+
+
+================================================================================
+CATEGORY: 7. STOCK PRICES - Single Price Type
+================================================================================
+
+
+Query 1: What was Apple's opening price in 2023?
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Apple Inc. (AAPL) reported opening price of $137.94 for FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+Query 2: Show Microsoft closing price for 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Microsoft Corporation (MSFT) reported closing price of $376.04 for FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+Query 3: Google high price 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Alphabet Inc. (GOOG) reported high price of $142.97 for FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+Query 4: Amazon low price 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Amazon.com Inc. (AMZN) reported low price of $81.43 for FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+================================================================================
+CATEGORY: 8. STOCK PRICES - Multiple Price Types
+================================================================================
+
+
+Query 1: Show Apple opening and closing price for 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Apple Inc. (AAPL) reported opening price of $137.94, closing price of $194.71 for FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+Query 2: What were Microsoft's high and low prices in 2023?
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Microsoft Corporation (MSFT) reported high price of $384.30, low price of $219.35 for FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+================================================================================
+CATEGORY: 9. STOCK PRICES - Multi-Company
+================================================================================
+
+
+Query 1: Show closing price for Apple and Microsoft 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Here is the closing price for 2023:
+- **Apple Inc.**: $194.71 closing price
+- **Microsoft Corporation**: $376.04 closing price
+
+```
+ticker                  name  fiscal_year     avg_price_annual avg_open_price_annual avg_close_price_annual high_price_annual low_price_annual close_price_eoy          return_annual
+  AAPL            Apple Inc.         2023 161.1424988750000000  137.9399985000000000   186.5225030000000000        196.729996       124.169998      194.710007 0.35243457419994044454
+  MSFT Microsoft Corporation         2023 313.3999977125000000  296.2674980000000000   330.1575012000000000       384.2999878      219.3500061     376.0400085 0.54698044148196151610
+```
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+Query 2: Compare opening price for Apple, Microsoft, Google 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Here is the opening price for 2023:
+- **Alphabet Inc.**: $110.49 opening price
+- **Apple Inc.**: $137.94 opening price
+- **Microsoft Corporation**: $296.27 opening price
+
+```
+ticker                  name  fiscal_year     avg_price_annual avg_open_price_annual avg_close_price_annual high_price_annual low_price_annual close_price_eoy          return_annual
+  GOOG         Alphabet Inc.         2023 117.6306453487500000  110.4876564425000000   123.5917301250000000       142.9666425      84.98839839     139.9721375 0.56885235554725678672
+  AAPL            Apple Inc.         2023 161.1424988750000000  137.9399985000000000   186.5225030000000000        196.729996       124.169998      194.710007 0.35243457419994044454
+  MSFT Microsoft Corporation         2023 313.3999977125000000  296.2674980000000000   330.1575012000000000       384.2999878      219.3500061     376.0400085 0.54698044148196151610
+```
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+================================================================================
+CATEGORY: 10. STOCK PRICES - Average vs Actual
+================================================================================
+
+
+Query 1: Show Apple closing price for 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Apple Inc. (AAPL) reported closing price of $194.71 for FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+Query 2: Show Apple average closing price for 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Apple Inc. (AAPL) reported average closing price of $186.52, average price of $161.14 for FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+Query 3: Microsoft opening price 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Microsoft Corporation (MSFT) reported opening price of $296.27 for FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+Query 4: Microsoft average opening price 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Microsoft Corporation (MSFT) reported average opening price of $296.27, average price of $313.40 for FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+================================================================================
+CATEGORY: 11. COMBINED QUERIES - Financials + Ratios + Stock
+================================================================================
+
+
+Query 1: Show Apple revenue, net margin, and closing stock price for 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Apple Inc. (AAPL) reported closing price of $194.71 for FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+Query 2: What were Microsoft's revenue, ROE, and stock return in 2023?
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Microsoft Corporation (MSFT) reported average stock price of $313.40, year-high/low of $219.35-$384.30, annual return of +54.7% for FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+================================================================================
+CATEGORY: 12. QUARTERLY DATA
+================================================================================
+
+
+Query 1: What was Apple's revenue in Q4 2023?
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Apple Inc. (AAPL) reported revenue of $119.58B for Q4 FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+Query 2: Show Microsoft net income for Q3 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Microsoft Corporation (MSFT) reported net income of $22.29B for Q3 FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+Query 3: Apple closing stock price Q2 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Data found for Apple Inc. (AAPL) in Q2 FY2023.
+
+Sources: ALPHAVANTAGE_FIN (as_reported, 2025-10-12 10:33:18); YF; FRED
+--------------------------------------------------------------------------------
+
+
+================================================================================
+CATEGORY: 13. MACRO INDICATORS
+================================================================================
+
+
+Query 1: What was GDP in 2023?
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Macro indicators for FY2023: Real GDP (annual average) of $22671.10B.
+
+Sources: Not available
+--------------------------------------------------------------------------------
+
+
+Query 2: Show CPI for 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Macro indicators for FY2023: CPI (annual average) of 304.70, Core CPI (annual average) of 308.38.
+
+Sources: Not available
+--------------------------------------------------------------------------------
+
+
+Query 3: Unemployment rate in 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Macro indicators for FY2023: unemployment rate (annual average) of 3.63%.
+
+Sources: Not available
+--------------------------------------------------------------------------------
+
+
+Query 4: Fed funds rate 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Macro indicators for FY2023: Federal Funds Rate (annual average) of 5.02%.
+
+Sources: Not available
+--------------------------------------------------------------------------------
+
+
+================================================================================
+CATEGORY: 14. MACRO WITH FINANCIALS
+================================================================================
+
+
+Query 1: How did Apple perform in 2023 with GDP context?
+Status: FAILED
+--------------------------------------------------------------------------------
+Response:
+None
+--------------------------------------------------------------------------------
+
+
+Query 2: Compare Apple and Microsoft with macro indicators in 2023
+Status: PASSED
+--------------------------------------------------------------------------------
+Response:
+Here is the revenue for 2023:
+- **Apple Inc.**: $385.71B revenue
+- **Microsoft Corporation**: $227.58B revenue
+
+```
+ticker                  name  fiscal_year            revenue_b         net_income_b    gross_margin_annual operating_margin_annual      net_margin_annual               gdp_t           cpi_annual
+  AAPL            Apple Inc.         2023 385.7060000000000000 100.9130000000000000 0.45026782056799738661  0.30763846038174153371 0.26163191653746636039 22.6710965000000000 304.7041666666666550
+  MSFT Microsoft Corporation         2023 227.5830000000000000  82.5410000000000000 0.69748179784957575917  0.44174213363915582447 0.36268526208020809990 22.6710965000000000 304.7041666666666550
+```
+
+Sources: Not available
+--------------------------------------------------------------------------------
+

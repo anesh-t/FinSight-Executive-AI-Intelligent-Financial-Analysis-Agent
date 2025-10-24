@@ -127,7 +127,7 @@ def test_openai_connection():
         
         # Test with a simple completion
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4o",
             messages=[{"role": "user", "content": "Say 'test successful'"}],
             max_tokens=10
         )
