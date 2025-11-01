@@ -1,0 +1,365 @@
+{
+  "categories": {
+    "A_RISK_FACTORS_MULTI_COMPANY_YEAR": {
+      "priority": "HIGH",
+      "tested": 3,
+      "passed": 3,
+      "failed": 0,
+      "tests": [
+        {
+          "question": "Compare top risk factors reported by Apple and Microsoft for the year 2022",
+          "passed": true,
+          "score": 100.0,
+          "time": 11.918629884719849,
+          "cost": 0.0031425000000000003,
+          "answer_length": 4656
+        },
+        {
+          "question": "How did Microsoft's cybersecurity risks evolve between 2019 and 2022?",
+          "passed": true,
+          "score": 100.0,
+          "time": 3.822084903717041,
+          "cost": 0.0021345,
+          "answer_length": 3250
+        },
+        {
+          "question": "Which company\u2014Apple or Microsoft\u2014disclosed more regulatory risks in 2022?",
+          "passed": true,
+          "score": 100.0,
+          "time": 8.194658994674683,
+          "cost": 0.0019134999999999998,
+          "answer_length": 3540
+        }
+      ],
+      "pass_rate": 100.0,
+      "avg_time": 7.978457927703857,
+      "avg_score": 100.0
+    },
+    "B_MANAGEMENT_DISCUSSION_COMPARISON": {
+      "priority": "HIGH",
+      "tested": 3,
+      "passed": 3,
+      "failed": 0,
+      "tests": [
+        {
+          "question": "How did management at Apple and Microsoft explain strategic shifts in 2022?",
+          "passed": true,
+          "score": 100.0,
+          "time": 6.019325017929077,
+          "cost": 0.0017730000000000003,
+          "answer_length": 2917
+        },
+        {
+          "question": "Compare management discussions on R&D innovation for Microsoft and Apple in 2022",
+          "passed": true,
+          "score": 100.0,
+          "time": 9.440694093704224,
+          "cost": 0.0034434999999999995,
+          "answer_length": 5719
+        },
+        {
+          "question": "What future market outlooks were described by Apple in their 2022 filing?",
+          "passed": true,
+          "score": 100.0,
+          "time": 3.818118095397949,
+          "cost": 0.001666,
+          "answer_length": 2482
+        }
+      ],
+      "pass_rate": 100.0,
+      "avg_time": 6.426045735677083,
+      "avg_score": 100.0
+    },
+    "C_MARKET_RISK_DISCLOSURE": {
+      "priority": "MEDIUM",
+      "tested": 3,
+      "passed": 3,
+      "failed": 0,
+      "tests": [
+        {
+          "question": "Compare interest rate risk exposure described by Apple and Microsoft in 2022",
+          "passed": true,
+          "score": 100.0,
+          "time": 12.45767617225647,
+          "cost": 0.0032354999999999997,
+          "answer_length": 4590
+        },
+        {
+          "question": "How did foreign exchange risk disclosures change for Apple from 2019 through 2022?",
+          "passed": true,
+          "score": 100.0,
+          "time": 8.398804903030396,
+          "cost": 0.0026545,
+          "answer_length": 5045
+        },
+        {
+          "question": "What market risks did Microsoft highlight in 2022?",
+          "passed": true,
+          "score": 100.0,
+          "time": 4.616729259490967,
+          "cost": 0.0022685,
+          "answer_length": 3933
+        }
+      ],
+      "pass_rate": 100.0,
+      "avg_time": 8.491070111592611,
+      "avg_score": 100.0
+    },
+    "D_REGULATORY_COMPLIANCE_ESG": {
+      "priority": "MEDIUM",
+      "tested": 3,
+      "passed": 3,
+      "failed": 0,
+      "tests": [
+        {
+          "question": "Which companies cited climate change risk in their 2022 filings: Apple or Microsoft?",
+          "passed": true,
+          "score": 100.0,
+          "time": 4.489243030548096,
+          "cost": 0.0019445,
+          "answer_length": 3270
+        },
+        {
+          "question": "How have regulatory risks evolved for Apple since 2019?",
+          "passed": true,
+          "score": 100.0,
+          "time": 3.401827096939087,
+          "cost": 0.0009415000000000001,
+          "answer_length": 2536
+        },
+        {
+          "question": "What compliance challenges did Microsoft disclose in 2022?",
+          "passed": true,
+          "score": 100.0,
+          "time": 8.474145889282227,
+          "cost": 0.0026119999999999997,
+          "answer_length": 5106
+        }
+      ],
+      "pass_rate": 100.0,
+      "avg_time": 5.455072005589803,
+      "avg_score": 100.0
+    },
+    "E_LITIGATION_LEGAL": {
+      "priority": "MEDIUM",
+      "tested": 3,
+      "passed": 3,
+      "failed": 0,
+      "tests": [
+        {
+          "question": "Compare patent litigation risks for Apple and Microsoft in 2022",
+          "passed": true,
+          "score": 100.0,
+          "time": 8.147653102874756,
+          "cost": 0.003746,
+          "answer_length": 7318
+        },
+        {
+          "question": "What legal issues did Apple disclose in its 2022 filing?",
+          "passed": true,
+          "score": 100.0,
+          "time": 4.5903308391571045,
+          "cost": 0.001657,
+          "answer_length": 3042
+        },
+        {
+          "question": "How did antitrust risk discussions evolve for Microsoft?",
+          "passed": true,
+          "score": 100.0,
+          "time": 5.102874040603638,
+          "cost": 0.0020475,
+          "answer_length": 2941
+        }
+      ],
+      "pass_rate": 100.0,
+      "avg_time": 5.946952660878499,
+      "avg_score": 100.0
+    },
+    "F_CRISIS_MANAGEMENT": {
+      "priority": "HIGH",
+      "tested": 3,
+      "passed": 3,
+      "failed": 0,
+      "tests": [
+        {
+          "question": "Review COVID-19 risk mitigation strategies disclosed by Apple in 2022",
+          "passed": true,
+          "score": 100.0,
+          "time": 10.158903121948242,
+          "cost": 0.0022845,
+          "answer_length": 4057
+        },
+        {
+          "question": "How did Microsoft address cybersecurity risk in 2022?",
+          "passed": true,
+          "score": 100.0,
+          "time": 8.482586145401001,
+          "cost": 0.0025830000000000002,
+          "answer_length": 4889
+        },
+        {
+          "question": "What crisis management approaches did Apple describe?",
+          "passed": true,
+          "score": 100.0,
+          "time": 6.881118059158325,
+          "cost": 0.002094,
+          "answer_length": 3315
+        }
+      ],
+      "pass_rate": 100.0,
+      "avg_time": 8.507535775502523,
+      "avg_score": 100.0
+    },
+    "G_STRATEGIC_OUTLOOK": {
+      "priority": "HIGH",
+      "tested": 3,
+      "passed": 3,
+      "failed": 0,
+      "tests": [
+        {
+          "question": "Compare international expansion plans discussed by Apple and Microsoft in 2022",
+          "passed": true,
+          "score": 100.0,
+          "time": 6.623295068740845,
+          "cost": 0.003402,
+          "answer_length": 5618
+        },
+        {
+          "question": "How did Apple's management describe changes in capital allocation in 2022?",
+          "passed": true,
+          "score": 100.0,
+          "time": 6.898199081420898,
+          "cost": 0.0021149999999999997,
+          "answer_length": 3925
+        },
+        {
+          "question": "What strategic priorities did Microsoft highlight in 2022?",
+          "passed": true,
+          "score": 100.0,
+          "time": 4.201727867126465,
+          "cost": 0.001953,
+          "answer_length": 3432
+        }
+      ],
+      "pass_rate": 100.0,
+      "avg_time": 5.907740672429402,
+      "avg_score": 100.0
+    },
+    "H_OPERATIONAL_CHANGES": {
+      "priority": "MEDIUM",
+      "tested": 3,
+      "passed": 3,
+      "failed": 0,
+      "tests": [
+        {
+          "question": "What supply chain restructurings have been described by Apple in 2022?",
+          "passed": true,
+          "score": 100.0,
+          "time": 3.534036874771118,
+          "cost": 0.00227,
+          "answer_length": 3481
+        },
+        {
+          "question": "Compare changes in product innovation focus for Apple versus Microsoft",
+          "passed": true,
+          "score": 100.0,
+          "time": 8.502997875213623,
+          "cost": 0.0034605,
+          "answer_length": 6066
+        },
+        {
+          "question": "What operational challenges did Microsoft discuss in 2022?",
+          "passed": true,
+          "score": 100.0,
+          "time": 5.385510206222534,
+          "cost": 0.0024665,
+          "answer_length": 4364
+        }
+      ],
+      "pass_rate": 100.0,
+      "avg_time": 5.807514985402425,
+      "avg_score": 100.0
+    },
+    "I_SINGLE_COMPANY_SPECIFIC": {
+      "priority": "HIGH",
+      "tested": 3,
+      "passed": 3,
+      "failed": 0,
+      "tests": [
+        {
+          "question": "What are the top risks for Apple disclosed in 2022?",
+          "passed": true,
+          "score": 100.0,
+          "time": 5.43628191947937,
+          "cost": 0.0026025,
+          "answer_length": 5197
+        },
+        {
+          "question": "Summarize cybersecurity risks faced by Microsoft in 2022",
+          "passed": true,
+          "score": 100.0,
+          "time": 7.371764898300171,
+          "cost": 0.002644,
+          "answer_length": 5067
+        },
+        {
+          "question": "What reasons did Apple's management give for operational challenges in 2022?",
+          "passed": true,
+          "score": 100.0,
+          "time": 4.402959823608398,
+          "cost": 0.0023565,
+          "answer_length": 4269
+        }
+      ],
+      "pass_rate": 100.0,
+      "avg_time": 5.7370022137959795,
+      "avg_score": 100.0
+    },
+    "J_SECTION_SPECIFIC": {
+      "priority": "MEDIUM",
+      "tested": 3,
+      "passed": 3,
+      "failed": 0,
+      "tests": [
+        {
+          "question": "What does Apple's Item 1A say about cybersecurity risks in 2022?",
+          "passed": true,
+          "score": 100.0,
+          "time": 6.709010124206543,
+          "cost": 0.002299,
+          "answer_length": 4155
+        },
+        {
+          "question": "Summarize Apple's management discussion (Item 7) about strategy in 2022",
+          "passed": true,
+          "score": 100.0,
+          "time": 2.8214621543884277,
+          "cost": 0.0018015000000000001,
+          "answer_length": 1613
+        },
+        {
+          "question": "What market risks did Microsoft disclose in Item 7A for 2022?",
+          "passed": true,
+          "score": 100.0,
+          "time": 5.325917959213257,
+          "cost": 0.0024790000000000003,
+          "answer_length": 4359
+        }
+      ],
+      "pass_rate": 100.0,
+      "avg_time": 4.952130079269409,
+      "avg_score": 100.0
+    }
+  },
+  "overall": {
+    "total": 30,
+    "passed": 30,
+    "failed": 0,
+    "avg_time": 6.520952216784159,
+    "total_time": 195.62856650352478,
+    "total_cost": 0.071991,
+    "pass_rate": 100.0,
+    "min_time": 2.8214621543884277,
+    "max_time": 12.45767617225647
+  }
+}

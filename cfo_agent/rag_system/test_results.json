@@ -1,0 +1,603 @@
+{
+  "categories": {
+    "RISK_ANALYSIS": {
+      "priority": "TIER_1",
+      "questions_tested": 3,
+      "passed": 3,
+      "failed": 0,
+      "avg_score": 100.0,
+      "avg_time": 6.314491192499797,
+      "tests": [
+        {
+          "question": "What are Apple's top 3 risks in 2022?",
+          "passed": true,
+          "score": 100.0,
+          "time": 5.511882781982422,
+          "cost": 0.0019760000000000003,
+          "answer_length": 2830,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        },
+        {
+          "question": "What are the biggest threats to Microsoft in 2022?",
+          "passed": true,
+          "score": 100.0,
+          "time": 6.051403045654297,
+          "cost": 0.0024975,
+          "answer_length": 4385,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        },
+        {
+          "question": "List the main vulnerabilities for Amazon in 2022",
+          "passed": true,
+          "score": 100.0,
+          "time": 7.380187749862671,
+          "cost": 0.0021739999999999997,
+          "answer_length": 3017,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        }
+      ],
+      "pass_rate": 100.0
+    },
+    "BUSINESS_STRATEGY": {
+      "priority": "TIER_1",
+      "questions_tested": 3,
+      "passed": 3,
+      "failed": 0,
+      "avg_score": 100.0,
+      "avg_time": 4.139291922251384,
+      "tests": [
+        {
+          "question": "What is Apple's business model in 2022?",
+          "passed": true,
+          "score": 100.0,
+          "time": 4.17281174659729,
+          "cost": 0.0022285,
+          "answer_length": 3453,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        },
+        {
+          "question": "How does Microsoft make money according to its 2022 10-K?",
+          "passed": true,
+          "score": 100.0,
+          "time": 4.721153020858765,
+          "cost": 0.0022345000000000004,
+          "answer_length": 3056,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        },
+        {
+          "question": "What are Apple's main revenue streams in 2022?",
+          "passed": true,
+          "score": 100.0,
+          "time": 3.5239109992980957,
+          "cost": 0.0019915,
+          "answer_length": 2287,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        }
+      ],
+      "pass_rate": 100.0
+    },
+    "OPERATIONS": {
+      "priority": "TIER_2",
+      "questions_tested": 3,
+      "passed": 2,
+      "failed": 1,
+      "avg_score": 86.66666666666667,
+      "avg_time": 6.123585065205892,
+      "tests": [
+        {
+          "question": "Describe Apple's supply chain in 2022",
+          "passed": true,
+          "score": 100.0,
+          "time": 7.277482032775879,
+          "cost": 0.002,
+          "answer_length": 2941,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        },
+        {
+          "question": "What are Microsoft's key operational facilities?",
+          "passed": false,
+          "score": 60.0,
+          "time": 4.53619909286499,
+          "cost": 0.001938,
+          "answer_length": 4317,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": false,
+            "is_structured": true,
+            "not_error": true,
+            "passed": false,
+            "score": 60.0
+          }
+        },
+        {
+          "question": "How does Apple manufacture its products?",
+          "passed": true,
+          "score": 100.0,
+          "time": 6.557074069976807,
+          "cost": 0.0020995,
+          "answer_length": 2780,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        }
+      ],
+      "pass_rate": 66.66666666666666
+    },
+    "FINANCIAL_CONTEXT": {
+      "priority": "TIER_1",
+      "questions_tested": 3,
+      "passed": 3,
+      "failed": 0,
+      "avg_score": 100.0,
+      "avg_time": 4.3364527225494385,
+      "tests": [
+        {
+          "question": "What drove Apple's revenue growth in 2022?",
+          "passed": true,
+          "score": 100.0,
+          "time": 6.954325914382935,
+          "cost": 0.001964,
+          "answer_length": 2337,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        },
+        {
+          "question": "Why did Microsoft's margins change in 2022?",
+          "passed": true,
+          "score": 100.0,
+          "time": 2.870629072189331,
+          "cost": 0.001696,
+          "answer_length": 2184,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        },
+        {
+          "question": "What impacted Apple's profitability in 2022?",
+          "passed": true,
+          "score": 100.0,
+          "time": 3.18440318107605,
+          "cost": 0.0020575,
+          "answer_length": 2451,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        }
+      ],
+      "pass_rate": 100.0
+    },
+    "LEGAL_REGULATORY": {
+      "priority": "TIER_2",
+      "questions_tested": 3,
+      "passed": 3,
+      "failed": 0,
+      "avg_score": 100.0,
+      "avg_time": 4.570910135904948,
+      "tests": [
+        {
+          "question": "What legal issues does Apple face in 2022?",
+          "passed": true,
+          "score": 100.0,
+          "time": 3.997138261795044,
+          "cost": 0.0018815,
+          "answer_length": 2398,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        },
+        {
+          "question": "What lawsuits is Microsoft involved in?",
+          "passed": true,
+          "score": 100.0,
+          "time": 6.397625923156738,
+          "cost": 0.0019494999999999998,
+          "answer_length": 2855,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        },
+        {
+          "question": "What regulatory investigations affect Apple?",
+          "passed": true,
+          "score": 100.0,
+          "time": 3.3179662227630615,
+          "cost": 0.0019039999999999999,
+          "answer_length": 2678,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        }
+      ],
+      "pass_rate": 100.0
+    },
+    "GOVERNANCE": {
+      "priority": "TIER_3",
+      "questions_tested": 3,
+      "passed": 2,
+      "failed": 1,
+      "avg_score": 86.66666666666667,
+      "avg_time": 7.086162328720093,
+      "tests": [
+        {
+          "question": "What is Apple's governance structure?",
+          "passed": true,
+          "score": 100.0,
+          "time": 5.4637980461120605,
+          "cost": 0.002053,
+          "answer_length": 2840,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        },
+        {
+          "question": "Who are Microsoft's key executives in 2022?",
+          "passed": true,
+          "score": 100.0,
+          "time": 7.486094951629639,
+          "cost": 0.0019405,
+          "answer_length": 2554,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        },
+        {
+          "question": "What internal controls does Apple have?",
+          "passed": false,
+          "score": 60.0,
+          "time": 8.308593988418579,
+          "cost": 0.0020924999999999997,
+          "answer_length": 3173,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": false,
+            "passed": false,
+            "score": 60.0
+          }
+        }
+      ],
+      "pass_rate": 66.66666666666666
+    },
+    "FORWARD_LOOKING": {
+      "priority": "TIER_2",
+      "questions_tested": 3,
+      "passed": 3,
+      "failed": 0,
+      "avg_score": 100.0,
+      "avg_time": 5.057036399841309,
+      "tests": [
+        {
+          "question": "What is Apple's outlook for the future?",
+          "passed": true,
+          "score": 100.0,
+          "time": 4.12797999382019,
+          "cost": 0.0021065,
+          "answer_length": 3607,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        },
+        {
+          "question": "What are Microsoft's future plans?",
+          "passed": true,
+          "score": 100.0,
+          "time": 6.485934257507324,
+          "cost": 0.00204,
+          "answer_length": 3471,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        },
+        {
+          "question": "What forward-looking statements did Apple make in 2022?",
+          "passed": true,
+          "score": 100.0,
+          "time": 4.557194948196411,
+          "cost": 0.0020925,
+          "answer_length": 2752,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        }
+      ],
+      "pass_rate": 100.0
+    },
+    "SPECIAL_SITUATIONS": {
+      "priority": "TIER_2",
+      "questions_tested": 3,
+      "passed": 3,
+      "failed": 0,
+      "avg_score": 100.0,
+      "avg_time": 5.607736269632976,
+      "tests": [
+        {
+          "question": "How did COVID-19 impact Apple in 2022?",
+          "passed": true,
+          "score": 100.0,
+          "time": 6.564449787139893,
+          "cost": 0.002158,
+          "answer_length": 2918,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        },
+        {
+          "question": "How has Microsoft responded to the pandemic?",
+          "passed": true,
+          "score": 100.0,
+          "time": 6.969104051589966,
+          "cost": 0.002029,
+          "answer_length": 2991,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        },
+        {
+          "question": "What acquisitions has Apple made?",
+          "passed": true,
+          "score": 100.0,
+          "time": 3.2896549701690674,
+          "cost": 0.0020345000000000003,
+          "answer_length": 2727,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        }
+      ],
+      "pass_rate": 100.0
+    },
+    "COMPARATIVE": {
+      "priority": "TIER_1",
+      "questions_tested": 3,
+      "passed": 3,
+      "failed": 0,
+      "avg_score": 100.0,
+      "avg_time": 6.150276978810628,
+      "tests": [
+        {
+          "question": "Compare Apple and Microsoft's business models",
+          "passed": true,
+          "score": 100.0,
+          "time": 8.096828937530518,
+          "cost": 0.0034765000000000004,
+          "answer_length": 6284,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        },
+        {
+          "question": "Compare Apple and Microsoft's competitive positioning",
+          "passed": true,
+          "score": 100.0,
+          "time": 7.4805588722229,
+          "cost": 0.0033014999999999997,
+          "answer_length": 5754,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        },
+        {
+          "question": "Which company has better risk management: Apple or Microsoft?",
+          "passed": true,
+          "score": 100.0,
+          "time": 2.873443126678467,
+          "cost": 0.001301,
+          "answer_length": 2342,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        }
+      ],
+      "pass_rate": 100.0
+    },
+    "SYNTHESIS": {
+      "priority": "TIER_1",
+      "questions_tested": 3,
+      "passed": 3,
+      "failed": 0,
+      "avg_score": 100.0,
+      "avg_time": 3.8238488038380942,
+      "tests": [
+        {
+          "question": "Summarize Apple's key takeaways from its 2022 10-K",
+          "passed": true,
+          "score": 100.0,
+          "time": 4.203930854797363,
+          "cost": 0.001422,
+          "answer_length": 1622,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        },
+        {
+          "question": "Give me a CFO-level overview of Microsoft's 2022 filing",
+          "passed": true,
+          "score": 100.0,
+          "time": 3.9017317295074463,
+          "cost": 0.0019335,
+          "answer_length": 1310,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        },
+        {
+          "question": "What are the most important things to know about Apple from its 2022 10-K?",
+          "passed": true,
+          "score": 100.0,
+          "time": 3.3658838272094727,
+          "cost": 0.0017070000000000002,
+          "answer_length": 2906,
+          "evaluation": {
+            "has_content": true,
+            "has_sources": true,
+            "is_structured": true,
+            "not_error": true,
+            "passed": true,
+            "score": 100.0
+          }
+        }
+      ],
+      "pass_rate": 100.0
+    }
+  },
+  "overall": {
+    "total_questions": 30,
+    "passed": 28,
+    "failed": 2,
+    "avg_time": 5.3209791819254555,
+    "avg_score": 97.33333333333334,
+    "total_cost": 0.06228,
+    "pass_rate": 93.33333333333333
+  }
+}

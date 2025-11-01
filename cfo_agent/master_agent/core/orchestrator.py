@@ -1,0 +1,301 @@
+"""
+Master Orchestrator - Coordinates RAG and SQL agents for hybrid queries
+Handles routing, parallel execution, and result aggregation
+"""
+
+import sys
+from pathlib import Path
+import asyncio
+import time
+from typing import Dict, List, Optional, Any
+from dataclasses import dataclass
+
+# Add parent directory to path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from routing.query_classifier import QueryClassifier, QueryIntent
+from execution.agent_bridge import AgentCoordinator, AgentResponse
+
+
+@dataclass
+class OrchestratedResponse:
+    """Complete response from orchestrator"""
+    text: str
+    intent: str
+    agents_used: List[str]
+    rag_response: Optional[AgentResponse]
+    sql_response: Optional[AgentResponse]
+    total_latency: float
+    metadata: Dict[str, Any]
+    success: bool
+
+
+class MasterOrchestrator:
+    """Orchestrates RAG and SQL agents for comprehensive CFO analysis"""
+    
+    def __init__(self, verbose: bool = False, use_quick_mode: bool = True):
+        """
+        Initialize master orchestrator
+        
+        Args:
+            verbose: Print progress messages
+            use_quick_mode: Use quick mode for faster RAG responses (default: True)
+        """
+        self.verbose = verbose
+        self.use_quick_mode = use_quick_mode
+        
+        # Initialize components
+        self.classifier = QueryClassifier()
+        self.coordinator = AgentCoordinator(verbose=verbose, use_quick_mode=use_quick_mode)
+        
+        if verbose:
+            print("✅ Master Orchestrator initialized")
+    
+    async def query_async(self, question: str, session_id: str = "default") -> OrchestratedResponse:
+        """
+        Process query asynchronously with intelligent routing
+        
+        Args:
+            question: User question
+            session_id: Session identifier
+            
+        Returns:
+            OrchestratedResponse with complete result
+        """
+        start_time = time.time()
+        
+        if self.verbose:
+            print(f"\n{'='*80}")
+            print(f"🎯 MASTER ORCHESTRATOR - Processing Query")
+            print(f"{'='*80}")
+            print(f"Question: {question}")
+        
+        # Step 1: Classify query
+        if self.verbose:
+            print(f"\n📊 Step 1: Classifying query intent...")
+        
+        classification = self.classifier.classify(question)
+        
+        if self.verbose:
+            print(f"   Intent: {classification.intent.value.upper()}")
+            print(f"   Confidence: {classification.confidence:.0%}")
+            print(f"   Data Sources: {', '.join(classification.data_sources)}")
+            if classification.entities['companies']:
+                print(f"   Companies: {', '.join(classification.entities['companies'])}")
+            if classification.entities['years']:
+                print(f"   Years: {', '.join(map(str, classification.entities['years']))}")
+        
+        # Step 2: Route to appropriate agent(s)
+        if self.verbose:
+            print(f"\n🚀 Step 2: Executing query...")
+        
+        rag_response = None
+        sql_response = None
+        agents_used = []
+        
+        if classification.intent == QueryIntent.QUALITATIVE:
+            # RAG only
+            if self.verbose:
+                print(f"   → RAG Agent (qualitative analysis)")
+            
+            rag_response = self.coordinator.query_rag(question)
+            agents_used.append('RAG')
+            
+            # Use RAG response as final response
+            response_text = rag_response.text
+            
+        elif classification.intent == QueryIntent.QUANTITATIVE:
+            # SQL only
+            if self.verbose:
+                print(f"   → SQL Agent (quantitative data)")
+            
+            sql_response = self.coordinator.query_sql(question, session_id=session_id)
+            agents_used.append('SQL')
+            
+            # Use SQL response as final response
+            response_text = sql_response.text
+            
+        else:  # HYBRID
+            # Both agents in parallel
+            if self.verbose:
+                print(f"   → RAG + SQL Agents (parallel execution)")
+            
+            # Execute both in parallel
+            rag_task = asyncio.create_task(
+                asyncio.to_thread(self.coordinator.query_rag, question)
+            )
+            sql_task = asyncio.create_task(
+                asyncio.to_thread(self.coordinator.query_sql, question, session_id=session_id)
+            )
+            
+            # Wait for both
+            rag_response, sql_response = await asyncio.gather(rag_task, sql_task)
+            agents_used = ['RAG', 'SQL']
+            
+            # Synthesize responses (simple concatenation for now, will improve)
+            if self.verbose:
+                print(f"\n🔄 Step 3: Synthesizing results...")
+            
+            response_text = self._synthesize_simple(rag_response, sql_response, question)
+        
+        total_latency = time.time() - start_time
+        
+        if self.verbose:
+            print(f"\n✅ Query complete!")
+            print(f"   Total time: {total_latency:.2f}s")
+            print(f"   Agents used: {', '.join(agents_used)}")
+            if rag_response:
+                print(f"   RAG latency: {rag_response.latency:.2f}s")
+            if sql_response:
+                print(f"   SQL latency: {sql_response.latency:.2f}s")
+            print(f"{'='*80}\n")
+        
+        # Build metadata
+        metadata = {
+            'intent': classification.intent.value,
+            'confidence': classification.confidence,
+            'entities': classification.entities,
+            'agents_used': agents_used,
+            'total_latency': total_latency,
+        }
+        
+        if rag_response:
+            metadata['rag_latency'] = rag_response.latency
+            metadata['rag_metadata'] = rag_response.metadata
+        
+        if sql_response:
+            metadata['sql_latency'] = sql_response.latency
+            metadata['sql_metadata'] = sql_response.metadata
+        
+        # Check success
+        success = True
+        if rag_response and not rag_response.success:
+            success = False
+        if sql_response and not sql_response.success:
+            success = False
+        
+        return OrchestratedResponse(
+            text=response_text,
+            intent=classification.intent.value,
+            agents_used=agents_used,
+            rag_response=rag_response,
+            sql_response=sql_response,
+            total_latency=total_latency,
+            metadata=metadata,
+            success=success
+        )
+    
+    def query(self, question: str, session_id: str = "default") -> OrchestratedResponse:
+        """
+        Process query synchronously
+        
+        Args:
+            question: User question
+            session_id: Session identifier
+            
+        Returns:
+            OrchestratedResponse with complete result
+        """
+        return asyncio.run(self.query_async(question, session_id))
+    
+    def _synthesize_simple(
+        self,
+        rag_response: AgentResponse,
+        sql_response: AgentResponse,
+        question: str
+    ) -> str:
+        """
+        Simple synthesis of RAG and SQL responses
+        (Will be enhanced by Response Synthesizer later)
+        
+        Args:
+            rag_response: Response from RAG agent
+            sql_response: Response from SQL agent
+            question: Original question
+            
+        Returns:
+            Combined response text
+        """
+        parts = []
+        
+        # Add header
+        parts.append("# 📊 COMPREHENSIVE CFO ANALYSIS\n")
+        parts.append(f"**Question:** {question}\n")
+        
+        # Add qualitative analysis (RAG)
+        if rag_response and rag_response.success:
+            parts.append("\n## 📖 QUALITATIVE ANALYSIS (10-K Filings)")
+            parts.append("─" * 60)
+            parts.append(rag_response.text)
+        
+        # Add quantitative data (SQL)
+        if sql_response and sql_response.success:
+            parts.append("\n\n## 📈 QUANTITATIVE DATA (Financial Metrics)")
+            parts.append("─" * 60)
+            parts.append(sql_response.text)
+        
+        # Add synthesis section
+        parts.append("\n\n## 💡 INTEGRATED INSIGHTS")
+        parts.append("─" * 60)
+        parts.append("This analysis combines narrative context from SEC 10-K filings with")
+        parts.append("precise financial data to provide a comprehensive CFO-level perspective.")
+        
+        return "\n".join(parts)
+    
+    def close(self):
+        """Close all connections"""
+        self.coordinator.close()
+
+
+# Convenience function
+def orchestrate_query(question: str, verbose: bool = False) -> OrchestratedResponse:
+    """Quick query orchestration"""
+    orchestrator = MasterOrchestrator(verbose=verbose)
+    result = orchestrator.query(question)
+    orchestrator.close()
+    return result
+
+
+if __name__ == "__main__":
+    # Test the orchestrator
+    import sys
+    
+    print("="*80)
+    print("🎯 MASTER ORCHESTRATOR TEST")
+    print("="*80)
+    
+    orchestrator = MasterOrchestrator(verbose=True)
+    
+    test_queries = [
+        # Qualitative (RAG only)
+        "What are Apple's top risks in 2022?",
+        
+        # Quantitative (SQL only)
+        "What was Apple's revenue in 2022?",
+        
+        # Hybrid (both)
+        "How did supply chain risks affect Apple's margins in 2022?",
+    ]
+    
+    for i, question in enumerate(test_queries, 1):
+        print(f"\n{'='*80}")
+        print(f"TEST {i}/{len(test_queries)}")
+        print(f"{'='*80}")
+        
+        result = orchestrator.query(question)
+        
+        print(f"\n📊 RESULT:")
+        print(f"Intent: {result.intent}")
+        print(f"Agents: {', '.join(result.agents_used)}")
+        print(f"Success: {result.success}")
+        print(f"Latency: {result.total_latency:.2f}s")
+        print(f"\nResponse Preview:")
+        print(result.text[:300] + "...\n")
+        
+        # Wait a bit between queries
+        if i < len(test_queries):
+            time.sleep(1)
+    
+    orchestrator.close()
+    
+    print("\n✅ Orchestrator test complete!")

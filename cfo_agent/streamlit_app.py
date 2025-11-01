@@ -234,10 +234,34 @@ if "messages" not in st.session_state:
 if "session_id" not in st.session_state:
     st.session_state.session_id = f"session_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
 
+# Initialize query mode (NEW - 3 modes)
+if "query_mode" not in st.session_state:
+    st.session_state.query_mode = "Structured Data (SQL)"  # Default to existing mode
+
 # Enhanced Sidebar
 with st.sidebar:
     # Title with gradient
     st.markdown("## 📊 CFO Intelligence Platform")
+    st.markdown("---")
+    
+    # Query Mode Selector (NEW - 3 MODES)
+    st.markdown("### 🎯 Query Mode")
+    mode_options = [
+        "💾 Structured Data (SQL)",
+        "📚 Unstructured Data (10-K)",
+        "🔄 Hybrid (SQL + 10-K)"
+    ]
+    
+    selected_mode = st.radio(
+        "Choose your data source:",
+        mode_options,
+        index=mode_options.index(f"💾 {st.session_state.query_mode}") if f"💾 {st.session_state.query_mode}" in mode_options else 0,
+        help="Select which data source to query"
+    )
+    
+    # Update mode in session state
+    st.session_state.query_mode = selected_mode.split(" ", 1)[1]  # Remove emoji prefix
+    
     st.markdown("---")
     
     # System Status
@@ -290,49 +314,75 @@ with st.sidebar:
     
     st.markdown("---")
     
-    # Example queries with new advanced capabilities
+    # Example queries with new advanced capabilities (MODE-AWARE)
     st.subheader("💡 Quick Start Examples")
     
-    # Show different categories
-    query_tab = st.selectbox(
-        "Choose a category:",
-        ["🚀 Popular", "🏢 Multi-Company", "📊 Multiple Metrics", "🌍 Macro Context", "📈 Advanced"]
-    )
+    # Show mode-specific examples
+    current_mode = st.session_state.query_mode
     
-    if query_tab == "🚀 Popular":
+    if current_mode == "Structured Data (SQL)":
+        # ORIGINAL SQL EXAMPLES - NO CHANGES
+        query_tab = st.selectbox(
+            "Choose a category:",
+            ["🚀 Popular", "🏢 Multi-Company", "📊 Multiple Metrics", "🌍 Macro Context", "📈 Advanced"]
+        )
+        
+        if query_tab == "🚀 Popular":
+            examples = {
+                "📈 Quarter Snapshot": "show Apple revenue Q2 2023",
+                "💰 Annual Revenue": "show Microsoft revenue 2023",
+                "📊 Margins": "show Google gross margin Q2 2023",
+                "💼 Complete Picture": "show Apple complete picture Q2 2023",
+            }
+        elif query_tab == "🏢 Multi-Company":
+            examples = {
+                "🔀 Two Companies": "show Apple and Google revenue Q2 2023",
+                "📊 Three Companies": "show Apple, Microsoft, and Google revenue 2023",
+                "⚖️ Compare Margins": "compare Apple and Microsoft gross margin 2023",
+                "🏆 Multi Metrics": "compare Apple vs Google revenue and net income Q2 2023",
+            }
+        elif query_tab == "📊 Multiple Metrics":
+            examples = {
+                "💵 Rev + Income": "show Apple revenue, net income Q2 2023",
+                "📊 Three Metrics": "show Microsoft revenue, net income, gross margin Q2 2023",
+                "📈 Four Metrics": "show Google revenue, net income, ROE, debt to equity Q2 2023",
+                "🎯 Mixed Metrics": "show Amazon revenue and operating margin Q3 2023",
+            }
+        elif query_tab == "🌍 Macro Context":
+            examples = {
+                "🌐 Company + Macro": "show Apple with macro context Q2 2023",
+                "📊 Multi-Co + Macro": "compare Apple with Google and how CPI affected both Q2 2023",
+                "💹 Full Analysis": "show Microsoft full analysis Q2 2023",
+                "🔍 Sensitivity": "show Apple macro sensitivity 2023",
+            }
+        else:  # Advanced
+            examples = {
+                "📈 Growth": "show Apple revenue growth Q2 2023",
+                "📉 CAGR": "show Apple 3-year CAGR 2023",
+                "🏆 Peer Ranking": "who led in revenue Q2 2023",
+                "⏱️ TTM": "show Apple TTM revenue",
+            }
+    
+    elif current_mode == "Unstructured Data (10-K)":
+        # RAG-ONLY EXAMPLES
         examples = {
-            "📈 Quarter Snapshot": "show Apple revenue Q2 2023",
-            "💰 Annual Revenue": "show Microsoft revenue 2023",
-            "📊 Margins": "show Google gross margin Q2 2023",
-            "💼 Complete Picture": "show Apple complete picture Q2 2023",
+            "📋 Supply Chain Risks": "What were Apple's supply chain risks in 2022?",
+            "🔒 Cybersecurity": "What cybersecurity threats did Microsoft face in 2022?",
+            "📜 Regulatory Risks": "What regulatory challenges did Apple face in 2022?",
+            "🎯 Strategic Priorities": "What strategic priorities did Microsoft discuss in 2022?",
+            "🌍 ESG Commitments": "What climate commitments did Apple make in 2022?",
+            "⚠️ COVID Impact": "How did Apple address COVID-19 in 2022?",
         }
-    elif query_tab == "🏢 Multi-Company":
+    
+    else:  # Hybrid (SQL + 10-K)
+        # HYBRID EXAMPLES
         examples = {
-            "🔀 Two Companies": "show Apple and Google revenue Q2 2023",
-            "📊 Three Companies": "show Apple, Microsoft, and Google revenue 2023",
-            "⚖️ Compare Margins": "compare Apple and Microsoft gross margin 2023",
-            "🏆 Multi Metrics": "compare Apple vs Google revenue and net income Q2 2023",
-        }
-    elif query_tab == "📊 Multiple Metrics":
-        examples = {
-            "💵 Rev + Income": "show Apple revenue, net income Q2 2023",
-            "📊 Three Metrics": "show Microsoft revenue, net income, gross margin Q2 2023",
-            "📈 Four Metrics": "show Google revenue, net income, ROE, debt to equity Q2 2023",
-            "🎯 Mixed Metrics": "show Amazon revenue and operating margin Q3 2023",
-        }
-    elif query_tab == "🌍 Macro Context":
-        examples = {
-            "🌐 Company + Macro": "show Apple with macro context Q2 2023",
-            "📊 Multi-Co + Macro": "compare Apple with Google and how CPI affected both Q2 2023",
-            "💹 Full Analysis": "show Microsoft full analysis Q2 2023",
-            "🔍 Sensitivity": "show Apple macro sensitivity 2023",
-        }
-    else:  # Advanced
-        examples = {
-            "📈 Growth": "show Apple revenue growth Q2 2023",
-            "📉 CAGR": "show Apple 3-year CAGR 2023",
-            "🏆 Peer Ranking": "who led in revenue Q2 2023",
-            "⏱️ TTM": "show Apple TTM revenue",
+            "📊 Risk-Performance": "How did Apple's supply chain risks affect their gross margin in 2022?",
+            "🔒 Security-Investment": "What cybersecurity risks did Microsoft face and what was their R&D spending in 2022?",
+            "🎯 Strategy-Revenue": "How did Apple's innovation strategies align with revenue growth in 2022?",
+            "📜 Regulatory-Margins": "What regulatory challenges did Apple face and what was their operating margin in 2022?",
+            "🌍 ESG-CAPEX": "What were Apple's climate commitments and capital expenditure in 2022?",
+            "⚠️ Crisis-Resilience": "How did Apple address COVID-19 and what was their cash position in 2022?",
         }
     
     for label, query in examples.items():
@@ -457,36 +507,95 @@ with col5:
 
 st.markdown("---")
 
-# Display welcome message on first load
+# Display welcome message on first load (MODE-AWARE)
 if len(st.session_state.messages) == 0:
-    st.markdown("""
-    <div style="background: linear-gradient(145deg, #1e2a3a, #2a3f5f); 
-                padding: 25px; border-radius: 12px; margin: 20px 0;
-                border-left: 4px solid #4a9eff;">
-        <h3 style="color: #4a9eff; margin-top: 0;">👋 Welcome to CFO Intelligence Platform!</h3>
-        <p style="color: #e8eaed; margin: 10px 0;">
-            Ask me anything about Apple, Microsoft, Google, Amazon, or Meta's financials!
-        </p>
-        <div style="background: rgba(74, 158, 255, 0.1); padding: 10px; border-radius: 8px; margin: 10px 0;">
-            <p style="color: #4a9eff; margin: 0; font-size: 0.9rem;">
-                📊 <strong>Data Coverage:</strong> Company financials (2019-Q2 2025, updated quarterly) | 
-                Stock prices & macro data (real-time)
+    current_mode = st.session_state.query_mode
+    
+    if current_mode == "Structured Data (SQL)":
+        # ORIGINAL SQL MODE WELCOME
+        welcome_msg = """
+        <div style="background: linear-gradient(145deg, #1e2a3a, #2a3f5f); 
+                    padding: 25px; border-radius: 12px; margin: 20px 0;
+                    border-left: 4px solid #4a9eff;">
+            <h3 style="color: #4a9eff; margin-top: 0;">👋 Welcome to CFO Intelligence Platform!</h3>
+            <p style="color: #e8eaed; margin: 10px 0;">
+                Ask me anything about Apple, Microsoft, Google, Amazon, or Meta's financials!
             </p>
+            <div style="background: rgba(74, 158, 255, 0.1); padding: 10px; border-radius: 8px; margin: 10px 0;">
+                <p style="color: #4a9eff; margin: 0; font-size: 0.9rem;">
+                    💾 <strong>Mode: Structured Data (SQL)</strong> - Company financials (2019-Q2 2025) | 
+                    Stock prices & macro data (real-time)
+                </p>
+            </div>
+            <div style="margin-top: 15px;">
+                <p style="color: #7b68ee; font-weight: 600; margin: 5px 0;">🚀 Try these popular queries:</p>
+                <ul style="color: #e8eaed; margin: 10px 0; padding-left: 20px;">
+                    <li><code>show Apple revenue Q2 2023</code> - Basic financial query</li>
+                    <li><code>compare Apple and Google revenue Q2 2023</code> - Multi-company comparison</li>
+                    <li><code>show Microsoft revenue, net income, gross margin Q2 2023</code> - Multiple metrics</li>
+                    <li><code>show Apple complete picture Q2 2023</code> - Comprehensive analysis</li>
+                </ul>
+            </div>
         </div>
-        <div style="margin-top: 15px;">
-            <p style="color: #7b68ee; font-weight: 600; margin: 5px 0;">🚀 Try these popular queries:</p>
-            <ul style="color: #e8eaed; margin: 10px 0; padding-left: 20px;">
-                <li><code>show Apple revenue Q2 2023</code> - Basic financial query</li>
-                <li><code>compare Apple and Google revenue Q2 2023</code> - Multi-company comparison</li>
-                <li><code>show Microsoft revenue, net income, gross margin Q2 2023</code> - Multiple metrics</li>
-                <li><code>show Apple complete picture Q2 2023</code> - Comprehensive analysis</li>
-            </ul>
-            <p style="color: #4caf50; margin-top: 15px; font-size: 0.9rem;">
-                💡 <strong>Tip:</strong> Use the sidebar for categorized examples or check the footer for 1000+ query types!
+        """
+    
+    elif current_mode == "Unstructured Data (10-K)":
+        # RAG MODE WELCOME
+        welcome_msg = """
+        <div style="background: linear-gradient(145deg, #2a1f3d, #3a2f4d); 
+                    padding: 25px; border-radius: 12px; margin: 20px 0;
+                    border-left: 4px solid #7b68ee;">
+            <h3 style="color: #7b68ee; margin-top: 0;">📚 Welcome to Unstructured Data Mode!</h3>
+            <p style="color: #e8eaed; margin: 10px 0;">
+                Query SEC 10-K filings for strategic insights, risks, and qualitative analysis!
             </p>
+            <div style="background: rgba(123, 104, 238, 0.1); padding: 10px; border-radius: 8px; margin: 10px 0;">
+                <p style="color: #7b68ee; margin: 0; font-size: 0.9rem;">
+                    📚 <strong>Mode: Unstructured Data (10-K)</strong> - SEC filings (2019-2022) | 
+                    Risk factors, strategies, MD&A
+                </p>
+            </div>
+            <div style="margin-top: 15px;">
+                <p style="color: #4a9eff; font-weight: 600; margin: 5px 0;">🚀 Try these queries:</p>
+                <ul style="color: #e8eaed; margin: 10px 0; padding-left: 20px;">
+                    <li><code>What were Apple's supply chain risks in 2022?</code> - Risk analysis</li>
+                    <li><code>What cybersecurity threats did Microsoft face in 2022?</code> - Security risks</li>
+                    <li><code>What strategic priorities did Apple discuss in 2022?</code> - Strategy insights</li>
+                    <li><code>What regulatory challenges did Microsoft face in 2022?</code> - Compliance risks</li>
+                </ul>
+            </div>
         </div>
-    </div>
-    """, unsafe_allow_html=True)
+        """
+    
+    else:  # Hybrid
+        # HYBRID MODE WELCOME
+        welcome_msg = """
+        <div style="background: linear-gradient(145deg, #2a3f2a, #3a5f3a); 
+                    padding: 25px; border-radius: 12px; margin: 20px 0;
+                    border-left: 4px solid #4caf50;">
+            <h3 style="color: #4caf50; margin-top: 0;">🔄 Welcome to Hybrid Analysis Mode!</h3>
+            <p style="color: #e8eaed; margin: 10px 0;">
+                Get comprehensive CFO-level analysis combining both structured and unstructured data!
+            </p>
+            <div style="background: rgba(76, 175, 80, 0.1); padding: 10px; border-radius: 8px; margin: 10px 0;">
+                <p style="color: #4caf50; margin: 0; font-size: 0.9rem;">
+                    🔄 <strong>Mode: Hybrid (SQL + 10-K)</strong> - Financial metrics + Risk analysis | 
+                    Complete CFO intelligence
+                </p>
+            </div>
+            <div style="margin-top: 15px;">
+                <p style="color: #ff6b9d; font-weight: 600; margin: 5px 0;">🚀 Try these hybrid queries:</p>
+                <ul style="color: #e8eaed; margin: 10px 0; padding-left: 20px;">
+                    <li><code>How did Apple's supply chain risks affect their gross margin in 2022?</code></li>
+                    <li><code>What cybersecurity risks did Microsoft face and what was their R&D spending in 2022?</code></li>
+                    <li><code>How did Apple's innovation strategies align with revenue growth in 2022?</code></li>
+                    <li><code>What regulatory challenges did Apple face and what was their operating margin in 2022?</code></li>
+                </ul>
+            </div>
+        </div>
+        """
+    
+    st.markdown(welcome_msg, unsafe_allow_html=True)
 
 # Display chat messages
 for idx, message in enumerate(st.session_state.messages):
@@ -610,16 +719,83 @@ if prompt := st.chat_input("Ask a financial question..."):
                 progress_container.progress(progress_val)
                 time.sleep(0.2)
             
-            # Call CFO Agent API
-            response = requests.post(
-                f"{API_BASE_URL}/ask",
-                json={
-                    "question": prompt,
-                    "session_id": st.session_state.session_id,
-                    "enable_hitl": enable_hitl
-                },
-                timeout=30
-            )
+            # Route query based on selected mode (NEW - 3 MODES)
+            current_mode = st.session_state.query_mode
+            
+            if current_mode == "Structured Data (SQL)":
+                # MODE 1: Original structured data (SQL) - NO CHANGES
+                response = requests.post(
+                    f"{API_BASE_URL}/ask",
+                    json={
+                        "question": prompt,
+                        "session_id": st.session_state.session_id,
+                        "enable_hitl": enable_hitl
+                    },
+                    timeout=30
+                )
+            
+            elif current_mode == "Unstructured Data (10-K)":
+                # MODE 2: Unstructured data (RAG only)
+                import sys
+                from pathlib import Path
+                sys.path.insert(0, str(Path(__file__).parent))
+                
+                try:
+                    from master_agent import UnifiedCFOAgent
+                    
+                    # Create agent and query RAG only
+                    agent = UnifiedCFOAgent(verbose=False)
+                    result_obj = agent.query(prompt)
+                    agent.close()
+                    
+                    # Format response to match API format
+                    response = type('obj', (object,), {
+                        'status_code': 200,
+                        'json': lambda self: {
+                            "response": result_obj.answer,
+                            "viz_metadata": None  # No viz for RAG-only
+                        }
+                    })()
+                except Exception as e:
+                    import traceback
+                    error_detail = traceback.format_exc()
+                    response = type('obj', (object,), {
+                        'status_code': 500,
+                        'text': f"RAG Error: {str(e)}\n{error_detail}",
+                        'json': lambda self: {}
+                    })()
+            
+            else:  # Hybrid (SQL + 10-K)
+                # MODE 3: Hybrid query (RAG + SQL)
+                import sys
+                from pathlib import Path
+                sys.path.insert(0, str(Path(__file__).parent))
+                
+                try:
+                    from master_agent import UnifiedCFOAgent
+                    
+                    # Create agent and query hybrid
+                    agent = UnifiedCFOAgent(verbose=False)
+                    result_obj = agent.query(prompt)
+                    agent.close()
+                    
+                    # Format response to match API format
+                    response = type('obj', (object,), {
+                        'status_code': 200,
+                        'json': lambda self: {
+                            "response": result_obj.answer,
+                            "viz_metadata": None  # No viz for hybrid currently
+                        }
+                    })()
+                except Exception as e:
+                    import traceback
+                    error_detail = traceback.format_exc()
+                    response = type('obj', (object,), {
+                        'status_code': 500,
+                        'text': f"Hybrid Error: {str(e)}\n{error_detail}",
+                        'json': lambda self: {}
+                    })()
+
             
             # Show remaining progress steps quickly
             for step_text, progress_val in progress_steps[1:]:
