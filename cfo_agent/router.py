@@ -49,6 +49,10 @@ class IntentRouter:
         # Extract surfaces
         surfaces = [s.strip() for s in template['surface'].split(',')]
         
+        print(f"[DEBUG ROUTER] Intent: {intent}")
+        print(f"[DEBUG ROUTER] Template: {template_name}")
+        print(f"[DEBUG ROUTER] Surfaces: {surfaces}")
+        
         return {
             'intent': intent,
             'template_name': template_name,

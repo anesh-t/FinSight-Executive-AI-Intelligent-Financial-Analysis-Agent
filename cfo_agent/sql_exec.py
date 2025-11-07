@@ -23,7 +23,31 @@ class SQLExecutor:
             List of result rows as dicts
         """
         try:
+            # Filter out NULL ticker parameters for multi-company queries
+            # Build a list of non-NULL tickers
+            ticker_params = {k: v for k, v in params.items() if k in ['t1', 't2', 't3', 't4', 't5'] and v is not None}
+            
+            print(f"[DEBUG SQL_EXEC] All params: {params}", flush=True)
+            print(f"[DEBUG SQL_EXEC] Ticker params (non-NULL): {ticker_params}", flush=True)
+            print(f"[DEBUG SQL_EXEC] Original SQL has ARRAY: {'ARRAY[' in sql}", flush=True)
+            
+            if ticker_params:
+                # Replace ARRAY[:t1, :t2, :t3, :t4, :t5] with only non-NULL tickers
+                ticker_list = ', '.join([f":{k}" for k in sorted(ticker_params.keys())])
+                original_pattern = "ARRAY[:t1, :t2, :t3, :t4, :t5]::text[]"
+                replacement = f"ARRAY[{ticker_list}]::text[]"
+                
+                if original_pattern in sql:
+                    modified_sql = sql.replace(original_pattern, replacement)
+                    print(f"[DEBUG SQL_EXEC] ✅ Replaced ARRAY pattern")
+                    print(f"[DEBUG SQL_EXEC] New pattern: {replacement}")
+                    sql = modified_sql
+                else:
+                    print(f"[DEBUG SQL_EXEC] ⚠️ ARRAY pattern not found in SQL")
+            
+            print(f"[DEBUG SQL_EXEC] Executing SQL with {len(ticker_params)} companies...")
             records = await db_pool.execute_query(sql, params, timeout=self.timeout)
+            print(f"[DEBUG SQL_EXEC] ✅ Got {len(records)} rows")
             
             # Convert asyncpg Records to dicts
             results = [dict(record) for record in records]

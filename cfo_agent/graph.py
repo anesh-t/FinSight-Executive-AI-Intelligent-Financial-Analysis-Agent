@@ -200,6 +200,10 @@ class CFOAgentGraph:
                     params_used.append(params)
                 
             except Exception as e:
+                print(f"[DEBUG GRAPH] ❌ Task execution failed: {str(e)}", flush=True)
+                print(f"[DEBUG GRAPH] Exception type: {type(e).__name__}", flush=True)
+                import traceback
+                traceback.print_exc()
                 errors.append(f"Task execution failed: {str(e)}")
                 results.append([])
                 sql_executed.append("")

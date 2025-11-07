@@ -406,30 +406,66 @@ with st.sidebar:
             pass
         st.rerun()
     
-    # Clear ALL cache (chat + charts + session state)
+    # Clear ALL cache (chat + charts + session state + Python cache + FastAPI reload)
     if st.button("🧹 Clear All Cache", use_container_width=True, type="primary"):
-        # Get all session state keys
-        keys_to_remove = []
-        for key in st.session_state.keys():
-            # Keep only essential keys like session_id
-            if key not in ['session_id']:
-                keys_to_remove.append(key)
+        import subprocess
+        import os
         
-        # Remove all cached data
-        for key in keys_to_remove:
-            del st.session_state[key]
+        with st.spinner("🔄 Clearing all caches..."):
+            # 1. Clear Streamlit session state
+            keys_to_remove = []
+            for key in st.session_state.keys():
+                # Keep only essential keys like session_id
+                if key not in ['session_id']:
+                    keys_to_remove.append(key)
+            
+            # Remove all cached data
+            for key in keys_to_remove:
+                del st.session_state[key]
+            
+            # Reset messages
+            st.session_state.messages = []
+            
+            # 2. Clear backend session
+            try:
+                requests.delete(f"{API_BASE_URL}/session/{st.session_state.session_id}")
+            except:
+                pass
+            
+            # 3. Clear Python cache files
+            try:
+                # Get the directory of this script
+                current_dir = os.path.dirname(os.path.abspath(__file__))
+                
+                # Clear __pycache__ directories
+                subprocess.run(
+                    f"find {current_dir} -type d -name '__pycache__' -exec rm -rf {{}} + 2>/dev/null",
+                    shell=True,
+                    capture_output=True
+                )
+                
+                # Clear .pyc files
+                subprocess.run(
+                    f"find {current_dir} -name '*.pyc' -delete 2>/dev/null",
+                    shell=True,
+                    capture_output=True
+                )
+                
+                # 4. Trigger FastAPI reload by touching app.py
+                app_py_path = os.path.join(current_dir, 'app.py')
+                if os.path.exists(app_py_path):
+                    # Touch the file to trigger uvicorn's auto-reload
+                    subprocess.run(f"touch {app_py_path}", shell=True)
+                
+            except Exception as e:
+                st.warning(f"⚠️ Could not clear Python cache: {str(e)}")
+            
+            # 5. Clear Streamlit's own cache
+            st.cache_data.clear()
+            st.cache_resource.clear()
         
-        # Reset messages
-        st.session_state.messages = []
-        
-        # Clear backend session
-        try:
-            requests.delete(f"{API_BASE_URL}/session/{st.session_state.session_id}")
-        except:
-            pass
-        
-        st.success("✅ All cache cleared! Charts, messages, and session data removed.")
-        time.sleep(1)
+        st.success("✅ All caches cleared! Frontend, backend, and Python caches refreshed. FastAPI will reload automatically.")
+        time.sleep(2)
         st.rerun()
     
     st.markdown("---")
@@ -600,8 +636,8 @@ if len(st.session_state.messages) == 0:
 # Display chat messages
 for idx, message in enumerate(st.session_state.messages):
     with st.chat_message(message["role"]):
-        # Use text to avoid any markdown/formatting interpretation
-        st.text(message["content"])
+        # Display message content with custom styling to ensure visibility
+        st.markdown(f'<div style="color: #e8eaed; font-family: monospace; white-space: pre-wrap; padding: 10px; background-color: rgba(255,255,255,0.05); border-radius: 8px;">{message["content"]}</div>', unsafe_allow_html=True)
         
         # If assistant message has viz_metadata, show chart button
         if message["role"] == "assistant" and "viz_metadata" in message:
@@ -820,8 +856,11 @@ if prompt := st.chat_input("Ask a financial question..."):
                 # Display success indicator
                 st.success(f"✅ Query completed in {response_time:.2f}s")
                 
-                # Display the response (use text to avoid any markdown/formatting interpretation)
-                st.text(answer)
+                # Display the response with custom styling to ensure visibility
+                if answer and answer.strip():
+                    st.markdown(f'<div style="color: #e8eaed; font-family: monospace; white-space: pre-wrap; padding: 10px; background-color: rgba(255,255,255,0.05); border-radius: 8px;">{answer}</div>', unsafe_allow_html=True)
+                else:
+                    st.error("⚠️ No response generated. The query may need to be more specific (e.g., add 'Q2' for quarterly data).")
                 
                 # Extract viz_metadata and show chart button for new message
                 viz_metadata = result.get("viz_metadata")

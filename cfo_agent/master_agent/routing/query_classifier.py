@@ -96,7 +96,7 @@ class QueryClassifier:
         
         # Cause and effect
         'caused by', 'resulted in', 'led to',
-        'due to', 'because of', 'driven by',
+        'due to', 'because of', 'driven by', 'what drove',
         
         # Comparative analysis
         'compare', 'comparison', 'versus', 'vs',
@@ -106,9 +106,15 @@ class QueryClassifier:
         'financial impact', 'business impact',
         'strategic implications', 'financial implications',
         
+        # Explicit multi-source requests
+        '10-k citations', '10k citations', 'citations',
+        'macro context', 'macro', 'economic context',
+        'show me the numbers', 'numbers and', 'data and',
+        'context and numbers', 'qualitative and quantitative',
+        
         # Conjunction patterns (strong hybrid indicators)
         ' and what was ', ' and how did ', ' and what is ',
-        ' and analyze ', ' and their ',
+        ' and analyze ', ' and their ', ' and show ', ' and provide ',
     }
     
     # Company name patterns

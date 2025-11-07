@@ -13,6 +13,17 @@ from db.resolve import load_ticker_cache
 from hitl import hitl_gate
 from viz_data_fetcher import VizDataFetcher  # NEW: Visualization support
 
+# Import master orchestrator for hybrid queries
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent))
+try:
+    from master_agent.core.orchestrator import MasterOrchestrator
+    HYBRID_AVAILABLE = True
+except ImportError:
+    HYBRID_AVAILABLE = False
+    print("⚠️  Hybrid query support not available (master_agent not found)")
+
 
 # Pydantic models
 class QueryRequest(BaseModel):
@@ -50,6 +61,9 @@ app = FastAPI(
 # NEW: Global visualization fetcher (initialized in startup)
 viz_fetcher = None
 
+# NEW: Global hybrid orchestrator (initialized in startup)
+hybrid_orchestrator = None
+
 
 @app.on_event("startup")
 async def startup_event():
@@ -72,6 +86,14 @@ async def startup_event():
     global viz_fetcher
     viz_fetcher = VizDataFetcher(db_pool.pool)
     print("✅ Visualization fetcher initialized")
+    
+    # NEW: Initialize hybrid orchestrator
+    global hybrid_orchestrator
+    if HYBRID_AVAILABLE:
+        hybrid_orchestrator = MasterOrchestrator(verbose=False, use_quick_mode=True)
+        print("✅ Hybrid orchestrator initialized")
+    else:
+        print("⚠️  Hybrid orchestrator not available")
     
     print("🎉 CFO Agent ready!")
 
@@ -169,6 +191,49 @@ async def ask_question(request: QueryRequest):
         raise HTTPException(
             status_code=500,
             detail=f"Agent execution failed: {str(e)}"
+        )
+
+
+@app.post("/ask/hybrid", response_model=QueryResponse)
+async def ask_hybrid_question(request: QueryRequest):
+    """
+    Ask a hybrid question that requires both SQL data and 10-K context
+    
+    This endpoint uses the Master Orchestrator to intelligently route queries
+    to both the SQL agent (for quantitative data) and RAG agent (for qualitative
+    insights from 10-K filings), then synthesizes the results.
+    
+    Args:
+        request: QueryRequest with question and optional session_id
+        
+    Returns:
+        QueryResponse with synthesized answer combining both data sources
+    """
+    if not HYBRID_AVAILABLE or not hybrid_orchestrator:
+        raise HTTPException(
+            status_code=501,
+            detail="Hybrid query support not available. Please use /ask endpoint for SQL-only queries."
+        )
+    
+    try:
+        # Use the hybrid orchestrator (async version)
+        result = await hybrid_orchestrator.query_async(request.question, session_id=request.session_id)
+        
+        return QueryResponse(
+            response=result.text,
+            session_id=request.session_id,
+            viz_metadata={
+                'intent': result.intent,
+                'agents_used': result.agents_used,
+                'total_latency': result.total_latency,
+                'success': result.success
+            } if result.metadata else None
+        )
+    
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Hybrid query execution failed: {str(e)}"
         )
 
 

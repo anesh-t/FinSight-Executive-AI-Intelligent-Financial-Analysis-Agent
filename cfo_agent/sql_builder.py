@@ -12,7 +12,7 @@ class SQLBuilder:
     def __init__(self):
         self.generative_builder = GenerativeSQLBuilder()
     
-    async def build_sql(self, plan: Dict, use_generative: bool = False) -> Tuple[str, Dict, bool]:
+    async def build_sql(self, plan: Dict, use_generative: bool = True) -> Tuple[str, Dict, bool]:
         """
         Build SQL query from plan
         

@@ -45,8 +45,8 @@ ALLOWED_SURFACES = {
     'mv_company_full_annual'  # Layer 3: Layer 2 + Sensitivity (Annual)
 }
 
-# Allowed parameter names
-ALLOWED_PARAMS = {'ticker', 'fy', 'fq', 'limit', 't1', 't2', 'latest'}
+# Allowed parameter names (t1-t5 for multi-company queries)
+ALLOWED_PARAMS = {'ticker', 'fy', 'fq', 'limit', 't1', 't2', 't3', 't4', 't5', 'latest'}
 
 # Schema cache (will be loaded from database)
 _schema_cache: Dict[str, List[str]] = {}

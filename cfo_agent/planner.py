@@ -47,6 +47,10 @@ class TaskPlanner:
         # Get SQL from template
         sql = template['sql']
         
+        print(f"[DEBUG PLANNER] Template: {routed_task['template_name']}")
+        print(f"[DEBUG PLANNER] Intent: {routed_task['intent']}")
+        print(f"[DEBUG PLANNER] SQL preview: {sql[:200]}...")
+        
         return {
             'sql': sql,
             'params': params,
@@ -75,12 +79,19 @@ class TaskPlanner:
                 if ticker:
                     params['ticker'] = ticker
         
-        # Add t1, t2 for comparison queries
+        # Add t1, t2, t3, t4, t5 for comparison queries (up to 5 companies)
         if 't1' in template_params and 't2' in template_params:
             tickers = [t for t in entities_resolved.values() if t]
-            if len(tickers) >= 2:
+            if len(tickers) >= 1:
                 params['t1'] = tickers[0]
+            if len(tickers) >= 2:
                 params['t2'] = tickers[1]
+            if len(tickers) >= 3 and 't3' in template_params:
+                params['t3'] = tickers[2]
+            if len(tickers) >= 4 and 't4' in template_params:
+                params['t4'] = tickers[3]
+            if len(tickers) >= 5 and 't5' in template_params:
+                params['t5'] = tickers[4]
         
         # Add period params - simplified logic
         # If year is specified, use it; otherwise leave as NULL for latest

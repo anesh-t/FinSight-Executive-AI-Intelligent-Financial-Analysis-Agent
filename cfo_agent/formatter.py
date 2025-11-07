@@ -35,6 +35,7 @@ class ResponseFormatter:
         # Convert to DataFrame for analysis
         df = pd.DataFrame(results)
         
+        
         # Generate simple factual summary
         summary = self._generate_simple_summary(df, context)
         
@@ -416,6 +417,8 @@ class ResponseFormatter:
         if (show_all or 'roe' in requested_metrics):
             if 'roe' in row and row['roe'] is not None:
                 parts.append(f"ROE of {row['roe']*100:.1f}%")
+            elif 'roe_annual' in row and row['roe_annual'] is not None:
+                parts.append(f"ROE of {row['roe_annual']*100:.1f}%")
             elif 'roe_annual_avg_equity' in row and row['roe_annual_avg_equity'] is not None:
                 parts.append(f"ROE of {row['roe_annual_avg_equity']*100:.1f}%")
             elif 'roe_ttm' in row and row['roe_ttm'] is not None:
@@ -622,10 +625,13 @@ class ResponseFormatter:
         
         # Generic price - show average or closing if no specific type requested
         if (show_all or 'price' in requested_metrics):
+            print(f"[DEBUG FORMATTER] Price metric requested! Checking for price columns...")
+            print(f"[DEBUG FORMATTER] Available columns: {list(row.keys())}")
             # Only show if no specific price type was requested
             if 'opening_price' not in requested_metrics and 'closing_price' not in requested_metrics and 'high_price' not in requested_metrics and 'low_price' not in requested_metrics and 'average_price' not in requested_metrics:
                 # Quarterly average price
                 if 'avg_price' in row and row['avg_price'] is not None:
+                    print(f"[DEBUG FORMATTER] Found avg_price: {row['avg_price']}")
                     parts.append(f"average stock price of ${float(row['avg_price']):.2f}")
                 # Annual average price
                 elif 'avg_price_annual' in row and row['avg_price_annual'] is not None:
@@ -699,8 +705,32 @@ class ResponseFormatter:
         print(f"[DEBUG FORMATTER] Final parts list: {parts}")
         print(f"[DEBUG FORMATTER] Parts count: {len(parts)}")
         
+        # Check if macro indicators are present (for complete_macro_context queries)
+        macro_parts = []
+        if 'gdp_t' in row and row['gdp_t'] is not None:
+            macro_parts.append(f"GDP ${row['gdp_t']:.2f}T")
+        elif 'gdp' in row and row['gdp'] is not None:
+            macro_parts.append(f"GDP ${row['gdp']/1e3:.2f}T")
+        
+        if 'cpi' in row and row['cpi'] is not None:
+            macro_parts.append(f"CPI {row['cpi']:.2f}")
+        
+        if 'unemployment_rate' in row and row['unemployment_rate'] is not None:
+            macro_parts.append(f"unemployment {row['unemployment_rate']:.2f}%")
+        
+        if 'fed_funds_rate' in row and row['fed_funds_rate'] is not None:
+            macro_parts.append(f"Fed rate {row['fed_funds_rate']:.2f}%")
+        
+        if 'sp500_index' in row and row['sp500_index'] is not None:
+            macro_parts.append(f"S&P 500 {row['sp500_index']:.2f}")
+        
         if len(parts) > 0:
             metrics_str = ", ".join(parts)
+            
+            # Add macro context if present
+            if macro_parts:
+                macro_str = ", ".join(macro_parts)
+                metrics_str = f"{metrics_str}. Macro context: {macro_str}"
             
             if len(df) == 1:
                 # Single result - simple sentence
@@ -718,6 +748,7 @@ class ResponseFormatter:
         question = context.get('question', '')
         requested_metrics = self._extract_requested_metrics(question) if question else {'all'}
         show_all = 'all' in requested_metrics or len(requested_metrics) == 0
+        
         
         # Check if user wants "average" explicitly
         question_upper = question.upper() if question else ''
@@ -750,6 +781,8 @@ class ResponseFormatter:
             metric_names.append("net margin")
         if 'roe' in requested_metrics:
             metric_names.append("ROE")
+        if 'roa' in requested_metrics:
+            metric_names.append("ROA")
         if 'opening_price' in requested_metrics:
             metric_names.append("opening price")
         if 'closing_price' in requested_metrics:
@@ -808,8 +841,17 @@ class ResponseFormatter:
             if ('roe' in requested_metrics):
                 if 'roe' in row and row['roe'] is not None:
                     parts.append(f"{row['roe']*100:.1f}% ROE")
+                elif 'roe_annual' in row and row['roe_annual'] is not None:
+                    parts.append(f"{row['roe_annual']*100:.1f}% ROE")
                 elif 'roe_annual_avg_equity' in row and row['roe_annual_avg_equity'] is not None:
                     parts.append(f"{row['roe_annual_avg_equity']*100:.1f}% ROE")
+            
+            # ROA
+            if ('roa' in requested_metrics):
+                if 'roa' in row and row['roa'] is not None:
+                    parts.append(f"{row['roa']*100:.1f}% ROA")
+                elif 'roa_annual' in row and row['roa_annual'] is not None:
+                    parts.append(f"{row['roa_annual']*100:.1f}% ROA")
             
             # Stock price metrics
             if ('opening_price' in requested_metrics):
@@ -995,10 +1037,10 @@ class ResponseFormatter:
         if parts:
             # Natural language formatting
             if len(parts) == 1:
-                return f"In {year}, {parts[0]}."
+                return f"In {period_str}, {parts[0]}."
             else:
                 metrics_str = ", and ".join([", ".join(parts[:-1]), parts[-1]])
-                return f"In {year}, {metrics_str}."
+                return f"In {period_str}, {metrics_str}."
         else:
             return f"Macro data available for {period_str}."
     

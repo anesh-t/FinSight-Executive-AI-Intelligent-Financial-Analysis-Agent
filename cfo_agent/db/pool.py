@@ -82,15 +82,37 @@ class DatabasePool:
                 raise RuntimeError(f"Query execution failed: {str(e)}")
     
     def _convert_params(self, sql: str, params: dict):
-        """Convert :named params to $1, $2, etc."""
+        """Convert :named params to $1, $2, etc. using regex for precision"""
+        import re
+        
         positional_sql = sql
         positional_params = []
         param_index = 1
         
         for key, value in params.items():
-            placeholder = f":{key}"
-            if placeholder in positional_sql:
-                positional_sql = positional_sql.replace(placeholder, f"${param_index}")
+            # Match :param but not ::type_cast (PostgreSQL type casting)
+            # Use word boundary after the parameter name
+            pattern = r':' + re.escape(key) + r'\b'
+            
+            # Find all matches, but skip if preceded by another colon (::type_cast)
+            def replace_func(match):
+                # Check if this is preceded by a colon (would be ::)
+                start_pos = match.start()
+                if start_pos > 0 and positional_sql[start_pos - 1] == ':':
+                    # This is part of ::type_cast, don't replace
+                    return match.group(0)
+                return f"${param_index}"
+            
+            # Count actual matches (not ::)
+            matches = []
+            for match in re.finditer(pattern, positional_sql):
+                start_pos = match.start()
+                if start_pos == 0 or positional_sql[start_pos - 1] != ':':
+                    matches.append(match)
+            
+            if matches:
+                # Replace all occurrences
+                positional_sql = re.sub(pattern, replace_func, positional_sql)
                 positional_params.append(value)
                 param_index += 1
         

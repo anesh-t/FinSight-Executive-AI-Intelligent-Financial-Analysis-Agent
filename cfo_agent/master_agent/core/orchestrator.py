@@ -7,8 +7,15 @@ import sys
 from pathlib import Path
 import asyncio
 import time
+import os
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass
+from langchain_openai import ChatOpenAI
+from langchain.prompts import ChatPromptTemplate
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -47,6 +54,9 @@ class MasterOrchestrator:
         # Initialize components
         self.classifier = QueryClassifier()
         self.coordinator = AgentCoordinator(verbose=verbose, use_quick_mode=use_quick_mode)
+        
+        # Initialize LLM for synthesis (using gpt-4o-mini for faster response)
+        self.llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.0)
         
         if verbose:
             print("✅ Master Orchestrator initialized")
@@ -116,20 +126,20 @@ class MasterOrchestrator:
             response_text = sql_response.text
             
         else:  # HYBRID
-            # Both agents in parallel
+            # Both agents - SEQUENTIAL to avoid database connection conflicts
             if self.verbose:
-                print(f"   → RAG + SQL Agents (parallel execution)")
+                print(f"   → RAG + SQL Agents (sequential execution)")
             
-            # Execute both in parallel
-            rag_task = asyncio.create_task(
-                asyncio.to_thread(self.coordinator.query_rag, question)
-            )
-            sql_task = asyncio.create_task(
-                asyncio.to_thread(self.coordinator.query_sql, question, session_id=session_id)
+            # Execute SQL first (faster, uses database)
+            sql_response = await asyncio.to_thread(
+                self.coordinator.query_sql, question, session_id=session_id
             )
             
-            # Wait for both
-            rag_response, sql_response = await asyncio.gather(rag_task, sql_task)
+            # Then execute RAG (uses separate resources)
+            rag_response = await asyncio.to_thread(
+                self.coordinator.query_rag, question
+            )
+            
             agents_used = ['RAG', 'SQL']
             
             # Synthesize responses (simple concatenation for now, will improve)
@@ -205,8 +215,12 @@ class MasterOrchestrator:
         question: str
     ) -> str:
         """
-        Simple synthesis of RAG and SQL responses
-        (Will be enhanced by Response Synthesizer later)
+        LLM-powered synthesis of RAG and SQL responses
+        
+        Combines:
+        1. Original question
+        2. Structured data (SQL results)
+        3. Unstructured insights (10-K context)
         
         Args:
             rag_response: Response from RAG agent
@@ -214,33 +228,78 @@ class MasterOrchestrator:
             question: Original question
             
         Returns:
-            Combined response text
+            Synthesized comprehensive answer
         """
-        parts = []
+        # Extract the data sources
+        structured_data = sql_response.text if sql_response and sql_response.success else "No structured data available."
+        unstructured_insights = rag_response.text if rag_response and rag_response.success else "No 10-K insights available."
         
-        # Add header
-        parts.append("# 📊 COMPREHENSIVE CFO ANALYSIS\n")
-        parts.append(f"**Question:** {question}\n")
+        # Create synthesis prompt
+        synthesis_prompt = ChatPromptTemplate.from_messages([
+            ("system", """You are a CFO-level financial analyst. Your task is to provide a comprehensive answer by synthesizing:
+1. The user's question
+2. Structured financial data (from SQL database)
+3. Unstructured insights (from 10-K filings)
+
+Provide a clear, professional answer that:
+- Directly answers the question
+- Integrates both quantitative data and qualitative context
+- Highlights key insights and connections between the data sources
+- Uses specific numbers and citations when available
+- Maintains a CFO-level perspective
+
+Format your response professionally with clear sections if needed."""),
+            ("user", """Question: {question}
+
+STRUCTURED DATA (Financial Metrics):
+{structured_data}
+
+UNSTRUCTURED INSIGHTS (10-K Filings):
+{unstructured_insights}
+
+Provide a comprehensive answer that synthesizes all three inputs above.""")
+        ])
         
-        # Add qualitative analysis (RAG)
-        if rag_response and rag_response.success:
-            parts.append("\n## 📖 QUALITATIVE ANALYSIS (10-K Filings)")
-            parts.append("─" * 60)
-            parts.append(rag_response.text)
-        
-        # Add quantitative data (SQL)
-        if sql_response and sql_response.success:
-            parts.append("\n\n## 📈 QUANTITATIVE DATA (Financial Metrics)")
-            parts.append("─" * 60)
-            parts.append(sql_response.text)
-        
-        # Add synthesis section
-        parts.append("\n\n## 💡 INTEGRATED INSIGHTS")
-        parts.append("─" * 60)
-        parts.append("This analysis combines narrative context from SEC 10-K filings with")
-        parts.append("precise financial data to provide a comprehensive CFO-level perspective.")
-        
-        return "\n".join(parts)
+        # Generate synthesis
+        try:
+            messages = synthesis_prompt.format_messages(
+                question=question,
+                structured_data=structured_data,
+                unstructured_insights=unstructured_insights
+            )
+            
+            response = self.llm.invoke(messages)
+            synthesized_answer = response.content
+            
+            # Add source attribution
+            sources = []
+            if sql_response and sql_response.success:
+                sources.append("Financial Database (SQL)")
+            if rag_response and rag_response.success:
+                sources.append("SEC 10-K Filings")
+            
+            if sources:
+                synthesized_answer += f"\n\n**Sources:** {', '.join(sources)}"
+            
+            return synthesized_answer
+            
+        except Exception as e:
+            # Fallback to simple concatenation if LLM synthesis fails
+            if self.verbose:
+                print(f"⚠️  LLM synthesis failed: {str(e)}, using fallback")
+            
+            parts = []
+            parts.append(f"**Question:** {question}\n")
+            
+            if rag_response and rag_response.success:
+                parts.append("\n**10-K Insights:**")
+                parts.append(rag_response.text)
+            
+            if sql_response and sql_response.success:
+                parts.append("\n**Financial Data:**")
+                parts.append(sql_response.text)
+            
+            return "\n".join(parts)
     
     def close(self):
         """Close all connections"""
