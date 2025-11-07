@@ -56,7 +56,8 @@ class MasterOrchestrator:
         self.coordinator = AgentCoordinator(verbose=verbose, use_quick_mode=use_quick_mode)
         
         # Initialize LLM for synthesis (using gpt-4o-mini for faster response)
-        self.llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.0)
+        # Use streaming for faster perceived response
+        self.llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.0, streaming=False, max_tokens=800)
         
         if verbose:
             print("✅ Master Orchestrator initialized")
@@ -126,19 +127,33 @@ class MasterOrchestrator:
             response_text = sql_response.text
             
         else:  # HYBRID
-            # Both agents - SEQUENTIAL to avoid database connection conflicts
+            # Both agents - PARALLEL execution (optimized)
             if self.verbose:
-                print(f"   → RAG + SQL Agents (sequential execution)")
+                print(f"   → RAG + SQL Agents (parallel execution - optimized)")
             
-            # Execute SQL first (faster, uses database)
-            sql_response = await asyncio.to_thread(
-                self.coordinator.query_sql, question, session_id=session_id
+            # Execute both in parallel for speed
+            sql_task = asyncio.create_task(
+                asyncio.to_thread(self.coordinator.query_sql, question, session_id=session_id)
+            )
+            rag_task = asyncio.create_task(
+                asyncio.to_thread(self.coordinator.query_rag, question)
             )
             
-            # Then execute RAG (uses separate resources)
-            rag_response = await asyncio.to_thread(
-                self.coordinator.query_rag, question
-            )
+            # Wait for both with timeout
+            try:
+                sql_response, rag_response = await asyncio.gather(sql_task, rag_task, return_exceptions=True)
+                
+                # Handle exceptions
+                if isinstance(sql_response, Exception):
+                    sql_response = AgentResponse(text="SQL data unavailable", success=False, latency=0.0)
+                if isinstance(rag_response, Exception):
+                    rag_response = AgentResponse(text="10-K insights unavailable", success=False, latency=0.0)
+            except Exception as e:
+                # Fallback to SQL only if parallel fails
+                sql_response = await asyncio.to_thread(
+                    self.coordinator.query_sql, question, session_id=session_id
+                )
+                rag_response = AgentResponse(text="10-K insights unavailable", success=False, latency=0.0)
             
             agents_used = ['RAG', 'SQL']
             
@@ -234,30 +249,17 @@ class MasterOrchestrator:
         structured_data = sql_response.text if sql_response and sql_response.success else "No structured data available."
         unstructured_insights = rag_response.text if rag_response and rag_response.success else "No 10-K insights available."
         
-        # Create synthesis prompt
+        # Create concise synthesis prompt (optimized for speed and table formatting)
         synthesis_prompt = ChatPromptTemplate.from_messages([
-            ("system", """You are a CFO-level financial analyst. Your task is to provide a comprehensive answer by synthesizing:
-1. The user's question
-2. Structured financial data (from SQL database)
-3. Unstructured insights (from 10-K filings)
+            ("system", """You are a CFO analyst. Synthesize the financial data and 10-K insights to answer the question. 
+If the 10-K data contains tables, format them as markdown tables. Be concise but comprehensive."""),
+            ("user", """Q: {question}
 
-Provide a clear, professional answer that:
-- Directly answers the question
-- Integrates both quantitative data and qualitative context
-- Highlights key insights and connections between the data sources
-- Uses specific numbers and citations when available
-- Maintains a CFO-level perspective
+DATA: {structured_data}
 
-Format your response professionally with clear sections if needed."""),
-            ("user", """Question: {question}
+10-K: {unstructured_insights}
 
-STRUCTURED DATA (Financial Metrics):
-{structured_data}
-
-UNSTRUCTURED INSIGHTS (10-K Filings):
-{unstructured_insights}
-
-Provide a comprehensive answer that synthesizes all three inputs above.""")
+Provide answer with: 1) Tables (if present in 10-K), 2) Key numbers, 3) Main insights. Use markdown table format.""")
         ])
         
         # Generate synthesis

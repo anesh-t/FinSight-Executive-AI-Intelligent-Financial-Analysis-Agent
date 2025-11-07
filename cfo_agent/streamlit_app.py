@@ -771,24 +771,93 @@ if prompt := st.chat_input("Ask a financial question..."):
                 )
             
             elif current_mode == "Unstructured Data (10-K)":
-                # MODE 2: Unstructured data (RAG only)
+                # MODE 2: Unstructured data (RAG only) - Enhanced table retrieval
                 import sys
                 from pathlib import Path
                 sys.path.insert(0, str(Path(__file__).parent))
                 
                 try:
-                    from master_agent import UnifiedCFOAgent
+                    from langchain_openai import ChatOpenAI
+                    from langchain.prompts import ChatPromptTemplate
                     
-                    # Create agent and query RAG only
-                    agent = UnifiedCFOAgent(verbose=False)
-                    result_obj = agent.query(prompt)
-                    agent.close()
+                    # Check if query is asking for tables
+                    table_keywords = ['table', 'breakdown', 'by segment', 'by category', 'by product', 'by region', 'products and services', 'products vs services', 'segment']
+                    is_table_query = any(keyword in prompt.lower() for keyword in table_keywords)
+                    
+                    if is_table_query:
+                        # Use enhanced table retriever for better table extraction
+                        sys.path.insert(0, str(Path(__file__).parent / 'rag_system'))
+                        from table_retriever import TableRetriever
+                        
+                        # Extract company and year from query if possible
+                        company = None
+                        year = None
+                        if 'apple' in prompt.lower():
+                            company = 'Apple'
+                        if '2019' in prompt:
+                            year = 2019
+                        elif '2022' in prompt:
+                            year = 2022
+                        
+                        # Use table-specific retriever
+                        table_retriever = TableRetriever(verbose=False)
+                        chunks = table_retriever.retrieve_table(
+                            query=prompt,
+                            company=company,
+                            year=year,
+                            top_k=10
+                        )
+                        table_retriever.close()
+                        
+                        # Combine top chunks
+                        if chunks:
+                            combined_text = "\n\n".join([chunk.chunk_text for chunk in chunks[:3]])
+                            rag_result_text = combined_text
+                            rag_success = True
+                        else:
+                            rag_result_text = "No table data found."
+                            rag_success = False
+                    else:
+                        # Use standard RAG for non-table queries
+                        from master_agent.execution.agent_bridge import AgentCoordinator
+                        coordinator = AgentCoordinator(verbose=False, use_quick_mode=True)
+                        rag_result = coordinator.query_rag(prompt)
+                        rag_result_text = rag_result.text
+                        rag_success = rag_result.success
+                    
+                    # Format with LLM if table query
+                    if is_table_query and rag_success:
+                        # Use LLM to format tables from RAG data
+                        llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.0, max_tokens=1000)
+                        format_prompt = ChatPromptTemplate.from_messages([
+                            ("system", "You are a financial analyst. Format the 10-K data into clear markdown tables. Be concise and compact. Do NOT add extra blank lines between sections."),
+                            ("user", "Question: {question}\n\n10-K Data: {data}\n\nFormat this as a compact answer with markdown tables. Use single line breaks between sections, not multiple blank lines.")
+                        ])
+                        
+                        messages = format_prompt.format_messages(question=prompt, data=rag_result_text)
+                        formatted_response = llm.invoke(messages)
+                        
+                        # SIMPLE AND EFFECTIVE: Remove all multiple blank lines
+                        import re
+                        final_text = formatted_response.content.strip()
+                        
+                        # Replace 2 or more consecutive newlines with just 1 newline
+                        # This removes ALL blank lines completely
+                        final_text = re.sub(r'\n\n+', '\n', final_text)
+                        
+                        # Add back ONE blank line before markdown headers only
+                        final_text = re.sub(r'\n(#{1,6} )', r'\n\n\1', final_text)
+                        
+                        # Add back ONE blank line before "Gross Margin Percentage" type headers
+                        final_text = re.sub(r'\n([A-Z][A-Za-z ]+:?\n)', r'\n\n\1', final_text)
+                    else:
+                        final_text = rag_result_text if rag_success else "No 10-K data found for this query."
                     
                     # Format response to match API format
                     response = type('obj', (object,), {
                         'status_code': 200,
                         'json': lambda self: {
-                            "response": result_obj.answer,
+                            "response": final_text,
                             "viz_metadata": None  # No viz for RAG-only
                         }
                     })()
@@ -802,35 +871,27 @@ if prompt := st.chat_input("Ask a financial question..."):
                     })()
             
             else:  # Hybrid (SQL + 10-K)
-                # MODE 3: Hybrid query (RAG + SQL)
-                import sys
-                from pathlib import Path
-                sys.path.insert(0, str(Path(__file__).parent))
-                
+                # MODE 3: Hybrid query (RAG + SQL) - Use /ask/hybrid endpoint
                 try:
-                    from master_agent import UnifiedCFOAgent
-                    
-                    # Create agent and query hybrid
-                    agent = UnifiedCFOAgent(verbose=False)
-                    result_obj = agent.query(prompt)
-                    agent.close()
-                    
-                    # Format response to match API format
-                    response = type('obj', (object,), {
-                        'status_code': 200,
-                        'json': lambda self: {
-                            "response": result_obj.answer,
-                            "viz_metadata": None  # No viz for hybrid currently
-                        }
-                    })()
-                except Exception as e:
-                    import traceback
-                    error_detail = traceback.format_exc()
-                    response = type('obj', (object,), {
-                        'status_code': 500,
-                        'text': f"Hybrid Error: {str(e)}\n{error_detail}",
-                        'json': lambda self: {}
-                    })()
+                    response = requests.post(
+                        f"{API_BASE_URL}/ask/hybrid",
+                        json={
+                            "question": prompt,
+                            "session_id": st.session_state.session_id
+                        },
+                        timeout=120  # 2 minutes for hybrid queries
+                    )
+                except requests.exceptions.Timeout:
+                    # If hybrid times out, fall back to SQL only
+                    st.warning("⚠️ Hybrid query is taking too long. Falling back to SQL-only mode...")
+                    response = requests.post(
+                        f"{API_BASE_URL}/ask",
+                        json={
+                            "question": prompt,
+                            "session_id": st.session_state.session_id
+                        },
+                        timeout=30
+                    )
 
             
             # Show remaining progress steps quickly
@@ -848,6 +909,15 @@ if prompt := st.chat_input("Ask a financial question..."):
             if response.status_code == 200:
                 result = response.json()
                 answer = result.get("response", "No response received")
+                
+                # FINAL CLEANUP: Remove excessive blank lines before display
+                import re
+                if answer and answer.strip():
+                    # Remove all multiple consecutive newlines (2+ becomes 1)
+                    answer = re.sub(r'\n\n+', '\n', answer)
+                    # Add back ONE blank line before headers
+                    answer = re.sub(r'\n(#{1,6} )', r'\n\n\1', answer)
+                    answer = re.sub(r'\n([A-Z][A-Za-z ]+Percentage)', r'\n\n\1', answer)
                 
                 # Clear progress
                 progress_container.empty()

@@ -90,8 +90,18 @@ async def startup_event():
     # NEW: Initialize hybrid orchestrator
     global hybrid_orchestrator
     if HYBRID_AVAILABLE:
+        print("🔄 Initializing hybrid orchestrator (this may take 30-60 seconds)...")
         hybrid_orchestrator = MasterOrchestrator(verbose=False, use_quick_mode=True)
         print("✅ Hybrid orchestrator initialized")
+        
+        # Warm up the RAG agent only (not full hybrid query to avoid DB conflicts)
+        print("🔄 Warming up RAG agent (loading embeddings)...")
+        try:
+            # Just initialize the RAG agent, don't run a full query
+            warmup_result = hybrid_orchestrator.coordinator.query_rag("test")
+            print("✅ RAG agent warmed up and ready!")
+        except Exception as e:
+            print(f"⚠️  RAG warmup failed (will initialize on first query): {str(e)}")
     else:
         print("⚠️  Hybrid orchestrator not available")
     
