@@ -734,10 +734,22 @@ class ResponseFormatter:
             
             if len(df) == 1:
                 # Single result - simple sentence
-                return f"{name} ({ticker}) reported {metrics_str} for {period_str}."
+                response = f"{name} ({ticker}) reported {metrics_str} for {period_str}."
             else:
                 # Multiple results - add count
-                return f"Found {len(df)} periods of data for {name} ({ticker}). For {period_str}: {metrics_str}."
+                response = f"Found {len(df)} periods of data for {name} ({ticker}). For {period_str}: {metrics_str}."
+            
+            # Clean up any formatting issues (ensure proper spacing)
+            import re
+            # Fix missing spaces after commas
+            response = re.sub(r',(\S)', r', \1', response)  # Add space after comma if missing
+            # Fix concatenated words with "of"
+            response = re.sub(r'([a-z])of\$', r'\1 of $', response, flags=re.IGNORECASE)
+            response = re.sub(r'([a-z])of\s*\$', r'\1 of $', response, flags=re.IGNORECASE)
+            # Ensure space after B, M, K before comma
+            response = re.sub(r'(\d+\.?\d*\s*[BMK]),', r'\1, ', response, flags=re.IGNORECASE)
+            
+            return response
         else:
             print(f"[DEBUG FORMATTER] WARNING: Empty parts list! Returning generic message.")
             return f"Data found for {name} ({ticker}) in {period_str}."
@@ -891,9 +903,17 @@ class ResponseFormatter:
         
         # Combine intro and company lines
         if len(company_lines) > 0:
-            return intro + "\n" + "\n".join(company_lines)
+            response = intro + "\n" + "\n".join(company_lines)
         else:
-            return intro
+            response = intro
+        
+        # Clean up formatting
+        import re
+        response = re.sub(r',(\S)', r', \1', response)
+        response = re.sub(r'([a-z])of\$', r'\1 of $', response, flags=re.IGNORECASE)
+        response = re.sub(r'(\d+\.?\d*\s*[BMK]),', r'\1, ', response, flags=re.IGNORECASE)
+        
+        return response
     
     def _summarize_dataframe(self, df: pd.DataFrame) -> str:
         """Create a text summary of DataFrame for LLM"""
