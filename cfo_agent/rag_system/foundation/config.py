@@ -64,7 +64,7 @@ class LLMConfig:
             provider=os.getenv("DEFAULT_LLM_PROVIDER", "openai"),
             openai_api_key=os.getenv("OPENAI_API_KEY"),
             anthropic_api_key=os.getenv("ANTHROPIC_API_KEY"),
-            openai_model=os.getenv("OPENAI_MODEL", "gpt-4o-mini"),
+            openai_model=os.getenv("OPENAI_MODEL", "gpt-5.1"),
             anthropic_model=os.getenv("ANTHROPIC_MODEL", "claude-3-opus-20240229"),
             max_context_length=int(os.getenv("MAX_CONTEXT_LENGTH", "8000"))
         )

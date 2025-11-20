@@ -55,9 +55,9 @@ class MasterOrchestrator:
         self.classifier = QueryClassifier()
         self.coordinator = AgentCoordinator(verbose=verbose, use_quick_mode=use_quick_mode)
         
-        # Initialize LLM for synthesis (using gpt-4o-mini for faster response)
-        # Use streaming for faster perceived response
-        self.llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.0, streaming=False, max_tokens=800)
+        # Initialize LLM for synthesis (using gpt-5.1 for best quality)
+        # Increased max_completion_tokens for comprehensive multi-company analysis
+        self.llm = ChatOpenAI(model="gpt-5.1", temperature=0.0, streaming=False, max_completion_tokens=2000)
         
         if verbose:
             print("✅ Master Orchestrator initialized")
@@ -103,6 +103,28 @@ class MasterOrchestrator:
         rag_response = None
         sql_response = None
         agents_used = []
+        
+        # Handle out-of-scope questions
+        if classification.intent == QueryIntent.OUT_OF_SCOPE:
+            if self.verbose:
+                print(f"   → Out of scope - providing direct answer")
+            
+            # Use LLM to provide a simple direct answer
+            from datetime import datetime
+            current_date = datetime.now().strftime("%B %d, %Y")
+            
+            simple_answer = f"Today's date is {current_date}."
+            
+            return OrchestratedResponse(
+                text=simple_answer,
+                intent=classification.intent.value,
+                agents_used=['DIRECT'],
+                rag_response=None,
+                sql_response=None,
+                total_latency=time.time() - start_time,
+                metadata={'reasoning': classification.reasoning},
+                success=True
+            )
         
         if classification.intent == QueryIntent.QUALITATIVE:
             # RAG only
@@ -249,17 +271,39 @@ class MasterOrchestrator:
         structured_data = sql_response.text if sql_response and sql_response.success else "No structured data available."
         unstructured_insights = rag_response.text if rag_response and rag_response.success else "No 10-K insights available."
         
-        # Create concise synthesis prompt (optimized for speed and table formatting)
+        # Create optimized synthesis prompt for comprehensive multi-company analysis
         synthesis_prompt = ChatPromptTemplate.from_messages([
-            ("system", """You are a CFO analyst. Synthesize the financial data and 10-K insights to answer the question. 
-If the 10-K data contains tables, format them as markdown tables. Be concise but comprehensive."""),
-            ("user", """Q: {question}
+            ("system", """You are an expert CFO analyst. Synthesize structured financial data and 10-K insights to provide a comprehensive, well-organized answer.
 
-DATA: {structured_data}
+CRITICAL FORMATTING RULES - DO NOT USE MARKDOWN TABLES:
+- NEVER use vertical bars (|) or Markdown table syntax
+- Use numbered lists, bullet points, and labeled sections instead
+- Format metrics in clean blocks like:
+  Gross Margin (2023): 44.1%
+  Revenue: $383.3B
+  Products GM: 36.5%
+- Use bold labels for key metrics
+- Use bullet points (•) for lists
+- Use clear section headers with numbers (1., 2., 3.)
+- Keep formatting simple and readable
+- No ASCII tables, no pipes, no complex formatting"""),
+            ("user", """Question: {question}
 
-10-K: {unstructured_insights}
+STRUCTURED DATA (SQL):
+{structured_data}
 
-Provide answer with: 1) Tables (if present in 10-K), 2) Key numbers, 3) Main insights. Use markdown table format.""")
+UNSTRUCTURED INSIGHTS (10-K):
+{unstructured_insights}
+
+Provide a comprehensive answer that:
+1. Directly answers the question with a brief summary
+2. Presents ALL data in clean labeled format (NO TABLES, NO PIPES)
+3. Uses numbered sections and bullet points
+4. Explains key drivers/trends for EACH company mentioned
+5. Combines quantitative data with qualitative insights
+6. Highlights important patterns or differences across companies
+
+Remember: Format like ChatGPT - clean, readable, NO Markdown tables!""")
         ])
         
         # Generate synthesis

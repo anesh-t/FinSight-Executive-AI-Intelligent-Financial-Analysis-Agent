@@ -14,7 +14,7 @@ load_dotenv()
 class GenerativeSQLBuilder:
     """Generates SQL using LLM with safety constraints"""
     
-    def __init__(self, model: str = "gpt-4o", temperature: float = 0.0):
+    def __init__(self, model: str = "gpt-5.1", temperature: float = 0.0):
         self.llm = ChatOpenAI(model=model, temperature=temperature)
         
         # Load generative SQL prompt

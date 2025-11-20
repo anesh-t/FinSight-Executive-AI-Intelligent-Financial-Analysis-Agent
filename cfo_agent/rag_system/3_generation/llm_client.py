@@ -117,12 +117,21 @@ class LLMClient:
         
         # API call
         try:
-            response = self.client.chat.completions.create(
-                model=self.model,
-                messages=messages,
-                temperature=temperature or self.temperature,
-                max_tokens=max_tokens or self.max_tokens
-            )
+            # Use max_completion_tokens for GPT-5.1, max_tokens for older models
+            if 'gpt-5' in self.model.lower():
+                response = self.client.chat.completions.create(
+                    model=self.model,
+                    messages=messages,
+                    temperature=temperature or self.temperature,
+                    max_completion_tokens=max_tokens or self.max_tokens
+                )
+            else:
+                response = self.client.chat.completions.create(
+                    model=self.model,
+                    messages=messages,
+                    temperature=temperature or self.temperature,
+                    max_tokens=max_tokens or self.max_tokens
+                )
             
             # Extract response
             text = response.choices[0].message.content
@@ -168,13 +177,23 @@ class LLMClient:
         
         # Streaming API call
         try:
-            stream = self.client.chat.completions.create(
-                model=self.model,
-                messages=messages,
-                temperature=temperature or self.temperature,
-                max_tokens=max_tokens or self.max_tokens,
-                stream=True
-            )
+            # Use max_completion_tokens for GPT-5.1, max_tokens for older models
+            if 'gpt-5' in self.model.lower():
+                stream = self.client.chat.completions.create(
+                    model=self.model,
+                    messages=messages,
+                    temperature=temperature or self.temperature,
+                    max_completion_tokens=max_tokens or self.max_tokens,
+                    stream=True
+                )
+            else:
+                stream = self.client.chat.completions.create(
+                    model=self.model,
+                    messages=messages,
+                    temperature=temperature or self.temperature,
+                    max_tokens=max_tokens or self.max_tokens,
+                    stream=True
+                )
             
             for chunk in stream:
                 if chunk.choices[0].delta.content is not None:

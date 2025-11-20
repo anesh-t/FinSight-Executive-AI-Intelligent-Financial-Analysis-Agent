@@ -828,7 +828,7 @@ if prompt := st.chat_input("Ask a financial question..."):
                     # Format with LLM if table query
                     if is_table_query and rag_success:
                         # Use LLM to format tables from RAG data
-                        llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.0, max_tokens=1000)
+                        llm = ChatOpenAI(model="gpt-5.1", temperature=0.0, max_tokens=1000)
                         format_prompt = ChatPromptTemplate.from_messages([
                             ("system", "You are a financial analyst. Format the 10-K data into clear markdown tables. Be concise and compact. Do NOT add extra blank lines between sections."),
                             ("user", "Question: {question}\n\n10-K Data: {data}\n\nFormat this as a compact answer with markdown tables. Use single line breaks between sections, not multiple blank lines.")

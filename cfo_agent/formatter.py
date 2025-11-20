@@ -14,7 +14,7 @@ load_dotenv()
 class ResponseFormatter:
     """Formats query results into CFO-grade responses"""
     
-    def __init__(self, model: str = "gpt-4o", temperature: float = 0.0):
+    def __init__(self, model: str = "gpt-5.1", temperature: float = 0.0):
         self.llm = ChatOpenAI(model=model, temperature=temperature)
     
     async def format_response(self, results: List[Dict], context: Dict, citations: Dict) -> str:

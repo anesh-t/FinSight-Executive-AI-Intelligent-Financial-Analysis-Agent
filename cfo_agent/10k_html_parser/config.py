@@ -25,8 +25,8 @@ class HTMLParserConfig:
     MIN_TABLE_COLS = 2                # Minimum columns
     MAX_CELL_LENGTH = 500             # Max chars per table cell
     
-    # LLM settings (using free tier models)
-    LLM_MODEL = "gpt-4o-mini"         # Most cost-efficient
+    # LLM settings (using latest model)
+    LLM_MODEL = "gpt-5.1"         # Latest and most capable
     LLM_TEMPERATURE = 0.3
     MAX_RETRIES = 3
     

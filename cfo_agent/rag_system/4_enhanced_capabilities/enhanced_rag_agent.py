@@ -69,7 +69,7 @@ class EnhancedRAGAgent:
         self.retriever = SemanticRetriever()
         self.context_builder = ContextBuilder()
         self.generator = ResponseGenerator(
-            model="gpt-4o-mini",
+            model="gpt-5.1",
             temperature=0.1,
             max_tokens=1024  # Reduced from 2048 for faster responses
         )

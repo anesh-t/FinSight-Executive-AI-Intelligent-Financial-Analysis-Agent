@@ -71,17 +71,15 @@ class SemanticRetriever:
         print()
     
     def _create_connection(self):
-        """Create PostgreSQL connection using Supabase pooler"""
+        """Create PostgreSQL connection using Supabase"""
         try:
-            # Use Supabase connection pooler for better compatibility
-            project_id = config.database.supabase_url.replace('https://', '').replace('.supabase.co', '')
-            
+            # Use direct Supabase connection with hardcoded password from SUPABASE_DB_URL
             conn = psycopg2.connect(
-                host='aws-1-us-east-2.pooler.supabase.com',
+                host='db.ikhrfgywojsrvxgdojxd.supabase.co',
                 port=5432,
                 database='postgres',
-                user=f'postgres.{project_id}',
-                password=config.database.db_password
+                user='postgres',
+                password='asntrbdrhbcsdgjkt'
             )
             return conn
         except Exception as e:

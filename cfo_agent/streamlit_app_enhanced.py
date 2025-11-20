@@ -512,7 +512,7 @@ with tab1:
                             
                             if chunks:
                                 combined_text = "\n\n".join([chunk.chunk_text for chunk in chunks[:3]])
-                                llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.0, max_tokens=1000)
+                                llm = ChatOpenAI(model="gpt-5.1", temperature=0.0, max_tokens=1000)
                                 format_prompt = ChatPromptTemplate.from_messages([
                                     ("system", "Format 10-K data into clear markdown tables. Be concise."),
                                     ("user", "Question: {question}\n\nData: {data}\n\nFormat as compact answer.")
@@ -536,7 +536,7 @@ with tab1:
                         response = requests.post(
                             f"{API_BASE_URL}/ask/hybrid",
                             json={"question": prompt, "session_id": st.session_state.session_id},
-                            timeout=60
+                            timeout=300  # 5 minutes for complex multi-company queries
                         )
                     
                     response_time = time.time() - start_time

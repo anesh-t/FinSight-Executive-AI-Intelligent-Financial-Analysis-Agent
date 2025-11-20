@@ -15,7 +15,7 @@ load_dotenv()
 class QueryDecomposer:
     """Decomposes natural language queries into structured tasks"""
     
-    def __init__(self, model: str = "gpt-4o", temperature: float = 0.0):
+    def __init__(self, model: str = "gpt-5.1", temperature: float = 0.0):
         self.llm = ChatOpenAI(model=model, temperature=temperature)
         
         # Load router/planner prompt

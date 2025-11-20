@@ -14,6 +14,7 @@ class QueryIntent(Enum):
     QUALITATIVE = "qualitative"    # RAG only
     QUANTITATIVE = "quantitative"  # SQL only
     HYBRID = "hybrid"              # Both RAG + SQL
+    OUT_OF_SCOPE = "out_of_scope"  # Non-financial questions
 
 
 @dataclass
@@ -29,6 +30,15 @@ class QueryClassification:
 
 class QueryClassifier:
     """Intelligent query classification"""
+    
+    # Non-financial questions (out of scope)
+    OUT_OF_SCOPE_PATTERNS = {
+        'what is date', 'what is today', 'current date', 'todays date',
+        'what time', 'current time', 'what day',
+        'hello', 'hi', 'hey', 'thanks', 'thank you',
+        'how are you', 'who are you', 'what can you do',
+        'weather', 'news', 'sports', 'politics',
+    }
     
     # Keywords that indicate quantitative (SQL) queries
     QUANTITATIVE_KEYWORDS = {
@@ -147,6 +157,17 @@ class QueryClassifier:
         """
         query_lower = query.lower()
         
+        # Check for out-of-scope questions first
+        if self._is_out_of_scope(query_lower):
+            return QueryClassification(
+                query=query,
+                intent=QueryIntent.OUT_OF_SCOPE,
+                confidence=0.95,
+                entities={},
+                data_sources=[],
+                reasoning="Non-financial question detected"
+            )
+        
         # Count keyword matches
         quant_score = self._count_keywords(query_lower, self.QUANTITATIVE_KEYWORDS)
         qual_score = self._count_keywords(query_lower, self.QUALITATIVE_KEYWORDS)
@@ -171,6 +192,13 @@ class QueryClassifier:
             data_sources=data_sources,
             reasoning=reasoning
         )
+    
+    def _is_out_of_scope(self, query_lower: str) -> bool:
+        """Check if query is out of scope (non-financial)"""
+        for pattern in self.OUT_OF_SCOPE_PATTERNS:
+            if pattern in query_lower:
+                return True
+        return False
     
     def _count_keywords(self, query: str, keywords: set) -> int:
         """Count keyword matches in query"""
